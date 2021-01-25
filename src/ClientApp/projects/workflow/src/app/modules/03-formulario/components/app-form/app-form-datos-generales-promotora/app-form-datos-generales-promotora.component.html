@@ -1,0 +1,162 @@
+<div class="row">
+  <div class="col-12">
+    <h2  >Datos de la promotora</h2>
+</div>
+</div>
+<mat-divider [inset]="true"></mat-divider>
+<div class="form-row">
+  <div class="col-md-6">
+    <!-- <sunedu-form-field
+      label="Tipo de documento"
+      controlName="tipoDocumentoEnum"
+      [formGroupParent]="formGroup"
+      [msgValidations]="validations.apellidos"
+      (on-change)="handleChangeInput($event)"
+    ></sunedu-form-field> -->
+    <sunedu-form-field
+      variant="select"
+      label="Tipo de documento"
+      bindLabel="text"
+      bindValue="value"
+      controlName="tipoDocumentoEnum"
+      [formGroupParent]="formGroup"
+      [msgValidations]="validations.apellidos">
+    </sunedu-form-field>
+  </div>
+  <div class="col-md-6">
+    <sunedu-form-field
+      label="N° de documento"
+      controlName="numeroDocumento"
+      [formGroupParent]="formGroup"
+      [msgValidations]="validations.apellidos"
+      (on-change)="handleChangeInput($event)"
+    ></sunedu-form-field>
+  </div>
+</div>
+<div class="form-row">
+  <div class="col-md-6">
+    <sunedu-form-field
+      label="Nombre/denominación"
+      controlName="nombre"
+      [formGroupParent]="formGroup"
+      [msgValidations]="validations.apellidos"
+      (on-change)="handleChangeInput($event)"
+    ></sunedu-form-field>
+  </div>
+  <div class="col-md-6">
+    <sunedu-form-field
+      label="Oficina registral"
+      controlName="oficinaRegitral"
+      [formGroupParent]="formGroup"
+      [msgValidations]="validations.apellidos"
+      (on-change)="handleChangeInput($event)"
+    ></sunedu-form-field>
+  </div>
+</div>
+<div class="form-row">
+  <div class="col-md-6">
+    <sunedu-form-field
+      label="N° de partida registral"
+      controlName="numeroPartida"
+      [formGroupParent]="formGroup"
+      [msgValidations]="validations.apellidos"
+      (on-change)="handleChangeInput($event)"
+    ></sunedu-form-field>
+  </div>
+  <div class="col-md-6">
+    <sunedu-form-field
+      label="Asiento"
+      controlName="asiento"
+      [formGroupParent]="formGroup"
+      [msgValidations]="validations.apellidos"
+      (on-change)="handleChangeInput($event)"
+    ></sunedu-form-field>
+  </div>
+</div>
+<div class="form-row">
+  <div class="col-md-6">
+    <sunedu-form-field
+      label="Razón social"
+      controlName="razonSocial"
+      [formGroupParent]="formGroup"
+      [msgValidations]="validations.apellidos"
+      (on-change)="handleChangeInput($event)"
+    ></sunedu-form-field>
+  </div>
+  <div class="col-md-6">
+    <sunedu-form-field
+      label="Rubro"
+      controlName="rubro"
+      [formGroupParent]="formGroup"
+      [msgValidations]="validations.apellidos"
+      (on-change)="handleChangeInput($event)"
+    ></sunedu-form-field>
+  </div>
+</div>
+<div class="form-row">
+  <div class="col-md-6">
+    <sunedu-form-field
+      label="Domicilio legal"
+      controlName="domicilioLegal"
+      [formGroupParent]="formGroup"
+      [msgValidations]="validations.apellidos"
+      (on-change)="handleChangeInput($event)"
+    ></sunedu-form-field>
+  </div>
+  <div class="col-md-6">
+    <!-- <sunedu-form-field
+      label="Departamento"
+      controlName="nombreDepartamento"
+      [formGroupParent]="formGroup"
+      [msgValidations]="validations.apellidos"
+      (on-change)="handleChangeInput($event)"
+    ></sunedu-form-field> -->
+    <sunedu-form-field
+      variant="select"
+      label="Departamento"
+      bindLabel="text"
+      bindValue="value"
+      controlName="nombreDepartamento"
+      [formGroupParent]="formGroup"
+      [msgValidations]="validations.apellidos">
+    </sunedu-form-field>
+  </div>
+</div>
+<div class="form-row">
+  <div class="col-md-6">
+    <!-- <sunedu-form-field
+      label="Provincia"
+      controlName="nombreProvincia"
+      [formGroupParent]="formGroup"
+      [msgValidations]="validations.apellidos"
+      (on-change)="handleChangeInput($event)"
+    ></sunedu-form-field> -->
+    <sunedu-form-field
+      variant="select"
+      label="Provincia"
+      bindLabel="text"
+      bindValue="value"
+      controlName="nombreProvincia"
+      [formGroupParent]="formGroup"
+      [msgValidations]="validations.apellidos">
+    </sunedu-form-field>
+  </div>
+  <div class="col-md-6">
+    <!-- <sunedu-form-field
+      label="Distrito"
+      controlName="nombreDistrito"
+      [formGroupParent]="formGroup"
+      [msgValidations]="validations.apellidos"
+      (on-change)="handleChangeInput($event)"
+    ></sunedu-form-field> -->
+    <sunedu-form-field
+      variant="select"
+      label="Distrito"
+      bindLabel="text"
+      bindValue="value"
+      controlName="nombreDistrito"
+      [formGroupParent]="formGroup"
+      [msgValidations]="validations.apellidos">
+    </sunedu-form-field>
+  </div>
+</div>

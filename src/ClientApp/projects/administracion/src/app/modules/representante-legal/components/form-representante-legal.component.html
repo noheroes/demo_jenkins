@@ -1,0 +1,28 @@
+<ng-container *ngIf="state$ | async as state">
+  <!-- <div class="row">
+    <div class="col-12">
+      <h2>Universidad</h2>
+    </div>
+  </div> -->  
+  <sunedu-form-model-field variant="select" label="Universidad" [options]="entidadesEnum"
+    (on-change)="handleInputChange($event)" bindLabel="text" bindValue="value" [disabled]="false">
+  </sunedu-form-model-field>
+  <br>
+  <br>
+  <br>
+  <br>
+  <mat-divider [inset]="true"></mat-divider>
+  <div style="display: flex; margin-top: 10px;" *ngIf="esEditable">
+    <div style="flex: 1"></div>
+    <sunedu-base-button label="Agregar Representante" color="accent" icon="add_circle"
+      (on-click)="handleClickNuevoRepresentanteLegal()"
+      [disabled]="state.buscadorRepresentante.isLoading || seleccionoEntidad==false">
+    </sunedu-base-button>
+  </div>
+
+  <sunedu-data-grid [loading]="state.buscadorRepresentante.isLoading" [source]="state.buscadorRepresentante.gridSource"
+    [definition]="state.buscadorRepresentante.gridDefinition" (on-load-data)="handleLoadData($event)"
+    (on-click-button)="handleClickButton($event)">
+  </sunedu-data-grid>
+
+</ng-container>

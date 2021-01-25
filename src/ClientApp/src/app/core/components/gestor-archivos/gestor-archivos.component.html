@@ -1,0 +1,251 @@
+<form
+  autocomplete="off"
+  novalidate
+  #formulario
+>
+
+  <ng-container [ngSwitch]="friendly">
+
+    <ng-container *ngSwitchCase="false">
+      <ng-container *ngTemplateOutlet="defaultGestorTemplate"></ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="true">
+      <ng-container *ngTemplateOutlet="friendlyTemplate"></ng-container>
+    </ng-container>
+
+  </ng-container>
+
+</form>
+
+<ng-container *ngIf="!friendly">
+  <ng-container *ngTemplateOutlet="tagsTemplate"></ng-container>
+</ng-container>
+
+<sunedu-json-viewer
+  [show]="debugMode"
+  [json]="{
+    idArchivo:idArchivo,
+    config: config,
+    internalDisplayConfig: internalDisplayConfig,
+    variablesInternas: {
+    selectedFile: selectedFile,
+    acceptedFiles: acceptedFiles,
+    displayText: displayText,
+    historySource: historySource
+    }
+  }"
+></sunedu-json-viewer>
+
+
+
+
+
+
+
+
+<!-- ============================================ -->
+<!-- TEMPLATES -->
+<!-- ============================================ -->
+
+<!-- ============================================ -->
+<!-- TEMPLATE PARA LA APARIENCIA POR DEFAULT -->
+<!-- ============================================ -->
+<ng-template #defaultGestorTemplate>
+  <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
+  <div
+    class="gestor-archivos-container"
+    #container
+  >
+    <ng-container *ngTemplateOutlet="progressTemplate"></ng-container>
+
+    <div
+      class="gestor-archivos-file-input-container"
+      [ngClass]="{'unset-flex': !config.mostrarCajaDeTexto }"
+    >
+      <ng-container *ngTemplateOutlet="formFieldTemplate"></ng-container>
+
+      <ng-container *ngTemplateOutlet="fileInputTemplate"></ng-container>
+
+    </div>
+
+    <ng-container *ngTemplateOutlet="buttonsTemplate"></ng-container>
+
+  </div>
+</ng-template>
+
+<!-- ============================================ -->
+<!-- TEMPLATE PARA LA APARIENCIA AMIGABLE -->
+<!-- ============================================ -->
+
+<ng-template #friendlyTemplate>
+  <div
+    class="gestor-archivos-container justify-content-center"
+    #container
+  >
+    <div class="gestor-archivos-file-input-container unset-flex">
+      <ng-container *ngTemplateOutlet="fileInputTemplate"></ng-container>
+    </div>
+    <div class="icon-label-container mat-elevation-z8">
+      <div class="friendly-mini-buttons-container">
+        <sunedu-gestor-archivos-buttons
+          [friendlyStyle]="true"
+          (clickHelp)="clickHelp.emit()"
+          (clickUpload)="handleUploadFile()"
+          (clickDelete)="handleDeleteFile()"
+          [visibleHelp]="friendlyConfig.mostrarBotonAyuda"
+          [visibleUpload]="selectedFile"
+          [visibleDelete]="idArchivo"
+          [enableHelp]="!disabled&&!loading"
+          [enableUpload]="!disabled&&!loading&&selectedFile"
+          [enableDelete]="!disabled&&!loading&&idArchivo"
+        ></sunedu-gestor-archivos-buttons>
+      </div>
+      <div
+        [matTooltip]="idArchivo?'Descargar archivo: '+ nombreArchivoOriginal:'Seleccionar Archivo'"
+        class="icon-label-clickeable-area"
+        (click)="handleClickFriendly()"
+      >
+        <ng-container *ngTemplateOutlet="progressTemplate"></ng-container>
+        <mat-icon
+          class="friendly-icon"
+          *ngIf="!loading"
+        >{{friendlyConfig.icon}}</mat-icon>
+        <div class="friendly-label-container">
+          <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- ============================================ -->
+<!-- TEMPLATE PARA EL FILE INPUT -->
+<!-- ============================================ -->
+
+<ng-template #fileInputTemplate>
+  <input
+    #inputFile
+    type="file"
+    [disabled]="disabled||!config.puedeCargarArchivo"
+    [accept]="acceptedFiles"
+    (change)="handleChangeFile($event)"
+  />
+</ng-template>
+
+<!-- ============================================ -->
+<!-- TEMPLATE PARA EL CAMPO DE TEXTO -->
+<!-- ============================================ -->
+
+<ng-template #formFieldTemplate>
+  <mat-form-field
+    *ngIf="config.mostrarCajaDeTexto"
+    class="gestor-archivos-file-input"
+    floatLabel="never"
+  >
+    <input
+      #inputText
+      matInput
+      [(ngModel)]="displayText"
+      [ngModelOptions]="{standalone: true}"
+      readonly
+    >
+    <mat-hint
+      *ngIf="config.mostrarHint"
+      class="hint-info-archivo"
+    >
+      <mat-icon>info</mat-icon>
+      Peso máximo {{config.pesoMaximoEnMB}}MB. Tipos de archivo permitidos: {{acceptedFiles}}
+    </mat-hint>
+  </mat-form-field>
+
+  <div *ngIf="inputError">
+    <div
+      class="custom-error mat-error"
+      [@transitionMessages]="'enter'"
+    >
+      <div>
+        El archivo es obligatorio
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<!-- ============================================ -->
+<!-- TEMPLATE PARA LA ETIQUETA DEL INPUT -->
+<!-- ============================================ -->
+
+<ng-template #labelTemplate>
+
+  <mat-label
+    *ngIf="label"
+    class="mat-body-strong"
+    [ngClass]="{
+      'mat-error': inputError,
+      'friendly-label': friendly
+    }"
+  >{{label}} <span *ngIf="isRequiredLabel">*</span></mat-label>
+
+</ng-template>
+
+<!-- ============================================ -->
+<!-- TEMPLATE PARA LOS TAGS -->
+<!-- ============================================ -->
+
+<ng-template #tagsTemplate>
+  <app-gestor-archivos-tags
+    *ngIf="config.puedeVerTags&&!friendly"
+    [existeArchivo]="idArchivo"
+    [tags]="tags"
+    [editable]="config.puedeEditarTags"
+    (changeTag)="handleChangeTags($event)"
+    [disabled]="disabled||loading"
+    (save)="handleUpdateTags()"
+  ></app-gestor-archivos-tags>
+</ng-template>
+
+<!-- ============================================ -->
+<!-- TEMPLATE PARA LOS BOTONES -->
+<!-- ============================================ -->
+
+<ng-template #buttonsTemplate>
+  <sunedu-gestor-archivos-buttons
+    [buttonsOnly]="!config.mostrarCajaDeTexto"
+    (clickAttach)="handleSelectFile()"
+    (clickUpload)="handleUploadFile()"
+    (clickDownload)="handleDownloadFile()"
+    (clickDelete)="handleDeleteFile()"
+    [enableAttach]="!disabled&&!loading&&internalDisplayConfig.seleccionarArchivoHabilitado"
+    [enableUpload]="!disabled&&!loading&&selectedFile&&internalDisplayConfig.cargarArchivoHabilitado"
+    [enableDownload]="!disabled&&!loading&&idArchivo&&internalDisplayConfig.descargarArchivoHabilitado"
+    [enableDelete]="!disabled&&!loading&&idArchivo&&internalDisplayConfig.eliminarArchivoHabilitado"
+    [enableHistory]="!disabled&&!loading&&idArchivo&&internalDisplayConfig.verHistorialArchivoHabilitado"
+    [visibleAttach]="config.puedeCargarArchivo"
+    [visibleUpload]="config.puedeSubirArchivo"
+    [visibleDownload]="config.puedeDescargarArchivo"
+    [visibleDelete]="idArchivo&&config.puedeEliminarArchivo"
+    [visibleHistory]="idArchivo&&config.puedeVerHistorialArchivo"
+  >
+    <app-gestor-archivos-historial
+      [loading]="loading"
+      [emptyText]="textEmptyHistoryData"
+      [source]="historySource"
+      (download)="handleDownloadFile($event.version, $event.nombre)"
+    >
+    </app-gestor-archivos-historial>
+  </sunedu-gestor-archivos-buttons>
+</ng-template>
+
+<!-- ============================================ -->
+<!-- TEMPLATE PARA EL PROGRESO -->
+<!-- ============================================ -->
+
+<ng-template #progressTemplate>
+  <app-gestor-archivos-progress
+    [indeterminate]="!internalDisplayConfig.barraProgresoVisible"
+    [progress]="internalDisplayConfig.barraProgresoPorcentaje"
+    [show]="loading||internalDisplayConfig.barraProgresoVisible"
+  ></app-gestor-archivos-progress>
+
+</ng-template>

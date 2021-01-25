@@ -1,0 +1,250 @@
+<ng-container *ngIf="state$ | async as state">
+    <sunedu-modal-form-container
+    [title]="state.title"
+    [loading]="state.isLoading"
+    (on-submit)="handleSubmit()"
+    (on-dismiss)="handleClose()"
+    [msgErrors]="state.error"
+    [cancelLabel]="CLOSE_MODAL.LIC_CLOSE_MODAL_LABEL" [cancelIcon]="CLOSE_MODAL.LIC_CLOSE_MODAL_ICON"
+    [formType]="state.type">
+    <mat-card>
+      <mat-card-content>
+        <div class="form-row">
+          <div class="col-md-6">
+            <sunedu-form-model-field
+            label="Código Sede/Filial"
+            [formModelField]="form.model['codigoSedeFilial']"
+            [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+            [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+          </div>
+          <div class="col-md-6"
+          [hidden] = "state.isLoading  || state.type == formType.REGISTRAR">
+            <sunedu-form-model-field
+                label="Código local"
+                [formModelField]="form.model['codigo']"
+                [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>          
+        </div>        
+        <fieldset>
+          <legend>Tipos de servicio:</legend>
+          <div class="form-row">
+              <div class="col-md-6">
+                  <sunedu-form-model-field
+                    variant="check"
+                    label="Servicio educativo"
+                    [formModelField]="form.model['esServicioEducativo']"
+                    (on-change)="handleInputChange($event)"
+                    [inputProps]="{ maxlength : 250}"
+                    [hideRequiredIndicator]="true">
+                  </sunedu-form-model-field>
+                </div>
+                <div class="col-md-6">
+                  <sunedu-form-model-field
+                    variant="check"
+                    label="Servicio educacionales complementarios"
+                    [formModelField]="form.model['esServicioEducativoComplementario']"
+                    (on-change)="handleInputChange($event)"
+                    [hideRequiredIndicator]="true">
+                  </sunedu-form-model-field>
+                </div>
+          </div>
+          <div class="form-row">
+              <div class="col-md-6">
+                  <sunedu-form-model-field
+                    variant="check"
+                    label="Otro"
+                    [formModelField]="form.model['esOtroServicio']"
+                    (on-change)="handleInputChange($event)"
+                    [hideRequiredIndicator]="true">
+                  </sunedu-form-model-field>
+                </div>
+                <div class="col-md-6">
+                  <sunedu-form-model-field
+                  label="Otro tipo de servicio"
+                  [formModelField]="form.model['otroServicio']"                  
+                  [disabled]="otroServicioDisabled"
+                  [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                  [hideRequiredIndicator]="true">
+                </sunedu-form-model-field>
+                </div>
+          </div>
+          <br/>
+        </fieldset>
+        <div class="form-row" [hidden]= "state.isLoading  || mostrarServicioAcademico">
+            <div class="col-md-6">
+                <sunedu-form-model-field
+                label="N° de Resolución de Autorización"
+                [formModelField]="form.model['resolucionAutorizacion']"
+                [inputProps]="{ maxlength: 20 }"
+                [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                [hideRequiredIndicator]="true">
+              </sunedu-form-model-field>
+            </div>
+            <div class="col-md-6">
+                <sunedu-form-model-field
+                label="Fecha de Autorización"
+                variant="datepicker" 
+                [maxDate]="max_date"
+                [formModelField]="form.model['fechaAutorizacion']"
+                [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                [hideRequiredIndicator]="true">
+              </sunedu-form-model-field>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+              <sunedu-form-model-field
+                variant="select"
+                label="Departamento"
+                bindLabel="text"
+                bindValue="value"
+                [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                [formModelField]="form.model['nombreDepartamento']"
+                [options]="departamentos"
+                (on-change)="handleInputChange($event)"
+                [hideRequiredIndicator]="true">
+                </sunedu-form-model-field>
+            </div>
+          <div class="col-md-6">
+            <sunedu-form-model-field
+              variant="select"
+              label="Provincia"
+              bindLabel="text"
+              bindValue="value"
+              [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [formModelField]="form.model['nombreProvincia']"
+              [options]="provincias"
+              (on-change)="handleInputChange($event)"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>          
+        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+                <sunedu-form-model-field 
+                  variant="select"
+                  label="Distrito"
+                  bindLabel="text"
+                  bindValue="value"
+                  [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                  [formModelField]="form.model['nombreDistrito']"
+                  [options]="distritos"
+                  (on-change)="handleInputChange($event)"
+                  [hideRequiredIndicator]="true">
+                </sunedu-form-model-field>
+            </div>       
+        </div>
+        <div class="form-row">
+            <div class="col-md-12">
+                <sunedu-form-model-field
+                label="Dirección"
+                [formModelField]="form.model['direccion']"
+                [inputProps]="{ maxlength : 250}"
+                [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                [hideRequiredIndicator]="true">
+              </sunedu-form-model-field>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-12">
+                <sunedu-form-model-field
+                label="Referencia"
+                [formModelField]="form.model['referencia']"
+                [inputProps]="{ maxlength : 250}"
+                [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                [hideRequiredIndicator]="true">
+              </sunedu-form-model-field>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+                <sunedu-form-model-field
+                decimal-only
+                label="Área terreno (m2)"
+                [inputProps]="{ maxlength : 9}"
+                decimals= "2"
+                number-only="true"
+                [formModelField]="form.model['areaTerreno']"
+                [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                [hideRequiredIndicator]="true">
+              </sunedu-form-model-field>
+            </div>
+            <div class="col-md-6">
+                <sunedu-form-model-field
+                decimal-only
+                label="Área construida (m2)"
+                [inputProps]="{ maxlength : 9}"
+                decimals= "2"
+                number-only="true"
+                [formModelField]="form.model['areaConstruida']"
+                [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                [hideRequiredIndicator]="true">
+              </sunedu-form-model-field>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+                <sunedu-form-model-field
+                label="Aforo"
+                [inputProps]="{ maxlength : 5}"
+                number-only="true"
+                [formModelField]="form.model['aforo']"
+                [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                [hideRequiredIndicator]="true">
+              </sunedu-form-model-field>
+            </div>
+            <div class="col-md-6">
+                <!-- <sunedu-form-model-field
+                label="Teléfono"
+                [inputProps]="{ maxlength : telefonoMaxLength}"
+                (keypress)="keyPress($event)" 
+                [formModelField]="form.model['telefono']"
+                [disabled]="state.isLoading  || state.type == formType.CONSULTAR">
+              </sunedu-form-model-field>
+              <mat-icon style="font-size:small;margin-right: -8px; vertical-align: text-top;">info</mat-icon><label>Formato válido (XX)XXXXXXX / XXXXXXXXX</label> -->
+              <sunedu-form-model-field 
+                variant="mask" 
+                label="Teléfono" 
+                placeholder="Teléfono" 
+                number-only="true" 
+                [inputProps]="{ maxlength : 30}" 
+                [formModelField]="form.model['telefono']" 
+                [mask]="mask_telefono"
+                (on-change)="showTelefono()" 
+                [hideRequiredIndicator]="true"
+                >
+                </sunedu-form-model-field>
+                <mat-icon style="font-size:small;margin-right: -8px; vertical-align: text-top;">info</mat-icon><label>Formato válido (01)2345678 /987654321</label>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+                <sunedu-form-model-field
+                label="Cantidad de estudiantes"
+                number-only="true"
+                [inputProps]="{ maxlength : 6}"
+                [formModelField]="form.model['cantidadEstudiantes']"
+                [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                [hideRequiredIndicator]="true">
+              </sunedu-form-model-field>
+            </div>        
+        </div>
+        <div class="form-row">
+            <div class="col-md-12">
+                <sunedu-form-model-field
+                  variant="multiline"                  
+                  label="Comentarios"
+                  [inputProps]="{ maxlength : 500}"
+                  [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                  [formModelField]="form.model['comentarios']"
+                  [hideRequiredIndicator]="true">
+              </sunedu-form-model-field>
+            </div>        
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </sunedu-modal-form-container>
+  </ng-container>

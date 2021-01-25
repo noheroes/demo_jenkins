@@ -1,0 +1,34 @@
+<ng-container *ngIf="state$ | async as state">
+  <mat-card>
+    <mat-card-content>
+      <div [hidden] = "ocultarFiltro">
+      <sunedu-data-grid-form-filter (on-submit)="HandleSubmit()" (on-reset)="HandleLimpiar()"
+        [disableButtons]="state.isLoading" [hideExport]="true" [hideNew]="true">
+        <sunedu-form-model-field variant="select" label="Universidades" [formModelField]="formBuscar.model['idEntidad']"
+          [options]="state.comboLists.universidades" (on-change)="handleInputChange($event)" bindLabel="text"
+          bindValue="value" [disabled]="state.isLoading">
+        </sunedu-form-model-field>
+        <sunedu-form-model-field label="N° de solicitud" [formModelField]="formBuscar.model['numeroSolicitud']"
+          [inputProps]="{ maxlength: 15 }" [disabled]="state.isLoading" [hideRequiredIndicator]="true">
+        </sunedu-form-model-field>
+      </sunedu-data-grid-form-filter>
+    </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-content>
+
+      <div style="display: flex; margin-top: 10px;">
+        <div style="flex: 1"></div>
+
+        <div div class="col-md-3 align-self-end">
+
+        </div>
+      </div>
+      <sunedu-data-grid [loading]="state.isLoading" [source]="state.source" [definition]="state.gridDefinition"
+        (on-load-data)="handleLoadData($event)" (on-click-button)="handleClickButton($event)">
+      </sunedu-data-grid>
+
+    </mat-card-content>
+  </mat-card>
+</ng-container>

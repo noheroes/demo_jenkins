@@ -1,0 +1,28 @@
+<ng-container *ngIf="state$ | async as state">
+  <br>
+  <mat-card class="card-border" [hidden] = "idLocalSelecionado">    
+    
+    <!-- -->
+    <sunedu-data-grid
+      [loading]="state.isLoading"
+      [source]="state.source"
+      [definition]="state.gridDefinition"
+      (on-load-data)="handleLoadData($event)"
+      (on-click-button)="handleClickButton($event)"
+      >
+    </sunedu-data-grid>
+    <mat-divider [inset]="true"></mat-divider>
+    <div style="display: flex; margin-top: 10px;">
+      <!-- <div style="flex: 1"></div> -->
+      <sunedu-base-button
+        label="Otros"
+        color="accent"
+        icon="add_circle"
+        (on-click)="handleClickNuevoOtros(tipoPresupuesto)"
+        [disabled]="state.isLoading"
+        [hidden]="readOnly"
+        >
+      </sunedu-base-button>
+    </div>      
+  </mat-card>
+</ng-container>

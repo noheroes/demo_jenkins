@@ -1,0 +1,57 @@
+<ng-container *ngIf="state$ | async as state">
+  <hr>
+  <div class="row">
+    <div class="col-12">
+      <div class="node-head">
+        <div style="float:left;">
+          <p>Seleccione los colaboradores que conformarán el equipo de trabajo:</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th class="text-center no-padding">
+                N°
+              </th>
+              <th class="text-center no-padding">
+                Rol
+              </th>
+              <th class="text-center no-padding">
+                Colaborador
+              </th>
+              <th class="text-center no-padding">
+                Nro. de documento
+              </th>
+              <th class="text-center no-padding">
+                Sel.
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let usr of usuariosEquipoTrabajo">
+              <td class="text-center">{{usr.numero}}</td>
+              <td class="text-center">{{usr.rolDescripcion}}</td>
+              <td class="text-center">{{usr.usuarioDescripcion}}</td>
+              <td class="text-center">{{usr.usuarioNumeroDocumento}}</td>
+              <td class="text-center align-middle">
+                <div style="padding-left: 12px;">
+                  <input type="checkbox">
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="usuariosEquipoTrabajo.length==0">
+              <td class="text-center" colspan="99">No se encontró usuarios disponibles</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<!--<pre>{{usuariosEquipoTrabajo|json}}</pre>-->

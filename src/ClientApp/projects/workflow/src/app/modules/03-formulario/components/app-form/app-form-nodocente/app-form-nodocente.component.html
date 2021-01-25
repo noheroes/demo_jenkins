@@ -1,0 +1,123 @@
+<ng-container *ngIf="state$ | async as state">
+  <sunedu-modal-form-container [title]="state.title" [loading]="state.isLoading" (on-submit)="handleSubmit()"
+  [cancelLabel]="CLOSE_MODAL.LIC_CLOSE_MODAL_LABEL" [cancelIcon]="CLOSE_MODAL.LIC_CLOSE_MODAL_ICON"
+    (on-dismiss)="handleClose()" [msgErrors]="state.error" [formType]="state.type">
+    <mat-card>
+      <mat-card-content>
+        <div class="form-row">
+          <div class="col-md-6">
+            <sunedu-form-model-field label="Apellido paterno"
+              [formModelField]="form.model['apellidoPaterno']"
+              [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>
+          <div class="col-md-6">
+            <sunedu-form-model-field label="Apellido materno"
+              [formModelField]="form.model['apellidoMaterno']"
+              [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-6">
+            <sunedu-form-model-field label="Nombres" [formModelField]="form.model['nombres']"
+              [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>
+          <div class="col-md-6">
+            <sunedu-form-model-field variant="select" label="Sexo" bindLabel="text" bindValue="value"
+              [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [formModelField]="form.model['tipoSexoEnum']" [options]="state.comboLists.sexos"
+              (on-change)="handleInputChange($event)"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-6">
+            <sunedu-form-model-field variant="select" label="Tipo de documento" bindLabel="text" bindValue="value"
+              [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [formModelField]="form.model['tipoDocumentoEnum']" [options]="state.comboLists.tipoDocumentos"
+              (on-change)="handleInputChangeTipoDocumento($event)"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>
+          <div class="col-md-6">
+            <sunedu-form-model-field label="N° de documento" [formModelField]="form.model['numeroDocumento']"
+              [inputProps]="{ maxlength: documentoMaxlength }" number-only="true"
+              [disable-number-only]="disableDocumentoNumberOnly" number-letters-only="true"
+              [disable-number-letters-only]="!disableDocumentoNumberOnly"
+              [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-6">
+            <sunedu-form-model-field variant="select" label="Nacionalidad (País)" bindLabel="text" bindValue="value"
+              [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [formModelField]="form.model['codigoNacionalidad']" [options]="state.comboLists.paises"
+              (on-change)="handleInputChange($event)"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>
+          <div class="col-md-6">
+            <sunedu-form-model-field variant="select" label="Mayor grado académico o título" bindLabel="text"
+              bindValue="value" [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [formModelField]="form.model['noDocente']['tipoGradoAcademicoMayorEnum']"
+              [options]="state.comboLists.mayorGrados" (on-change)="handleInputChangeMayorGrado($event)"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-6">
+            <sunedu-form-model-field label="Denominación del puesto que ocupa"
+              [formModelField]="form.model['noDocente']['denominacionPuesto']"
+              [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>
+          <div class="col-md-6">
+            <mat-label>Niveles de Programa en los que trabaja</mat-label>
+            <sunedu-form-model-field variant="check" label="Pregrado"
+              [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [formModelField]="form.model['noDocente']['nivelProgramaPregrado']"
+              (on-change)="handleInputNivelesProgramaChange($event, connectionResult.NIVELPROGRAMAPREGRADO)"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+            <sunedu-form-model-field variant="check" label="Maestría"
+              [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [formModelField]="form.model['noDocente']['nivelProgramaMaestria']"
+              (on-change)="handleInputNivelesProgramaChange($event, connectionResult.NIVELPROGRAMAMAESTRIA)"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+            <sunedu-form-model-field variant="check" label="Doctorado"
+              [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [formModelField]="form.model['noDocente']['nivelProgramaDoctorado']"
+              (on-change)="handleInputNivelesProgramaChange($event, connectionResult.NIVELPROGRAMADOCTORADO)"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-12">
+            <sunedu-form-model-field variant="multiline" label="Comentario"
+              [inputProps]="{ maxlength: 500 }"
+              [formModelField]="form.model['noDocente']['comentario']"
+              [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </sunedu-modal-form-container>
+</ng-container>

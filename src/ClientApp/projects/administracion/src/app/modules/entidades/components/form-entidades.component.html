@@ -1,0 +1,28 @@
+<ng-container *ngIf="state$ | async as state">
+  <!-- <div class="row">
+    <div class="col-12">
+      <h2>Universidades</h2>
+    </div>
+  </div> -->
+  <br>
+  <mat-divider [inset]="true"></mat-divider>
+  <div style="display: flex; margin-top: 10px;">
+    <div style="flex: 1;"></div>
+    <sunedu-base-button
+      label="Agregar Universidad"
+      color="accent"
+      icon="add_circle"
+      (on-click)="handleClickNuevoUniversidad()"
+      [disabled]="state.buscadorEntidad.isLoading"
+    ></sunedu-base-button>
+  </div>
+
+  <sunedu-data-grid
+    [loading]="state.buscadorEntidad.isLoading"
+    [source]="state.buscadorEntidad.gridSource"
+    [definition]="state.buscadorEntidad.gridDefinition"
+    (on-load-data)="handleLoadData($event)"
+    (on-click-button)="handleClickButton($event)"
+  >
+  </sunedu-data-grid>
+</ng-container>

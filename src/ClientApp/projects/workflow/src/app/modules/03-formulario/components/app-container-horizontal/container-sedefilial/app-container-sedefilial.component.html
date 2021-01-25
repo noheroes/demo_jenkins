@@ -1,0 +1,37 @@
+<ng-container *ngIf="state$ | async as state" [ngSwitch]="state.formato.currentForm">
+  <ng-container *ngSwitchCase="'sedeFilial'" [ngTemplateOutlet]="sedeFilial"
+    [ngTemplateOutletContext]="{state:(state$ | async)}"></ng-container>
+  <ng-container *ngSwitchCase="'local'" [ngTemplateOutlet]="local"
+    [ngTemplateOutletContext]="{stateLocal:(localState$ | async)}"></ng-container>
+</ng-container>
+
+
+<ng-template #sedeFilial let-state='state'>
+  <div style="display: flex; margin-top: 10px;">
+    <div style="flex: 1"></div>
+    <sunedu-button-nuevo label="Agregar Sede/Filial" [disabled]="state.buscadorSedeFilial.isLoading" [hidden]="readOnly"
+      class="example-icon" (on-click)="handleClickNuevoSedeFilial()">
+    </sunedu-button-nuevo>
+  </div>
+  
+  <sunedu-data-grid
+  [loading]="state.buscadorSedeFilial.isLoading"
+  [source]="state.buscadorSedeFilial.source"
+    [definition]="state.buscadorSedeFilial.gridDefinition"
+    (on-load-data)="handleLoadData($event)"
+    (on-click-button)="handleClickButton($event)">
+  </sunedu-data-grid>
+</ng-template>
+
+
+<ng-template #local let-stateLocal='stateLocal'>
+  <br/>
+  <sunedu-button-nuevo [disabled]="stateLocal.buscadorLocal.isLoading" class="example-icon"
+    (on-click)="handleClickNuevoLocal()" [hidden]="readOnly">
+  </sunedu-button-nuevo>
+  <sunedu-data-grid [loading]="stateLocal.buscadorLocal.isLoading" [source]="stateLocal.buscadorLocal.source"
+    [definition]="stateLocal.buscadorLocal.gridDefinition" (on-load-data)="handleLoadLocalData($event)"
+    (on-click-button)="handleClickButtonLocal($event)">
+  </sunedu-data-grid>
+  <sunedu-base-button icon="reply" color="primary" label="Ir a sede/filial" (click)='retornar()'>Cancelar</sunedu-base-button>
+</ng-template>

@@ -1,0 +1,103 @@
+<ng-container *ngIf="state$ | async as state">
+  <sunedu-modal-form-container
+  [title]="state.title"
+  [loading]="state.isLoading"
+  (on-submit)="handleSubmit()"
+  (on-dismiss)="handleClose()"
+  [msgErrors]="state.error"
+  [cancelLabel]="CLOSE_MODAL.LIC_CLOSE_MODAL_LABEL" [cancelIcon]="CLOSE_MODAL.LIC_CLOSE_MODAL_ICON"
+  [formType]="state.type">
+  <mat-card>
+    <mat-card-content>
+      <div class="form-row">
+        <div class="col-md-6" [hidden] = "codigoHidden">
+          <sunedu-form-model-field
+          label="Código de programa"
+          [formModelField]="form.model['codigo']"
+          [inputProps]="{ maxlength: 50 }"
+          [disabled]="state.isLoading  || state.type == formType.CONSULTAR || esDisabled"
+          [hideRequiredIndicator]="true">
+        </sunedu-form-model-field>
+        </div>
+        <div class="col-md-6">
+          <sunedu-form-model-field
+          label="Denominación segunda especialidad"
+          [formModelField]="form.model['denominacionPrograma']"
+          [inputProps]="{ maxlength: 200 }"
+          [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+          [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+        </div>
+        <div class="col-md-6">
+          <sunedu-form-model-field
+                variant="select"
+                label="Denominación del clasificador CINE"
+                bindLabel="text"
+                bindValue="value"
+                [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                [formModelField]="form.model['codigoCINE']"
+                [options]="state.comboLists.denominacionClasificadorCINEs"
+                (on-change)="handleInputChange($event)"
+                [hideRequiredIndicator]="true">
+              </sunedu-form-model-field>
+        </div>
+        
+        <div class="col-md-6">
+          <sunedu-form-model-field
+          label="Denominación del Título que otorga"
+          [formModelField]="form.model['denominacionTituloOtorgado']"
+          [inputProps]="{ maxlength: 200 }"
+          [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+          [hideRequiredIndicator]="true">
+        </sunedu-form-model-field>
+        </div>
+        <div class="col-md-6">
+          <sunedu-form-model-field
+          label="N° de Resolución de creación"
+          [formModelField]="form.model['resolucionCreacionModalidad']"
+          [inputProps]="{ maxlength: 20 }"
+          [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+          [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+        </div>
+        <div class="col-md-6">
+          <sunedu-form-model-field variant="datepicker" 
+          label="Fecha de creación"
+          [formModelField]="form.model['fechaCreacionModalidad']"
+          [maxDate]="max_date"
+          [inputProps]="{ maxlength: 15 }"
+          [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+          [hideRequiredIndicator]="true">
+        </sunedu-form-model-field>
+        </div>
+        <div class="col-md-6">
+          <sunedu-form-model-field
+                variant="select"
+                label="Nombre de facultad"
+                bindLabel="text"
+                bindValue="value"
+                [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                [formModelField]="form.model['idFacultad']"
+                [options]="state.comboLists.nombreFacultades"
+                (on-change)="handleInputChange($event)"
+                [hideRequiredIndicator]="true">
+              </sunedu-form-model-field>
+        </div>
+        <div class="col-md-6">
+          <sunedu-form-model-field
+                variant="select"
+                label="Régimen de estudio"
+                bindLabel="text"
+                bindValue="value"
+                [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                [formModelField]="form.model['regimenEstudioEnum']"
+                [options]="state.comboLists.regimenEstudios"
+                (on-change)="handleInputChange($event)"
+                [hideRequiredIndicator]="true">
+              </sunedu-form-model-field>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</sunedu-modal-form-container>
+</ng-container>

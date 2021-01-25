@@ -1,0 +1,331 @@
+@import "./variables";
+
+@include mat-core();
+
+/*
+ *=============================================
+ * TIPOGRAFÍA GALENUS
+ *=============================================
+ */
+@font-face {
+  font-family: 'WorkSans-Light';
+  src: url('./assets/fonts/worksans-light/worksans-light.eot');
+  src: url('./assets/fonts/worksans-light/worksans-light.eot?#iefix') format('embedded-opentype'),
+    url('./assets/fonts/worksans-light/worksans-light.woff2') format('woff2'),
+    url('./assets/fonts/worksans-light/worksans-light.woff') format('woff'),
+    url('./assets/fonts/worksans-light/worksans-light.ttf') format('truetype'),
+    url('./assets/fonts/worksans-light/worksans-light.svg#WorkSans-Light') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'WorkSans-Regular';
+  src: url('./assets/fonts/worksans-regular/worksans-regular.eot');
+  src: url('./assets/fonts/worksans-regular/worksans-regular.eot?#iefix') format('embedded-opentype'),
+    url('./assets/fonts/worksans-regular/worksans-regular.woff2') format('woff2'),
+    url('./assets/fonts/worksans-regular/worksans-regular.woff') format('woff'),
+    url('./assets/fonts/worksans-regular/worksans-regular.ttf') format('truetype'),
+    url('./assets/fonts/worksans-regular/worksans-regular.svg#WorkSans-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'WorkSans-Medium';
+  src: url('./assets/fonts/worksans-medium/worksans-medium.eot');
+  src: url('./assets/fonts/worksans-medium/worksans-medium.eot?#iefix') format('embedded-opentype'),
+    url('./assets/fonts/worksans-medium/worksans-medium.woff2') format('woff2'),
+    url('./assets/fonts/worksans-medium/worksans-medium.woff') format('woff'),
+    url('./assets/fonts/worksans-medium/worksans-medium.ttf') format('truetype'),
+    url('./assets/fonts/worksans-medium/worksans-medium.svg#WorkSans-Medium') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'WorkSans-SemiBold';
+  src: url('./assets/fonts/worksans-semibold/worksans-semibold.eot?#iefix') format('embedded-opentype'),
+    url('./assets/fonts/worksans-semibold/worksans-semibold.woff') format('woff'),
+    url('./assets/fonts/worksans-semibold/worksans-semibold.ttf') format('truetype'),
+    url('./assets/fonts/worksans-semibold/worksans-semibold.svg#WorkSans-SemiBold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+/*
+ *===============================================
+ * ESTILOS DE LOS FORM CONTROLS DE LA APLICACIÓN
+ *===============================================
+ */
+
+.mat-form-field {
+  input {
+    line-height: 5px;
+    text-transform: uppercase; /*CAYL mayusculas*/
+  }
+  textarea {
+    text-transform: uppercase; 
+  }
+  .mat-form-field-infix {
+    border-top: 0px !important;
+  }
+
+  .mat-form-field-invalid .mat-form-field-flex {
+    border-color: #f44336 !important;
+
+    &:hover {
+      border-color: #f44336 !important;
+    }
+  }
+
+  .mat-form-field-flex {
+    background: #fff;
+    border: 1px solid #ced4da;
+    padding: 5px 10px;
+
+    &:hover {
+      border: 1px solid #5e4f9a;
+    }
+  }
+
+  .mat-form-field-underline {
+    height: 0px !important;
+  }
+
+  .mat-form-field-ripple {
+    height: 0px !important;
+    display: none !important;
+  }
+
+  &.mat-form-field-disabled .mat-form-field-flex,
+  &.mat-form-field-select-disabled .mat-form-field-flex {
+    background: #f7f7f7 !important;
+    color: #7b7b7b !important;
+    padding-left: 10px !important;
+    border: none !important;
+    border-bottom: 1px dashed #b9b9b9 !important;
+    cursor: not-allowed !important;
+
+    .mat-input-element:disabled,
+    .mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after {
+      color: #333333;
+      opacity: 0.6 !important;
+    }
+  }
+}
+
+.ng-select-multiple.mat-form-field .mat-form-field-infix {
+  padding-bottom: 0px;
+}
+
+.ng-select-multiple.mat-form-field .mat-form-field-flex {
+  min-height: 35px;
+}
+
+.ng-select-multiple.mat-form-field .mat-form-field-flex .ng-select {
+  margin-top: -5px !important;
+}
+
+/*
+    *===============================================
+    * ESTILOS DE TABS PARA LA APLICACION
+    *===============================================
+    */
+
+.mat-tab-group:not(.vertical-tabs) {
+  // .mat-tab-header {
+  //   // border-bottom: solid 0px !important;
+  // }
+
+  .mat-tab-list {
+    .mat-ink-bar {
+      visibility: hidden !important;
+    }
+  }
+
+  .mat-tab-label {
+    height: 35px !important;
+    opacity: 1 !important;
+    // border-top: mat-color($yup-app-primary) solid 1px;
+    // border-right: mat-color($yup-app-primary) solid 1px;
+    // border-left: mat-color($yup-app-primary) solid 1px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-right: 2px;
+
+    //.mat-tab-label-content {}
+
+    &.mat-tab-disabled {
+      opacity: 0.6 !important;
+    }
+  }
+
+  .mat-tab-label:not(.mat-tab-label-active) {
+    //background: mat-color($yup-app-primary);
+    background: #f2f2f2;
+
+    .mat-tab-label-content {
+      color: mat-contrast($yup-app-primary, morado);
+    }
+  }
+
+  .mat-tab-label.mat-tab-label-active {
+    .mat-tab-label-content {
+      //color: mat-color($yup-app-primary);
+      color: white;
+      font-weight: bold;
+    }
+  }
+}
+
+
+
+/*
+    *===============================================
+    * ESTILOS DE TABLAS PARA LA APLICACION
+    *===============================================
+    */
+
+@media (min-width: 769px) {
+  .mat-row {
+    height: 32px !important;
+  }
+}
+
+.mat-header-cell {
+  background: #584892 !important;
+  color: #ffffff !important;
+}
+
+.mat-header-row {
+  height: 42px !important;
+}
+
+.mat-sort-header-arrow {
+  color: #ffffff !important;
+}
+
+/*
+    *===============================================
+    * ESTILOS DE MODALES PARA LA APLICACION
+    *===============================================
+    */
+/*
+   .mat-dialog-content {
+     margin: 0 -18px !important;
+     padding: 0px 18px !important;
+   }
+   */
+@media (min-width: 1400px) {
+  .mat-dialog-content {
+    max-height: 80vh !important;
+  }
+}
+
+.mat-dialog-actions {
+  padding: 12px 0 !important;
+}
+
+
+.app-title {
+  color: mat-color($yup-app-primary) !important;
+}
+
+.sunedu-button-blue button {
+  background: #024b82;
+  color: #fff;
+}
+
+/*
+    *===============================================
+    * ESTILOS DE SELECT PARA LA APLICACION
+    *===============================================
+    */
+
+.ng-select.select-sunedu {
+  border: 0px;
+
+  border-radius: 0;
+  text-transform: uppercase; /*CAYL mayusculas*/
+}
+
+.ng-select.select-sunedu .ng-select-container {
+  border-radius: 0;
+
+  &:hover {
+    border-color: mat-color($yup-app-primary);
+  }
+}
+
+.select-sunedu .ng-option {
+  white-space: inherit !important;
+
+  &.ng-option-marked {
+    background-color: #ccc9de !important;
+  }
+}
+
+.select-sunedu .ng-option.ng-option-selected {
+
+  background-color: #e6e4f0 !important;
+
+  .custom-control.custom-checkbox .form-check-label::before {
+    background-color: mat-color($yup-app-primary);
+  }
+}
+
+.ng-select.select-sunedu.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+  background-color: #e6e4f0 !important;
+}
+
+.ng-select.ng-select-multiple .ng-clear-wrapper .ng-clear {
+  transform: rotate(-15deg);
+  margin-top: 2px;
+}
+
+.ng-select.ng-select-disabled .ng-select-container {
+  background: #f7f7f7 !important;
+  color: #7b7b7b !important;
+  padding-left: 10px !important;
+  border: none !important;
+  border-bottom: 1px dashed #b9b9b9 !important;
+  cursor: not-allowed !important;
+}
+
+.ng-select.ng-select-focused:not(.ng-select-opened)>.ng-select-container {
+  box-shadow: none;
+  border-color: mat-color($yup-app-primary);
+}
+
+.simple-table {
+  width: 100%;
+
+  th {
+    padding: 5px;
+  }
+
+  tr {
+    height: 20px;
+
+    td {
+      padding: 5px;
+      border-bottom: 0px !important;
+      border-top: solid 1px #dcdcdc;
+    }
+  }
+}
+
+.simple-table.grid-style {
+  th {
+    background: mat-color($yup-app-primary);
+    color: #fff;
+  }
+}
+
+mat-label:not(.mat-error) {
+  font-weight: bold !important;
+  color: #565656 !important;
+}

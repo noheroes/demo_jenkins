@@ -1,0 +1,59 @@
+<ng-container *ngIf="state$ | async as state">
+  <sunedu-data-grid-form-filter
+  (on-submit)="HandleSubmit()"
+  (on-reset)="HandleLimpiar()"
+  [disableButtons]="state.isLoading"
+  [hideExport]="true" [hideNew]="true"
+  >
+
+  <sunedu-form-model-field
+  variant="select"
+  label="Periodo académico"
+  [formModelField]="form.model['codigoPeriodoAcademico']"
+  [options]="state.comboLists.perdiodoAcademicos"
+  (on-change)="handleInputChange($event)"
+  bindLabel="text"
+  bindValue="value"
+  [disabled]="state.isLoading"
+ ></sunedu-form-model-field>
+
+ <sunedu-form-model-field
+ variant="text"
+ placeholder="Nombre de curso"
+ label="Nombre de curso"
+ [formModelField]="form.model['nombreCurso']"
+ [disabled]="state.isLoading"
+></sunedu-form-model-field>
+
+<sunedu-form-model-field
+variant="select"
+label="Tipo de estudio"
+[formModelField]="form.model['codigoTipoEstudio']"
+[options]="state.comboLists.tipoEstudios"
+(on-change)="handleInputChange($event)"
+bindLabel="text"
+bindValue="value"
+[disabled]="state.isLoading"
+></sunedu-form-model-field>
+
+<sunedu-form-model-field
+variant="select"
+label="Tipo de curso"
+[formModelField]="form.model['codigoTipoCurso']"
+[options]="state.comboLists.tipoCursos"
+(on-change)="handleInputChange($event)"
+bindLabel="text"
+bindValue="value"
+[disabled]="state.isLoading"
+></sunedu-form-model-field>
+
+<sunedu-form-model-field
+variant="text"
+placeholder="N° total de semanas"
+label="N° total de semanas"
+[formModelField]="form.model['numeroTotalSemanas']"
+[disabled]="state.isLoading"
+></sunedu-form-model-field>
+
+</sunedu-data-grid-form-filter>
+</ng-container>

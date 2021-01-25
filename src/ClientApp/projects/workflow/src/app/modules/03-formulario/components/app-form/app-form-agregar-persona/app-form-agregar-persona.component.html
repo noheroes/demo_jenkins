@@ -1,0 +1,7 @@
+<ng-container *ngIf="state$ | async as state">
+  <div style="display: flex; margin-top: 10px;">
+    <div style="flex: 1"></div>
+    <sunedu-base-button [label]="titleButton" color="accent" icon="add_circle" (on-click)="handleClickAgregarTipo()"
+        [disabled]="state.isLoading"></sunedu-base-button>
+  </div>
+</ng-container>

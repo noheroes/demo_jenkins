@@ -1,0 +1,141 @@
+<ng-container *ngIf="state$ | async as state">
+  <sunedu-modal-form-container [title]="state.title"
+                               [loading]="state.isLoading"
+                               (on-submit)="handleSubmit()"
+                               (on-dismiss)="handleClose()"
+                               [cancelLabel]="CLOSE_MODAL.LIC_CLOSE_MODAL_LABEL" [cancelIcon]="CLOSE_MODAL.LIC_CLOSE_MODAL_ICON"
+                               [msgErrors]="state.error"
+                               [formType]="state.type">
+
+    <div class="form-row">
+      <div class="col-md-6">
+        <sunedu-form-model-field variant="text"
+                                 label="N° total de laboratorios de cómputo"
+                                 number-only="true"
+                                 [inputProps]="{ maxlength :4 }"
+                                 [formModelField]="form.model['numeroLaboratorioComputo']"
+                                 [disabled]="true"
+                                 [hideRequiredIndicator]="true">
+        </sunedu-form-model-field>
+      </div>
+      <div class="col-md-6">
+        <sunedu-form-model-field variant="text"
+                                 label="N° total de laboratorios de enseñanza"
+                                 number-only="true"
+                                 [inputProps]="{ maxlength :4 }"
+                                 [formModelField]="form.model['numeroLaboratorioEnsenanza']"
+                                 [disabled]="true"
+                                 [hideRequiredIndicator]="true">
+        </sunedu-form-model-field>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-6">
+        <sunedu-form-model-field variant="text"
+                                 label="N° total de laboratorios de investigación"
+                                 number-only="true"
+                                 [inputProps]="{ maxlength :4 }"
+                                 [formModelField]="form.model['numeroLaboratorioInvestigacion']"
+                                 [disabled]="true"
+                                 [hideRequiredIndicator]="true">
+        </sunedu-form-model-field>
+      </div>
+      <div class="col-md-6">
+        <sunedu-form-model-field variant="text"
+                                 label="N° total de talleres de enseñanza"
+                                 number-only="true"
+                                 [inputProps]="{ maxlength :4 }"
+                                 [formModelField]="form.model['numeroTalleresEnsenanza']"
+                                 [disabled]="true"
+                                 [hideRequiredIndicator]="true">
+        </sunedu-form-model-field>
+      </div>
+
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-6">
+        <sunedu-form-model-field variant="text"
+                                 label="N° total de bibliotecas"
+                                 number-only="true"
+                                 [inputProps]="{ maxlength :4 }"
+                                 [formModelField]="form.model['numeroBibliotecas']"
+                                 [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                                 [hideRequiredIndicator]="true">
+        </sunedu-form-model-field>
+
+      </div>
+      <div class="col-md-6">
+        <sunedu-form-model-field variant="text"
+                                 label="N° total de aulas"
+                                 number-only="true"
+                                 [inputProps]="{ maxlength :4 }"
+                                 [formModelField]="form.model['numeroAulas']"
+                                 [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                                 [hideRequiredIndicator]="true">
+        </sunedu-form-model-field>
+
+      </div>
+
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-6">
+        <sunedu-form-model-field variant="text"
+                                 label="N° total de ambientes para docentes"
+                                 number-only="true"
+                                 [inputProps]="{ maxlength :4 }"
+                                 [formModelField]="form.model['numeroAmbientesDocentes']"
+                                 [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                                 [hideRequiredIndicator]="true">
+        </sunedu-form-model-field>
+      </div>
+      <div class="col-md-6">
+        <sunedu-form-model-field variant="text"
+                                 label="N° total de tópicos"
+                                 number-only="true"
+                                 [inputProps]="{ maxlength :3 }"
+                                 [formModelField]="form.model['numeroTopicos']"
+                                 [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                                 [hideRequiredIndicator]="true">
+        </sunedu-form-model-field>
+      </div>
+
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-6">
+        <sunedu-form-model-field variant="text"
+                                 label="Denominación de ambientes complementarios"
+                                 [formModelField]="form.model['denominacionAmbienteComplementario']"
+                                 [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                                 [inputProps]="{ maxlength : 250}"
+                                 [hideRequiredIndicator]="true">
+        </sunedu-form-model-field>
+      </div>
+      <div class="col-md-6">
+        <sunedu-form-model-field variant="text"
+                                 label="Denominación de ambientes para servicios de bienestar universitarios"
+                                 [formModelField]="form.model['denominacionAmbienteServicio']"
+                                 [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                                 [inputProps]="{ maxlength : 250}"
+                                 [hideRequiredIndicator]="true">
+        </sunedu-form-model-field>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-12">
+        <sunedu-form-model-field variant="multiline"
+                                 label="Comentarios"
+                                 [formModelField]="form.model['comentario']"
+                                 [inputProps]="{ maxlength: 500 }"
+                                 [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                                 [hideRequiredIndicator]="true">
+        </sunedu-form-model-field>
+      </div>
+    </div>
+
+  </sunedu-modal-form-container>
+</ng-container>

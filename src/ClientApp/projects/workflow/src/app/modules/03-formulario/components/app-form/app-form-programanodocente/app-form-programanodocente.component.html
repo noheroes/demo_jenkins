@@ -1,0 +1,32 @@
+<ng-container *ngIf="state$ | async as state">
+  <sunedu-modal-container [title]="state.title" [loading]="state.isLoading" (on-dismiss)="handleClose()"
+  [cancelLabel]="CLOSE_MODAL.LIC_CLOSE_MODAL_LABEL" [cancelIcon]="CLOSE_MODAL.LIC_CLOSE_MODAL_ICON"
+    [msgErrors]="state.error" [formType]="state.type" [showOkButton]="false">
+    <mat-card>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-md-12 pb-3">
+            <h3>{{nombre_nodocente}}</h3>  
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-6">
+            <sunedu-form-model-field variant="select" label="Listados de programa académicos" bindLabel="text"
+              bindValue="value" [disabled]="state.isLoading  || state.type == formType.CONSULTAR  || state.readOnly"
+              [formModelField]="form.model['idPrograma']" [options]="state.comboLists.programas"
+              (on-change)="handleInputChange($event)"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>
+          <div class="col-md-6 align-self-end">
+            <sunedu-base-button *ngIf="!state.readOnly" label="Vincular" color="accent" icon="add_circle" (on-click)="handleSubmit()"
+              [disabled]="state.isLoading">
+            </sunedu-base-button>
+          </div>
+        </div>
+        <sunedu-data-grid [loading]="state.isLoading" [source]="state.source" [definition]="state.gridDefinition" (on-click-button)="handleClickButton($event)" (on-load-data)="handleLoadData($event)">
+        </sunedu-data-grid>
+      </mat-card-content>
+    </mat-card>
+  </sunedu-modal-container>
+</ng-container>

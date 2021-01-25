@@ -1,0 +1,40 @@
+<ng-container *ngIf="state$ | async as state" [ngSwitch]="state.formato.currentForm">
+  <ng-container *ngSwitchCase="'maestroPersona'" [ngTemplateOutlet]="maestroPersona"
+    [ngTemplateOutletContext]="{state:(state$ | async)}"></ng-container>
+  <ng-container *ngSwitchCase="'gradoAcademico'" [ngTemplateOutlet]="gradoAcademico"
+    [ngTemplateOutletContext]="{stateGradoAcademico:(stateGradoAcademico$ | async)}"></ng-container>
+</ng-container>
+
+<ng-template #maestroPersona let-state='state'>
+  <app-form-agregar-persona *ngIf="!readOnly" [titleButton]="'Agregar personal docente'" [tipo]='TIPOPERSONA.DOCENTE'></app-form-agregar-persona>
+
+  <sunedu-data-grid
+  [loading]="state.buscadorMaestroPersona.isLoading"
+  [source]="state.buscadorMaestroPersona.source"
+    [definition]="state.buscadorMaestroPersona.gridDefinition"
+    (on-load-data)="handleLoadData($event)"
+    (on-click-button)="handleClickButton($event)">
+    <ng-template suneduTemplate="tpl-sexo">  </ng-template>
+  </sunedu-data-grid>
+
+  <app-form-agregar-persona *ngIf="!readOnly" [titleButton]="'Agregar personal no docente'" [tipo]='TIPOPERSONA.NODOCENTE'></app-form-agregar-persona>
+  <sunedu-data-grid
+  [loading]="state.buscadorMaestroNoDocente.isLoading"
+  [source]="state.buscadorMaestroNoDocente.source"
+    [definition]="state.buscadorMaestroNoDocente.gridDefinition"
+    (on-load-data)="handleLoadDataNoDocente($event)"
+    (on-click-button)="handleClickButton($event)">
+    <ng-template suneduTemplate="tpl-sexo">  </ng-template>
+  </sunedu-data-grid>
+</ng-template>
+
+<ng-template #gradoAcademico let-stateGradoAcademico='stateGradoAcademico'>
+  <br/>
+  <sunedu-button-nuevo [disabled]="stateGradoAcademico.modalGradoAcademico.isLoading" [hidden]="readOnly" class="example-icon"
+    (on-click)="handleClickNuevoGradoAcademico()">
+  </sunedu-button-nuevo>
+  <sunedu-data-grid [loading]="stateGradoAcademico.modalGradoAcademico.isLoading" [source]="stateGradoAcademico.modalGradoAcademico.source" [definition]="stateGradoAcademico.modalGradoAcademico.gridDefinition"
+          (on-click-button)="handleClickButtonGradoAcademico($event)" (on-load-data)="handleLoadDataGradoAcademico($event)">
+   </sunedu-data-grid>
+  <sunedu-base-button icon="reply" color="primary" label="Ir a maestro de personas" (click)='retornar()'>Cancelar</sunedu-base-button>
+</ng-template>

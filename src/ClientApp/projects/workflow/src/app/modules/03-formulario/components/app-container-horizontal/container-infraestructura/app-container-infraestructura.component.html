@@ -1,0 +1,20 @@
+<ng-container *ngIf="state$ | async as state" >
+  <mat-card class="card-border" [hidden]="idLocalSelecionado">
+<!--
+    <app-form-buscar-infraestructura (on-click-nuevo)="handleClickNuevoInfraestructura()">
+    </app-form-buscar-infraestructura> -->
+    <div style="display: flex; margin-top: 10px;">
+      <div style="flex: 1"></div>
+      <sunedu-button-nuevo label="Agregar Infraestructura" [disabled]="state.buscadorInfraestructura.isLoading || state.buscadorInfraestructura.bloquearRegistro" [hidden]="readOnly"
+        class="example-icon" (on-click)="handleClickNuevoInfraestructura()">
+      </sunedu-button-nuevo>
+    </div>    
+    <sunedu-data-grid
+        [loading]="state.buscadorInfraestructura.isLoading"
+        [source]="state.buscadorInfraestructura.source"
+        [definition]="state.buscadorInfraestructura.gridDefinition"
+        (on-load-data)="handleLoadData($event)"
+        (on-click-button)="handleClickButton($event)">
+    </sunedu-data-grid>
+  </mat-card>
+</ng-container>

@@ -1,0 +1,17 @@
+<ng-container *ngIf="state$ | async as state">
+    <mat-toolbar>
+     <mat-toolbar-row>
+       <span class="example-spacer"></span>
+       <sunedu-button-nuevo [disabled]="state.buscadorLocal.isLoading" class="example-icon" (on-click)="handleClickNuevoLocal()">
+       </sunedu-button-nuevo>
+     </mat-toolbar-row>
+   </mat-toolbar>
+   <sunedu-data-grid
+   [loading]="state.buscadorLocal.isLoading"
+   [source]="state.buscadorLocal.source"
+   [definition]="state.buscadorLocal.gridDefinition"
+   (on-load-data)="handleLoadData($event)"
+   (on-click-button)="handleClickButton($event)">
+   </sunedu-data-grid>
+
+  </ng-container>

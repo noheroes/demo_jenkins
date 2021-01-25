@@ -1,0 +1,106 @@
+<ng-container *ngIf="state$ | async as state">
+  <sunedu-modal-form-container [title]="state.title" [loading]="state.isLoading" (on-submit)="handleSubmit()"
+  [cancelLabel]="CLOSE_MODAL.LIC_CLOSE_MODAL_LABEL" [cancelIcon]="CLOSE_MODAL.LIC_CLOSE_MODAL_ICON"
+    (on-dismiss)="handleClose()" [msgErrors]="state.error" [formType]="state.type">
+        <div class="row">
+          <div class="col-md-12 pb-3">
+            <h3>{{nombre_docente}}</h3>  
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-6">
+            <sunedu-form-model-field variant="select" label="Tipo de grado y/o título"
+              bindLabel="text" bindValue="value" [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [formModelField]="form.model['tipoMencionEnum']" [options]="state.comboLists.tipoGrado"
+              (on-change)="handleInputChange($event)"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>
+          <div class="col-md-6" [hidden] = "gradoSeleccionado">
+            <sunedu-form-model-field [label]="textoMencion"
+              [formModelField]="form.model['mencion']"
+              [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [inputProps]="{ maxlength : 100}"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>        
+          <div class="col-md-6" [hidden] = "gradoSeleccionado">
+            <sunedu-form-model-field variant="select" [label]="textoCodigoPaisGrado"
+              bindLabel="text" bindValue="value" [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [formModelField]="form.model['codigoPaisGrado']" [options]="state.comboLists.paises"
+              (on-change)="handleInputChange($event)"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>
+          <div class="col-md-6" [hidden] = "mostrarUnivGrado">
+            <sunedu-form-model-field variant="select" label="Listado de universidades"
+              bindLabel="text" bindValue="value" [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [formModelField]="form.model['codigoUniversidadGrado']" [options]="state.comboLists.listadoUniversidades"             
+              (on-change)="handleInputChange($event)"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>        
+          <div class="col-md-6" [hidden] = "esGradoNacional">
+            <sunedu-form-model-field label="Institución que otorgó el grado y/o título"
+              [formModelField]="form.model['institucionGrado']"
+              [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [inputProps]="{ maxlength : 100}"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>
+          <div class="col-md-6" [hidden] = "esGradoNacional">
+            <sunedu-form-model-field label="Res. SUNEDU reconocimiento del grado extranjero"
+              [formModelField]="form.model['resolucionSunedu']"
+              [inputProps]="{ maxlength: 20 }"
+              [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>
+        </div>
+        <div class="form-row" 
+        [hidden] = "esBachiller">
+          <div class="col-md-6">
+            <sunedu-form-model-field variant="select" label="Título"
+              bindLabel="text" bindValue="value" [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [formModelField]="form.model['esTitulado']" [options]="state.comboLists.tipoRespuesta"
+              (on-change)="handleInputChange($event)"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>
+          <div class="col-md-6" [hidden] = "esTitulado">
+            <sunedu-form-model-field label="Denominación del título"
+              [formModelField]="form.model['denominacionTitulo']"
+              [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [inputProps]="{ maxlength : 100}"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>
+        </div>
+        <div class="form-row" [hidden] = "esTitulado || esBachiller">
+          <div class="col-md-6">            
+            <sunedu-form-model-field variant="select" label="País en el que se otorgó el título"
+              bindLabel="text" bindValue="value" [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [formModelField]="form.model['codigoPaisTitulo']" [options]="state.comboLists.paises" (on-change)="handleInputChange($event)"
+              [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>            
+          </div>
+          <div class="col-md-6" [hidden] = "mostrarUnivTitulo">            
+            <sunedu-form-model-field variant="select" label="Listado de universidades"
+              bindLabel="text" bindValue="value" [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [formModelField]="form.model['codigoUniversidadTitulo']" [options]="state.comboLists.listadoUniversidades"
+              (on-change)="handleInputChange($event)" [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>                
+          <div class="col-md-6" [hidden] = "esTituloNacional">
+            <sunedu-form-model-field label="Institución que otorgó el título"
+              [formModelField]="form.model['institucionTitulo']"
+              [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+              [inputProps]="{ maxlength : 100}" [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+          </div>
+        </div>       
+        <!-- <sunedu-data-grid [loading]="state.isLoading" [source]="state.source" [definition]="state.gridDefinition"
+          (on-click-button)="handleClickButton($event)">
+        </sunedu-data-grid>  -->
+  </sunedu-modal-form-container>
+</ng-container>

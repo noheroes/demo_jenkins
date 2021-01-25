@@ -1,0 +1,52 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+//GALENUS PELETA
+//.btn-primary.btn-outline {
+//     color: #5d4595;
+// }
+// .btn-success.btn-outline {
+//     color: #1c84c6;
+// }
+// .btn-info.btn-outline {
+//     color: #23c6c8;
+// }
+// .btn-warning.btn-outline {
+//     color: #f8ac59;
+// }
+// .btn-danger.btn-outline {
+//     color: #ed5565;
+// }
+$sunedu-colors: (morado: #584892, rojo: #cb4f2b, azul: #024b82, contrast: (morado : #fff, rojo : #fff, azul : #fff));
+// $galenus-colors: (primary: #5d4595, success: #1c84c6, info: #23c6c8, warning: #f8ac59, danger: #ed5565, contrast: (primary: #fff, success: #fff, info: #fff, warning: #fff, danger: #fff));
+$galenus-colors: (primary: #5d4595, success: #1c84c6, info: #23c6c8, warning: #ed5565, danger: #ed5565, contrast: (primary: #fff, success: #fff, info: #fff, warning: #fff, danger: #fff));
+
+
+$yup-app-primary: mat-palette($galenus-colors, primary);
+$yup-app-accent: mat-palette($galenus-colors, success);
+
+// The warn palette is optional (defaults to red).
+$yup-app-warn: mat-palette($galenus-colors, warning);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$yup-app-theme: mat-light-theme($yup-app-primary, $yup-app-accent, $yup-app-warn);
+
+$custom-typography: mat-typography-config($font-family: "WorkSans-Regular, Helvetica, Arial, sans-serif");
+$title-typography: mat-typography-config($font-family: "WorkSans-Light, Helvetica, Arial, sans-serif");
+
+//=================================
+//EXPORTANDO COLORES
+//=================================
+$primary-color: mat-color($yup-app-primary);
+$accent-color: mat-color($yup-app-accent);
+$primary-color-contrast: mat-contrast($yup-app-primary, primary);

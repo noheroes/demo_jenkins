@@ -1,0 +1,206 @@
+<ng-container *ngIf="state$ | async as state">
+    <div class="row">
+      <div class="col-12">
+        <h2>Agregar Documentos</h2>
+      </div>
+    </div>
+    <br>
+    <mat-card>
+      <mat-card-content>
+        <div class="row" style="text-align: end; align-items: flex-end;">
+          <div class="col-4" style="text-align: left;">
+            <sunedu-base-button label="Firmar" color="primary" icon="library_add_check" *ngIf="false" (on-click)="handleClickFirma()"></sunedu-base-button>
+          </div>
+          <div class="col-3">
+            <h5 style="padding-top:10px;">Agregar</h5>
+          </div>
+          <div class="col-4" style="text-align: end; padding-left: 0px; padding-right: 0px;">
+            <sunedu-form-field
+                variant="select"
+                label=""
+                bindLabel="text"
+                bindValue="value"
+                [options]="tipos.list"
+                controlName="tipoDocumento"
+                [formGroupParent]="form"
+                [msgValidations]="validators['tipoDocumento']"
+                [hideRequiredIndicator]="true"
+                (on-change)="handleChange($event)"
+                [disabled]="readOnly"
+                >
+              </sunedu-form-field>
+  
+            <!-- <sunedu-form-field variant="select" label="" bindLabel="text" bindValue="value" [options]="tipos.list"
+              controlName="tipoDocumento" [formGroupParent]="form" [msgValidations]="validators['tipoDocumento']">
+            </sunedu-form-field> -->
+  
+          </div>
+          <div class="col-1" style="text-align:center;">
+            <button type="button" class="btn btn-primary button-left" (click)="onAdd()" *ngIf="!readOnly" >
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-content>
+        <br>
+        <hr>
+      <div style="display: flex; margin-top: 10px;">
+      <div style="flex: 1" class="inline-block"></div>
+          <sunedu-base-button label="Actualizar"
+                              color="primary"
+                              icon="refresh"
+                              (on-click)="handleRefresh()">
+          </sunedu-base-button>
+      </div>
+        <br />
+        <div class="table-responsive">
+          <!-- <table class="table table-striped table-bordered table-hover"  *ngIf="node.isExpanded"> -->
+          <table class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th class="text-center no-padding">
+                  Fecha de Emisión
+                </th>
+                <th class="text-center no-padding">
+                  Especialización del tipo
+                </th>
+                <th class="text-center no-padding">
+                  N°
+                </th>
+                <!-- <th class="text-center no-padding">
+                  Origen
+                </th> -->
+                <th class="text-center no-padding">
+                  Archivo
+                </th>
+                <th class="text-center no-padding" style="width: 40px;">
+                  Estado
+                </th>
+                <th class="text-center no-padding">
+                  Acciones
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tr *ngFor="let doc of node.documentosFase"> -->
+              <tr *ngFor="let doc of documentosFase">
+                <td class="text-center">{{doc.fechaRegistro | date: 'dd/MM/yyyy hh:mm a'}}</td>
+                <td class="text-center">{{doc.subtipoEspecializacion}}</td>
+                <td class="text-center">{{doc.numero}}</td>
+                <!-- <td class="text-center">{{doc.origen}}</td> -->
+                <td class="text-center">{{doc.metadataArchivo.archivoNombre}}</td>
+                <td class="text-center">{{doc.estadoDocumento}}</td>
+                <td class="text-center" style="width:50px;">
+                  <!-- *ngIf="doc.metadataArchivo.estadoRS>0" -->
+                  <div class="gestorArchivoButtonsContainer">
+
+                    <button color="primary" mat-flat-button matTooltip="Descargar archivo"
+                    [ngClass]="{'uniqueButton':readOnly,'gestorButton':!readOnly}" *ngIf="doc.estadoDocumento=='ELABORADO'"
+                      (click)="downloadDocumentoOperacion(doc.idArchivo, 0)" [disabled]="false">
+                      <mat-icon>cloud_download</mat-icon>
+                    </button>
+  
+                    <button color="accent" mat-flat-button matTooltip="Consultar estado de proceso" class="uniqueButton" (click)="refreshLoad()" [disabled]="false" *ngIf="doc.estadoDocumento=='ELABORADO' && showButton && !readOnly">
+                    <mat-icon>refresh</mat-icon>
+                    </button>
+  
+                    <!-- <a *ngIf="file.esIdArchivo" class="btn btn-primary small" style="color:white" (click)="downloadByIdArchivo(file);">
+      <mat-icon>cloud_download</mat-icon>
+      (click)="eliminarByTrackingNumber(contenido, node)"
+      </a> -->
+                    <!-- [ngClass]="{'uniqueButton':doc.metadataArchivo.estadoRS==0,'gestorButton':doc.metadataArchivo.estadoRS>0}"  -->
+  
+                    <button [ngClass]="{'uniqueButton':doc.estadoDocumento=='ELABORÁNDOSE','gestorButton':doc.estadoDocumento!='ELABORÁNDOSE'}" color="accent" mat-flat-button matTooltip="Eliminar archivo"
+                      (click)="eliminarDocumentoOperacion(doc)" [disabled]="false" *ngIf="!readOnly">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                    <!-- <a class="btn btn-danger small" style="color:white" (click)="eliminarByTrackingNumber(file);">
+      <mat-icon>delete</mat-icon>
+      <span class="badge badge-warning">Warning</span>
+      </a> -->
+                  <button class="gestorButton" color="primary" mat-flat-button matTooltip="Editar archivo"
+                  (click)="editarDocumentoOperacion(doc)" [disabled]="false" *ngIf="!readOnly && doc.estadoDocumento=='ELABORADO'">
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                    <!-- *ngIf="doc.metadataArchivo.estadoRS>0" -->
+                    <button 
+                      class="gestorButton" 
+                      color="primary" 
+                      mat-flat-button 
+                      [mdePopoverTriggerFor]="appPopover"
+                      mdePopoverTriggerOn="click" 
+                      #popoverTrigger="mdePopoverTrigger"
+                      matTooltip="Ver Historial" 
+                      (click)="historialDocumento(doc)" 
+                      [disabled]="false" 
+                      *ngIf="doc.metadataArchivo.estadoRS>0 && showButton">
+                      <mat-icon>history</mat-icon>
+                    <!-- <span *ngIf="contenido.comentariosCount>0" class="badgeComentario badge-warning">{{contenido.comentariosCount}}</span> -->
+                    </button>
+                    <!-- <app-form-documentos-popover buttonText="Click Me">
+                      <ul>
+                        <li>THIS</li>
+                        <li>IS</li>
+                        <li>MY POPOVER</li>
+                      </ul>
+                    </app-form-documentos-popover> -->
+<!--   
+                    <button mat-raised-button color="primary"
+                    [mdePopoverTriggerFor]="appPopover"
+                    mdePopoverTriggerOn="click" #popoverTrigger="mdePopoverTrigger">
+                    Show Popover
+                  </button>
+   -->
+  
+  
+  
+                    <!-- <a *ngIf="file.esIdArchivo" class="btn btn-primary small" style="color:white" (click)="messageByIdArchivo(file);">
+      <mat-icon>message</mat-icon>
+      </a> -->
+                  </div>
+                </td>
+              </tr>
+              <tr *ngIf="documentosFase.length==0">
+                <td class="text-center" colspan="99">No existen documentos</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  
+  </ng-container>
+  <br>
+  <br>
+  <mde-popover #appPopover="mdePopover" [mdePopoverCloseOnClick]="false" [mdePopoverOverlapTrigger]="false">
+    <mat-card>
+      <mat-card-content>
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover">
+            <thead>
+              <th>Nombre</th>
+              <th>Autor</th>
+              <th>Creado</th>
+              <th>Versión</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let version of versiones">
+                <td class="text-center">{{version.nombre}}</td>
+                <td class="text-center">
+                  <mat-icon style="vertical-align: bottom;">person</mat-icon>{{version.metadata.nombreUsuario}}</td>
+                <td class="text-center">{{version.fechaCreacion}}</td>
+                <td class="text-center">
+                  <button color="primary" mat-flat-button (click)="downloadVersion(version.version)">v{{version.version}} <mat-icon>cloud_download</mat-icon></button>
+                </td>
+              </tr>
+              <tr *ngIf="versiones.length==0">
+                <td class="text-center" colspan="99">No existe historial de versiones</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mde-popover>

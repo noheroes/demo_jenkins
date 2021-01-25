@@ -1,0 +1,15 @@
+<ng-container *ngIf="state$ | async as state">
+  <br/>
+    <mat-card class="card-border">
+        <sunedu-form-model-field
+        variant="select"
+        label="Local"
+        [options]="state.listaLocal.comboLists.locales"
+        (on-change)="handleInputChange($event)"
+        bindLabel="text"
+        bindValue="value"
+        [disabled]="false">
+      </sunedu-form-model-field>
+    </mat-card>
+  <br/>
+</ng-container>

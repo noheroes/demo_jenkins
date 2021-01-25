@@ -1,0 +1,37 @@
+<ng-container>
+  <mat-divider [inset]="true"></mat-divider>
+  <p style="margin-top: 10px;">{{title}}
+  </p>
+  <div style="margin-top: 10px;">
+    <div style="flex: 1;"></div>
+    <sunedu-base-button
+      [label]="inProcess==true? 'Procesando firma...':'Firmar medios de verificación'"
+      color="accent"
+      icon="library_add_check"
+      (on-click)="handleClickFirma()"
+      [disabled]="inProcess || mvDisabled"
+      *ngIf="!esFirmadoDocumento"
+    ></sunedu-base-button>
+  </div>
+  <div style="margin-top: 10px;" *ngIf="esFirmaAT">
+    <div style="flex: 1;"></div>
+    <sunedu-base-button
+      [label]="inProcess==true? 'Procesando firma...':'Firmar archivo testigo'"
+      color="accent"
+      icon="library_add_check"
+      (on-click)="handleClickFirmaArchivoTestigo()"
+      [disabled]="inProcess || atDisabled "
+    ></sunedu-base-button>
+  </div>
+  <div style="margin-top: 10px;">
+    <div style="flex: 1;"></div>
+    <sunedu-base-button
+      [label]="inProcess==true? 'Procesando firma...':'Firmar documentos'"
+      color="accent"
+      icon="library_add_check"
+      (on-click)="handleClickFirmaDocumento()"
+      [disabled]="inProcess || docDisabled "
+      *ngIf="esFirmadoDocumento"
+    ></sunedu-base-button>
+  </div>  
+</ng-container>

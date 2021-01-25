@@ -1,0 +1,30 @@
+$small-breakpoint-width: 720px;
+
+
+.flujos-category-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  justify-content: center;
+  @media (max-width: $small-breakpoint-width) {
+    justify-content: center;
+  }
+}
+
+.flujos-category-list-item {
+  display: inline-block;
+  margin: 20px;
+  vertical-align: top;
+  width: 300px;
+
+  .mat-card-title {
+    font-size: 20px;
+  }
+}
+
+.flujos-category-list-card-header {
+    text-align: center;
+    max-height: 180px;
+    padding: 45px 0;
+    background-color: #f8f8f9;
+}

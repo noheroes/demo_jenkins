@@ -1,0 +1,24 @@
+<ng-container *ngIf="state$ | async as state">
+  <sunedu-modal-form-container [title]="state.title" [loading]="state.isLoading"
+   [cancelLabel]="CLOSE_MODAL.LIC_CLOSE_MODAL_LABEL" [cancelIcon]="CLOSE_MODAL.LIC_CLOSE_MODAL_ICON"
+    (on-submit)="handleSubmit()" (on-dismiss)="handleClose()" [msgErrors]="state.error" [formType]="state.type" ok-label="Iniciar">
+
+    <sunedu-form-model-field variant="select" label="Universidad" [disabled]="state.isLoading" 
+    [options]="state.filterLists.entidad" [formModelField]="form.model['idEntidad']"
+    (on-change)="handleChangeInput($event)" bindLabel="text">
+  </sunedu-form-model-field>
+
+  <sunedu-form-model-field variant="select" label="Solicitud" [disabled]="state.isLoading" [options]="state.filterLists.solicitud" [formModelField]="form.model['idSolicitud']"
+  (on-change)="handleChangeInput($event)" bindLabel="text">
+  </sunedu-form-model-field>
+
+    <sunedu-form-model-field variant="select" label="Procesos(s)/actvidad(es)"  [disabled]="state.isLoading" [options]="state.filterLists.procedimiento"  [formModelField]="form.model['idProcedimiento']"
+    (on-change)="handleChangeInput($event)" bindLabel="text">
+  </sunedu-form-model-field>
+
+  <sunedu-form-model-field variant="select" label="Flujos"  [disabled]="state.isLoading" [options]="state.filterLists.subFlujo"  [formModelField]="form.model['idSubFlujo']"
+    (on-change)="handleChangeInput($event)" bindLabel="text" *ngIf="state.tieneSubFlujo">
+  </sunedu-form-model-field>
+
+</sunedu-modal-form-container>
+</ng-container>

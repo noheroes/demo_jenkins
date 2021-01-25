@@ -1,0 +1,71 @@
+<mat-card class="actividad-container-root" [ngClass]="{'fix-loader': loading&&!source}">
+  <ng-container *ngIf="loading&&!source;else contentTemplate">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Cargando...</span>
+    </div>
+  </ng-container>
+
+</mat-card>
+
+
+<ng-template #contentTemplate>
+  <ng-container *ngIf="!overrideContentTemplate;else applyOverrideTemplate">
+    <div class="vertical-tabs">
+      <mat-tab-group class="vertical-tabs" animationDuration="0" (selectedTabChange)="handleChangeTab($event)">
+        <ng-container *ngFor="let tab of contentSource;">
+
+          <mat-tab *ngIf="tab.visible" [label]="tab.name">
+            <ng-template matTabContent>
+              <ng-container>
+                <div class="tab-container">
+                  <ng-container *ngTemplateOutlet="contentTemplates[tab.key]; context: {
+                  $implicit: tab,
+                  modelData: source
+                }">
+                  </ng-container>
+                </div>
+              </ng-container>
+            </ng-template>
+          </mat-tab>
+        </ng-container>
+
+        <mat-tab *ngIf="conTabFinalizacion && !esConsultaSolicitud" [label]="'Finalizar Actividad'">
+          <ng-template matTabContent>
+            <div class="tab-container">
+              <div class="d-flex justify-content-center bd-highlight mb-3">
+                <div class="p-2">
+                  <ng-container *ngIf="loading&&!source;else contentTemplateDecision">
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="sr-only">Cargando...</span>
+                    </div>
+                  </ng-container>
+                </div>
+                <div class="p-2">
+                  <br />
+                  <sunedu-base-button class="button-finalizar" [label]="'Finalizar Actividad'"
+                    (on-click)="handleFinalizar()" [disabled]="disabledFinalizar" ></sunedu-base-button>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #contentTemplateDecision>
+  <div *ngIf="!source.formulario.conDecisionAutomatica && source.formulario.decision.conDecision">
+    <sunedu-form-model-field variant="select" bindLabel="label" bindValue="value"
+      [label]="source.formulario.decision.pregunta" [formModelField]="form.model['seleccion']"
+      [options]="{list:source.formulario.decision.opciones,loading:false}" (on-change)="handleInputChange($event)">
+    </sunedu-form-model-field>
+  </div>
+</ng-template>
+
+<ng-template #applyOverrideTemplate>
+  <ng-container *ngTemplateOutlet="overrideContentTemplate; context: {
+      $implicit: source
+    }">
+  </ng-container>
+</ng-template>

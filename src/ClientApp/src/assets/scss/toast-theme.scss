@@ -1,0 +1,51 @@
+@import '~@angular/material/theming';
+
+.mat-snack-bar-container.success {
+  background: mat-color(mat-palette($mat-green, 700));
+
+  .mat-simple-snackbar {
+    color: white;
+  }
+
+  .mat-simple-snackbar-action {
+    color: white;
+  }
+}
+
+.mat-snack-bar-container.error {
+  background: mat-color(mat-palette($mat-red, 600));
+
+  .mat-simple-snackbar {
+    color: white;
+  }
+
+  .mat-simple-snackbar-action {
+    color: white;
+  }
+}
+
+
+.mat-snack-bar-container.warning {
+  background: mat-color(mat-palette($mat-orange, 700));
+
+  .mat-simple-snackbar {
+    color: white;
+  }
+
+  .mat-simple-snackbar-action {
+    color: white;
+  }
+}
+
+
+.mat-snack-bar-container.info {
+  background: mat-color(mat-palette($mat-light-blue, 700));
+
+  .mat-simple-snackbar {
+    color: white;
+  }
+
+  .mat-simple-snackbar-action {
+    color: white;
+  }
+}

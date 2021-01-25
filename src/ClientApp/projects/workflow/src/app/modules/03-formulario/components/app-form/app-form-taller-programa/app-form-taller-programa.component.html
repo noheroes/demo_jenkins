@@ -1,0 +1,42 @@
+<ng-container *ngIf="state$ | async as state">
+  <sunedu-modal-form-container [title]="state.title" [loading]="state.isLoading" (on-dismiss)="handleClose()"
+  [cancelLabel]="CLOSE_MODAL.LIC_CLOSE_MODAL_LABEL" [cancelIcon]="CLOSE_MODAL.LIC_CLOSE_MODAL_ICON"
+    [msgErrors]="state.error" [formType]="state.type" [modoConsulta]="true">
+    <div class="row">
+      <div class="col-md-12 pb-3">
+        <h3>{{nombre_taller}}</h3>  
+      </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-9">
+          <sunedu-form-model-field
+            variant="select"
+            label="Listado de programas"
+            [formModelField]="form.model['codigoProgramaVinculado']"
+            [options]="state.comboLists.programas"
+            (on-change)="handleInputChange($event)"
+            bindLabel="text"
+            bindValue="value"
+            [disabled]="state.isLoading || readOnly"
+            [hideRequiredIndicator]="true"
+          ></sunedu-form-model-field>
+        </div>
+        <div div class="col-md-3 align-self-end">
+          <sunedu-base-button
+          label="Agregar"
+          color="accent"
+          icon="add_circle"
+          (on-click)="handleSubmit()"
+          [disabled]="state.isLoading"
+          [hidden]="readOnly"></sunedu-base-button>
+          </div>
+      </div>      
+      <sunedu-data-grid
+        [loading]="state.isLoading"
+        [source]="state.source"
+        [definition]="state.gridDefinition"  
+        (on-load-data)="handleLoadData($event)"      
+        (on-click-button)="handleClickButton($event)">
+      </sunedu-data-grid>
+  </sunedu-modal-form-container>
+</ng-container>

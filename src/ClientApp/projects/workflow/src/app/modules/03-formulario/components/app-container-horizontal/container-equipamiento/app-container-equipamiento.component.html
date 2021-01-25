@@ -1,0 +1,21 @@
+<ng-container *ngIf="state$ | async as state" >
+
+
+    <!-- <app-form-buscar-equipamiento (on-click-nuevo)="handleClickNuevoEquipamiento()">
+    </app-form-buscar-equipamiento> -->
+    <div style="display: flex; margin-top: 10px;">
+      <div style="flex: 1"></div>
+      <sunedu-button-nuevo label="Agregar Equipamiento" [disabled]="state.buscadorEquipamiento.isLoading"
+        class="example-icon" (on-click)="handleClickNuevoEquipamiento()">
+      </sunedu-button-nuevo>
+    </div>
+    <sunedu-data-grid
+        [loading]="state.buscadorEquipamiento.isLoading"
+        [source]="state.buscadorEquipamiento.source"
+        [definition]="state.buscadorEquipamiento.gridDefinition"
+        (on-load-data)="handleLoadData($event)"
+        (on-click-button)="handleClickButton($event)">
+    </sunedu-data-grid>
+
+
+</ng-container>

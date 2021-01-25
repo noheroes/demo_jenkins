@@ -1,0 +1,37 @@
+.gestorArchivoButtonsContainer {
+    border-radius: 5px 5px 5px 5px;
+    overflow: hidden;
+    // &.border-left-radius {
+    //   border-top-left-radius: 5px;
+    //   border-bottom-left-radius: 5px;
+    // }
+  }
+  
+  .gestorButton {
+    border-radius: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    min-width: 30px;
+  
+    margin-right: 1px;
+    mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+  
+  .uniqueButton {
+    border-radius: 5px 5px 5px 5px;
+    overflow: hidden;
+    padding-left: 0px;
+    padding-right: 0px;
+    min-width: 30px;
+  
+    mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+  

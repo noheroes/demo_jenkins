@@ -1,0 +1,60 @@
+<ng-container *ngIf="state$ | async as state">
+
+    <div class="horizontal-tabs">
+        <mat-tab-group class="horizontal-tabs">
+            <mat-tab label="Datos generales">
+                <app-app-container-datosgenerales [readOnly]="readOnly"></app-app-container-datosgenerales>
+            </mat-tab>
+            <mat-tab label="Sede/Filiales y Locales (Formato 04)">
+                <ng-template matTabContent>
+                    <app-container-sedefilial [readOnly]="readOnly"></app-container-sedefilial>
+                </ng-template>
+            </mat-tab>
+            <mat-tab label="Maestro de facultades">
+                <ng-template matTabContent>
+                    <app-container-maestro-facultad [readOnly]="readOnly">
+                    </app-container-maestro-facultad>
+                </ng-template>
+            </mat-tab>
+            <mat-tab label="Maestro de programas">
+                <ng-template matTabContent>
+                    <!-- <div class="row">
+                        <div class="col-12">
+                            <h2>Programa y Mención</h2>
+                        </div>
+                    </div>
+                    <app-container-maestro-programa [readOnly]="readOnly">
+                    </app-container-maestro-programa>
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>Segunda Especialidad</h2>
+                        </div>
+                    </div>
+                    <app-container-maestro-programa-se [readOnly]="readOnly">
+                    </app-container-maestro-programa-se> -->
+                    <app-container-maestro-programa-segunda [readOnly]="readOnly"></app-container-maestro-programa-segunda>
+                </ng-template>
+            </mat-tab>
+            <mat-tab label="Mallas Curriculares">
+                <ng-template matTabContent>
+                    <app-container-mallacurricular [readOnly]="readOnly"></app-container-mallacurricular>
+                </ng-template>
+            </mat-tab>
+            <mat-tab label="Maestro de personal">
+                <ng-template matTabContent>
+                    <app-container-maestroperosna [readOnly]="readOnly">
+                    </app-container-maestroperosna>
+                </ng-template>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+
+    <!-- <app-form-datos-generales (on-click-guardar)="handleClickGuardar()"></app-form-datos-generales> -->
+    <!-- <p>
+    app-container-datosgenerales works!
+  </p> -->
+    <!-- data: {{configTab | json}} <br>
+  modelData: {{modelData | json}} <br>
+  solicitud: {{modelData.solicitud | json}} <br>
+  detalleBandeja: {{modelData.detalleBandeja | json}} <br> -->
+</ng-container>

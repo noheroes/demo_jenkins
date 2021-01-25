@@ -1,0 +1,76 @@
+<ng-container *ngIf="state$ | async as state">
+    <sunedu-modal-form-container [title]="state.title" [loading]="state.isLoading" (on-submit)="handleSubmit()" 
+    [cancelLabel]="CLOSE_MODAL.LIC_CLOSE_MODAL_LABEL" [cancelIcon]="CLOSE_MODAL.LIC_CLOSE_MODAL_ICON"(on-dismiss)="handleClose()" [msgErrors]="state.error" [modoConsulta]="readOnly" [formType]="state.type">
+
+        <div class="form-row">
+            <div class="col-md-6">
+                <div [hidden] = "state.tipoEquipamiento!='L'">
+                    <sunedu-form-model-field  variant="text" label="Código de laboratorio" [formModelField]="form.model['codigoLaboratorioTaller']" [disabled]="true">
+                    </sunedu-form-model-field>
+                </div>
+                <div [hidden] = "state.tipoEquipamiento!='T'">
+                    <sunedu-form-model-field  variant="text" label="Código de taller" [formModelField]="form.model['codigoLaboratorioTaller']" [disabled]="true">
+                    </sunedu-form-model-field>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <sunedu-form-model-field 
+                variant="select" 
+                label="Tipo de equipos, mobiliarios y software" 
+                bindLabel="text" bindValue="value" 
+                [disabled]="state.isLoading  || state.type == formType.CONSULTAR || readOnly" 
+                [formModelField]="form.model['tipoEquipoMobiliarioEnum']" [options]="tipoEquipoMobiliarioEnum"
+                    (on-change)="handleInputChange($event)" [hideRequiredIndicator]="true">
+                </sunedu-form-model-field>
+                
+
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-6">
+
+                <sunedu-form-model-field variant="text" label="Nombre de equipos, mobiliarios y software" [formModelField]="form.model['nombreEqMobSoft']" [disabled]="state.isLoading  || state.type == formType.CONSULTAR || readOnly"
+                [inputProps]="{ maxlength: 250 }" [hideRequiredIndicator]="true">
+                </sunedu-form-model-field>
+
+            </div>
+            <div class="col-md-6">
+
+                <sunedu-form-model-field variant="text" label="Cantidad de equipos, mobiliario y software" number-only="true" [inputProps]="{ maxlength : 4}" [formModelField]="form.model['numeroEqMobSoft']" [disabled]="state.isLoading  || state.type == formType.CONSULTAR || readOnly"
+                [hideRequiredIndicator]="true">
+                </sunedu-form-model-field>
+
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-6">
+
+                <sunedu-form-model-field 
+                    decimal-only label="Valorización (S/)" 
+                    [inputProps]="{ maxlength : 8}" 
+                    decimals="2"
+                    number-only="true"    
+                    [formModelField]="form.model['valorizacion']" 
+                    [disabled]="state.isLoading  || state.type == formType.CONSULTAR || readOnly"
+                    [hideRequiredIndicator]="true">
+                </sunedu-form-model-field>
+
+            </div>
+
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-12">
+                <sunedu-form-model-field variant="multiline" label="Comentarios" [inputProps]="{ maxlength : 500}" [formModelField]="form.model['comentario']" [disabled]="state.isLoading  || state.type == formType.CONSULTAR || readOnly"
+                [hideRequiredIndicator]="true">
+                </sunedu-form-model-field>
+            </div>
+        </div>
+        
+        <sunedu-data-grid [loading]="state.isLoading" [source]="state.source" [definition]="state.gridDefinition" (on-load-data)="handleLoadData($event)" (on-click-button)="handleClickButton($event)">
+        </sunedu-data-grid>
+    </sunedu-modal-form-container>
+</ng-container>

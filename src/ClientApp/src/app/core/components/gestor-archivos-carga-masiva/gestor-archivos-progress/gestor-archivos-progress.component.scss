@@ -1,0 +1,24 @@
+$progress-spinner-color: #2aad40;
+
+.progress-container {
+  position: relative;
+  height: 20px;
+  margin: 4px;
+}
+
+.progress-number {
+  position: absolute;
+  top: 7px;
+  font-size: 10px;
+  left: 9px;
+
+  &.fix-complete {
+    left: 6px;
+  }
+}
+
+::ng-deep {
+  .mat-progress-spinner circle {
+    stroke: $progress-spinner-color;
+  }
+}

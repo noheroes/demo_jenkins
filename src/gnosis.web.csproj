@@ -1,0 +1,165 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
+
+    <!-- Set this to true if you enable server-side prerendering -->
+    <BuildServerSideRenderer>false</BuildServerSideRenderer>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.0" />  
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\projects\administracion\src\app\modules\00-demo\**" />
+    <Compile Remove="ClientApp\projects\administracion\src\app\modules\02-entidad\**" />
+    <Compile Remove="ClientApp\projects\administracion\src\app\modules\firma\**" />
+    <Compile Remove="ClientApp\projects\maestros\**" />
+    <Compile Remove="ClientApp\projects\ng-material-multilevel-menu\**" />
+    <Compile Remove="ClientApp\projects\workflow\src\app\modules\00-demo\**" />
+    <Compile Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-grid\**" />
+    <Compile Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\store\NewFolder\**" />
+    <Compile Remove="ClientApp\projects\workflow\src\app\modules\04-forms\**" />
+    <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\projects\administracion\src\app\modules\00-demo\**" />
+    <Content Remove="ClientApp\projects\administracion\src\app\modules\02-entidad\**" />
+    <Content Remove="ClientApp\projects\administracion\src\app\modules\firma\**" />
+    <Content Remove="ClientApp\projects\maestros\**" />
+    <Content Remove="ClientApp\projects\ng-material-multilevel-menu\**" />
+    <Content Remove="ClientApp\projects\workflow\src\app\modules\00-demo\**" />
+    <Content Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-grid\**" />
+    <Content Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\store\NewFolder\**" />
+    <Content Remove="ClientApp\projects\workflow\src\app\modules\04-forms\**" />
+    <EmbeddedResource Remove="ClientApp\projects\administracion\src\app\modules\00-demo\**" />
+    <EmbeddedResource Remove="ClientApp\projects\administracion\src\app\modules\02-entidad\**" />
+    <EmbeddedResource Remove="ClientApp\projects\administracion\src\app\modules\firma\**" />
+    <EmbeddedResource Remove="ClientApp\projects\maestros\**" />
+    <EmbeddedResource Remove="ClientApp\projects\ng-material-multilevel-menu\**" />
+    <EmbeddedResource Remove="ClientApp\projects\workflow\src\app\modules\00-demo\**" />
+    <EmbeddedResource Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-grid\**" />
+    <EmbeddedResource Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\store\NewFolder\**" />
+    <EmbeddedResource Remove="ClientApp\projects\workflow\src\app\modules\04-forms\**" />
+    <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\projects\administracion\src\app\modules\00-demo\**" />
+    <None Remove="ClientApp\projects\administracion\src\app\modules\02-entidad\**" />
+    <None Remove="ClientApp\projects\administracion\src\app\modules\firma\**" />
+    <None Remove="ClientApp\projects\maestros\**" />
+    <None Remove="ClientApp\projects\ng-material-multilevel-menu\**" />
+    <None Remove="ClientApp\projects\workflow\src\app\modules\00-demo\**" />
+    <None Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-grid\**" />
+    <None Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\store\NewFolder\**" />
+    <None Remove="ClientApp\projects\workflow\src\app\modules\04-forms\**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-container\container-enviados\app-container-enviados.component.ts" />
+    <None Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-container\container-enviados\app-container-enviados.module.ts" />
+    <None Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-container\container-recibidos\app-container-recibidos.component.ts" />
+    <None Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-container\container-recibidos\app-container-recibidos.module.ts" />
+    <None Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-container\container-documentos\app-container-documentos.component.ts" />
+    <None Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-container\container-documentos\app-container-documentos.module.ts" />
+    <None Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-container\container-equipotrabajo\app-container-equipotrabajo.component.ts" />
+    <None Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-container\container-equipotrabajo\app-container-equipotrabajo.module.ts" />
+    <None Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-form\app-form-documentos\app-form-documentos.component.spec.ts" />
+    <None Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-form\app-form-documentos\app-form-documentos.component.ts" />
+    <None Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\service\documento.service.ts" />
+    <None Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\service\equipotrabajo.service.ts" />
+    <None Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\store\documento\actions\documento.action.ts" />
+    <None Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\store\documento\documento.store.interface.ts" />
+    <None Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\store\documento\documento.store.model.ts" />
+    <None Remove="ClientApp\projects\workflow\src\app\modules\03-formulario\store\documento\documento.store.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-container\container-enviados\app-container-enviados.component.ts" />
+    <TypeScriptCompile Include="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-container\container-enviados\app-container-enviados.module.ts" />
+    <TypeScriptCompile Include="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-container\container-recibidos\app-container-recibidos.component.ts" />
+    <TypeScriptCompile Include="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-container\container-recibidos\app-container-recibidos.module.ts" />
+    <TypeScriptCompile Include="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-container\container-documentos\app-container-documentos.component.ts" />
+    <TypeScriptCompile Include="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-container\container-documentos\app-container-documentos.module.ts" />
+    <TypeScriptCompile Include="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-container\container-equipotrabajo\app-container-equipotrabajo.component.ts" />
+    <TypeScriptCompile Include="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-container\container-equipotrabajo\app-container-equipotrabajo.module.ts" />
+    <TypeScriptCompile Include="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-form\app-form-documentos\app-form-documentos.component.spec.ts" />
+    <TypeScriptCompile Include="ClientApp\projects\workflow\src\app\modules\03-formulario\components\app-form\app-form-documentos\app-form-documentos.component.ts" />
+    <TypeScriptCompile Include="ClientApp\projects\workflow\src\app\modules\03-formulario\service\equipotrabajo.service.ts" />
+    <TypeScriptCompile Include="ClientApp\projects\workflow\src\app\modules\03-formulario\service\documento.service.ts" />
+    <TypeScriptCompile Include="ClientApp\projects\workflow\src\app\modules\03-formulario\store\documento\actions\documento.action.ts" />
+    <TypeScriptCompile Include="ClientApp\projects\workflow\src\app\modules\03-formulario\store\documento\documento.store.interface.ts" />
+    <TypeScriptCompile Include="ClientApp\projects\workflow\src\app\modules\03-formulario\store\documento\documento.store.model.ts" />
+    <TypeScriptCompile Include="ClientApp\projects\workflow\src\app\modules\03-formulario\store\documento\documento.store.ts" />
+  </ItemGroup>
+
+    <ItemGroup>
+    <Content Update="appsettings.Production.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="appsettings.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="ClientApp\src\app\core\constants\" />
+    </ItemGroup>
+
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+  </Target>
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <EnvironmentName>Development</EnvironmentName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <EnvironmentName>Production</EnvironmentName>
+  </PropertyGroup>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm rebuild node-sass" />    
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" />
+    <!--
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build  prod" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr  prod" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
+    -->
+    
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
+      <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+</Project>

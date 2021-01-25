@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col-12">
+    <h2 >Datos generales</h2>
+  </div>
+</div>
+  <div class="form-row">
+    <div class="col-md-6">
+      <sunedu-form-field
+      label="Nombre"
+      controlName="nombre"
+      [formGroupParent]="formGroup"
+      [msgValidations]="validations.apellidos"
+    ></sunedu-form-field>
+    </div>
+    <div class="col-md-6">
+       <sunedu-form-field
+      label="Ruc"
+      controlName="ruc"
+      [formGroupParent]="formGroup"
+      [msgValidations]="validations.apellidos"
+    ></sunedu-form-field>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-12">
+      <sunedu-form-field
+        label="Razón social"
+        controlName="razonSocial"
+        [formGroupParent]="formGroup"
+        [msgValidations]="validations.apellidos"
+      ></sunedu-form-field>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-6">
+      <sunedu-form-field
+        label="N° de documento de creación"
+        controlName="numeroDocumentoCreacion"
+        [formGroupParent]="formGroup"
+        [msgValidations]="validations.apellidos"
+      ></sunedu-form-field>
+    </div>
+    <div class="col-md-6">
+      <sunedu-form-field
+        label="Fecha de creación"
+        controlName="fechaDocumentoCreacion"
+        [formGroupParent]="formGroup"
+        [msgValidations]="validations.apellidos"
+      ></sunedu-form-field>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-6">
+      <!-- <sunedu-form-field
+        label="Tipo de gestion"
+        controlName="tipoGestion"
+        [formGroupParent]="formGroup"
+        [msgValidations]="validations.apellidos"
+      ></sunedu-form-field> -->
+      <sunedu-form-field
+        variant="select"
+        label="Tipo de Gestion"
+        bindLabel="text"
+        bindValue="value"
+        controlName="tipoGestion"
+        [formGroupParent]="formGroup"
+        [msgValidations]="validations.apellidos">
+      </sunedu-form-field>
+    </div>
+    <div class="col-md-6">
+      <!-- <sunedu-form-field
+        label="Modalidad de constitución o creación"
+        controlName="modalidadConstitucion"
+        [formGroupParent]="formGroup"
+        [msgValidations]="validations.apellidos"
+      ></sunedu-form-field> -->
+      <sunedu-form-field
+        variant="select"
+        label="Modalidad de constitución o creación"
+        bindLabel="text"
+        bindValue="value"
+        controlName="modalidadConstitucion"
+        [formGroupParent]="formGroup"
+        [msgValidations]="validations.apellidos">
+      </sunedu-form-field>
+    </div>
+  </div>
+  

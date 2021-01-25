@@ -1,0 +1,14 @@
+<sunedu-modal-container
+  [title]="'Errores de validación'"
+  [showOkButton]="false"
+  (on-dismiss)="dialogRef.close()"
+>
+  <sunedu-data-grid
+    gridType="list"
+    [showSearch]="false"
+    [source]="gridSource"
+    [definition]="gridDefinition"
+  >
+  </sunedu-data-grid>
+
+</sunedu-modal-container>

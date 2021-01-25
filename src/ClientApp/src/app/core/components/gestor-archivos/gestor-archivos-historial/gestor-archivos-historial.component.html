@@ -1,0 +1,27 @@
+<h3>Historial</h3>
+
+<sunedu-data-grid
+  gridType="local-pagination"
+  [loading]="loading"
+  [emptyRowsMsg]="emptyText"
+  [definition]="definition"
+  [source]="source"
+  [showSearch]="false"
+>
+  <ng-template
+    suneduTemplate="version"
+    let-data
+  >
+    <button
+      class="download-button"
+      mat-raised-button
+      color="accent"
+      matTooltip="Descargar archivo"
+      (click)="handleDownload(data)"
+      [disabled]="loading"
+    >
+      <mat-icon>cloud_download</mat-icon>
+      v{{data.version}}
+    </button>
+  </ng-template>
+</sunedu-data-grid>

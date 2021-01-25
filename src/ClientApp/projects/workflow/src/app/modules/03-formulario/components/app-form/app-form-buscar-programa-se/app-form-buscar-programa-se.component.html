@@ -1,0 +1,26 @@
+<ng-container *ngIf="state$ | async as state">
+    <sunedu-data-grid-form-filter
+    (on-submit)="HandleSubmit()"
+    (on-reset)="HandleLimpiar()"
+    [disableButtons]="state.isLoading" 
+    [hideExport]="true" [hideNew]="true"
+    >
+      <sunedu-form-model-field
+      variant="text"
+      placeholder="Programa y mención"
+      label="Programa y mención"
+      [formModelField]="form.model['programaMencion']"
+      [disabled]="state.isLoading"
+    ></sunedu-form-model-field>
+  
+      <sunedu-form-model-field
+      variant="text"
+      label="Facultad"
+      [formModelField]="form.model['facultad']"
+      [disabled]="state.isLoading"
+      
+      ></sunedu-form-model-field>
+  
+    </sunedu-data-grid-form-filter>
+  </ng-container>
+  

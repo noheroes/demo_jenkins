@@ -1,0 +1,12 @@
+<ng-container *ngIf="state$ | async as state">
+  <sunedu-modal-form-container [title]="state.title" [loading]="state.isLoading" (on-submit)="handleSubmit()"
+  [cancelLabel]="CLOSE_MODAL.LIC_CLOSE_MODAL_LABEL" [cancelIcon]="CLOSE_MODAL.LIC_CLOSE_MODAL_ICON"
+    (on-dismiss)="handleClose()" [msgErrors]="state.error" [formType]="state.type" [modoConsulta]="true">
+
+    <sunedu-data-grid [loading]="state.isLoading" [source]="state.source" [definition]="state.gridDefinition"
+      (on-click-button)="handleClickButton($event)">
+
+    </sunedu-data-grid>
+
+  </sunedu-modal-form-container>
+</ng-container>

@@ -1,0 +1,40 @@
+<ng-container *ngIf="state$ | async as state">
+  <fieldset>
+  <legend>Carga Masiva</legend>
+  <div class="form-row">
+    <div class="col-md-6">      
+      <sunedu-form-model-field variant="select" label="Tipo de carga masiva" bindLabel="text" bindValue="value"
+        [disabled]="state.buscadorCargaMasiva.isLoading"
+        [formModelField]="form.model['tipo']"
+        [options]="state.buscadorCargaMasiva.comboLists.tipoCargaMasiva"
+        (on-change)="handleInputChange($event)">
+      </sunedu-form-model-field>
+    </div>
+    <div class="col-md-3 align-self-end">
+      <sunedu-base-button label="Descargar plantilla" color="accent" icon="cloud_download" (on-click)="handleSubmitDownload()"
+        [hidden]="ocultarDescarga">
+      </sunedu-base-button>
+    </div>    
+  </div>
+  <div class="form-row">
+    <div class="col-md-12">
+      <sunedu-gestor-archivos-carga-masiva [config]="configFile" (dataArchivoChange)="archivo($event)">
+      </sunedu-gestor-archivos-carga-masiva>
+    </div>    
+  </div>
+  <br/>
+</fieldset>  
+  <div style="display: flex; margin-top: 5px;">
+    <div style="flex: 1"></div>
+    <sunedu-base-button label="Refrescar datos" color="accent" icon="refresh" (on-click)="handleRefrescarGrilla()"
+        [disabled]="state.buscadorCargaMasiva.isLoading">
+    </sunedu-base-button>
+    <sunedu-base-button label="Agregar carga masiva" color="accent" icon="add_circle" (on-click)="handleSaveCargaMasiva()"
+        [disabled]="state.buscadorCargaMasiva.isLoading || ocultarDescarga">
+    </sunedu-base-button>
+  </div>  
+
+  <sunedu-data-grid  [loading]="state.buscadorCargaMasiva.isLoading" [source]="state.buscadorCargaMasiva.source"
+    [definition]="state.buscadorCargaMasiva.gridDefinition" (on-click-button)="handleClickButton($event)">
+  </sunedu-data-grid>
+</ng-container>

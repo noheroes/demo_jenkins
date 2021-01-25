@@ -1,0 +1,71 @@
+.gestor-archivo-buttons-container {
+    border-radius: 0px 5px 5px 0;
+    overflow: hidden;
+  
+    &.border-left-radius {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+  }
+  
+  .gestor-button {
+    border-radius: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    min-width: 30px;
+  
+    mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+  
+  ::ng-deep {
+    .mat-progress-bar.mat-accent .mat-progress-bar-background {
+      fill: #f5c2b3;
+      background-color: #f5c2b3;
+    }
+  
+    .mat-progress-bar.mat-primary .mat-progress-bar-background {
+      fill: #d1c4e9;
+      background-color: #d1c4e9;
+    }
+  }
+  
+  .button-upload {
+    background-color: rgb(66, 95, 189);
+    color: #fff;
+  }
+  
+  .button-download {
+    background-color: #2e862e;
+    color: #fff;
+  }
+  
+  .button-delete {
+    background-color: rgb(66, 95, 189);
+    color: #fff;
+  }
+    
+  .friendly-mini-button {
+    height: 25px;
+    width: 25px;
+    margin-left: 2px;
+    margin-right: 2px;
+  
+    ::ng-deep .mat-button-wrapper {
+      padding: 0px 0px;
+    }
+  
+    mat-icon {
+      height: 30px;
+      width: 15px;
+      font-size: 15px;
+    }
+  }
+  
+  .friendly-button-delete {
+    background-color: rgb(223, 20, 20);
+  }
+  

@@ -1,0 +1,28 @@
+<ng-container *ngIf="state$ | async as state">
+  <mat-card class="card-border" [hidden] = "idLocalSelecionado">
+  
+    <!-- <app-form-agregar-nodocente (handleLoadRelacionDocente)="reloadRelacionDocente()" [idLocal]="idLocal" [idSede]="idSede" [readOnly]="readOnly"></app-form-agregar-nodocente> -->
+
+
+    <form [formGroup]="form" autocomplete="off" novalidate>
+      <div class="form-row">
+        <div class="col-md-8">
+          <sunedu-form-field variant="select" fullWidth="true" label="Lista de no docentes" controlName="idPersona"
+            [formGroupParent]="form" [options]="state.agregarRelacionNoDocente.comboLists.personas" [msgValidations]="msgValidations.idPersona"   [disabled]="state.agregarRelacionNoDocente.isLoading || readOnly"
+            [hideRequiredIndicator]="true">
+          </sunedu-form-field>
+        </div>
+        <div class="col-md-4 align-self-end">
+          <sunedu-base-button label="Agregar" color="accent" icon="add_circle" (on-click)="handleClickAgregarDocente()"
+            [disabled]="state.agregarRelacionNoDocente.isLoading" [hidden]="readOnly"></sunedu-base-button>
+        </div>
+      </div>
+    </form>
+
+
+  <sunedu-data-grid [loading]="state.buscadorRelacionNoDocente.isLoading" [source]="state.buscadorRelacionNoDocente.source"
+    [definition]="state.buscadorRelacionNoDocente.gridDefinition"
+    (on-click-button)="handleClickButton($event)" (on-load-data)="handleLoadData($event)"> 
+  </sunedu-data-grid>
+</mat-card>
+</ng-container>

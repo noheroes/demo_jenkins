@@ -1,0 +1,36 @@
+
+
+<ng-container *ngIf="state$ | async as state">
+  <div class="form-row">
+      <div class="col-md-9">
+        <sunedu-form-model-field
+          variant="select"
+          label="Listado de programas"
+          [formModelField]="form.model['programaMencion']"
+          [options]="state.comboLists.listadoProgramas"
+          (on-change)="handleInputChange($event)"
+          bindLabel="text"
+          bindValue="value"
+          [disabled]="state.isLoading"
+          [hideRequiredIndicator]="true"
+        ></sunedu-form-model-field>
+      </div>
+      <div div class="col-md-3 align-self-end">
+
+          <sunedu-base-button
+            label="Vincular"
+            color="accent"
+            icon="add_circle"
+            (on-click)="handleClickAgregarProgramaSe()"
+            [disabled]="state.isLoading"
+            ></sunedu-base-button>
+        </div>
+    </div>
+    <sunedu-data-grid
+      [loading]="state.isLoading"
+      [source]="state.source"
+      [definition]="state.gridDefinition"
+      (on-load-data)="handleLoadData($event)"
+      (on-click-button)="handleClickButton($event)">
+      </sunedu-data-grid>
+</ng-container>

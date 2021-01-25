@@ -1,0 +1,21 @@
+<ng-container *ngIf="state$ | async as state">
+  <sunedu-modal-form-container
+    [title]="state.title"
+    [loading]="state.isLoading"
+    (on-submit)="handleSubmit()"
+    (on-dismiss)="handleClose()"
+    [msgErrors]="state.error"
+    [cancelLabel]="CLOSE_MODAL.LIC_CLOSE_MODAL_LABEL" [cancelIcon]="CLOSE_MODAL.LIC_CLOSE_MODAL_ICON"
+    [formType]="state.type"
+  >
+    <div style="text-align: center;">
+      <iframe
+        frameborder="0"
+        name="iframeFirma"
+        id="iframeFirma"
+        width="500px"
+        height="220px"
+      ></iframe>
+    </div>
+  </sunedu-modal-form-container>
+</ng-container>

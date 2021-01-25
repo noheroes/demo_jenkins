@@ -1,0 +1,28 @@
+.tabla-margin{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    margin-top: 15px;
+    color: #212529;
+    border-collapse: collapse;
+    font-size: 14px !important;
+}
+.table-bordered {
+    border: 1px solid #ced4da;
+}
+.table-bordered thead td, .table-bordered thead th {
+    border-bottom-width: 2px;
+    background-color: #584892;
+}
+.table-bordered td, .table-bordered th {
+    border: 1px solid #ced4da;
+}
+.table td, .table th {
+    padding: .75rem;
+    vertical-align: top;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+}

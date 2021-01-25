@@ -1,0 +1,67 @@
+@import './src/assets/scss/variables';
+
+.actividad-container-root {
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.tab-container {
+  padding: 15px;
+}
+
+:host {
+
+  ::ng-deep {
+
+    .mat-tab-label-active {
+      color: $primary-color;
+    }
+
+    .mat-tab-group {
+      flex-direction: row;
+    }
+
+    .mat-tab-header {
+      border-bottom: none;
+    }
+
+    .mat-tab-header-pagination {
+      display: none !important;
+    }
+
+    .mat-tab-labels {
+      flex-direction: column;
+    }
+
+    .mat-ink-bar {
+      height: 100%;
+      left: 98% !important;
+    }
+
+    .mat-tab-body-wrapper {
+      flex: 1 1 auto;
+    }
+
+    .mat-tab-label {}
+
+    // .mat-tab-label:after {
+    //   content: '';
+    //   width: 0px;
+    //   height: 0px;
+    //   border-style: solid;
+    //   border-width: 15px 5px 15px 20px;
+    //   border-color: transparent transparent transparent red;
+    //   display: inline-block;
+    //   vertical-align: middle;
+    //   position: absolute;
+    //   // bottom: 0;
+    //   // left: -13px;
+    //   right: 0;
+    //   margin: 0 auto;
+    // }
+  }
+}
+
+.fix-loader {
+  min-height: 150px;
+}

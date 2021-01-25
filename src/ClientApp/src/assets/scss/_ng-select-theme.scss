@@ -1,0 +1,364 @@
+// WIP
+@import '~@angular/material/theming';
+
+@mixin ng-select-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $isdark: map-get($theme, is-dark);
+
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+
+  $highlight-color: if($isdark, mat-color($foreground, text), mat-color($primary));
+
+  .ng-select,
+  .ng-select-container,
+  .ng-input>input {
+    color: mat-color($foreground, text) !important;
+    font: inherit;
+    font-family: inherit;
+  }
+
+  .ng-placeholder {
+    display: none;
+    color: mat-color($foreground, text, .54) !important;
+  }
+
+  .ng-select-focused {
+    .ng-placeholder {
+      display: inline-block;
+    }
+
+    .ng-has-value {
+      .ng-placeholder {
+        display: none;
+      }
+    }
+  }
+
+  .ng-clear-wrapper,
+  .ng-arrow-wrapper {
+    height: 1em;
+    color: mat-color($foreground, text, .4);
+  }
+
+  .ng-clear-wrapper:hover,
+  .ng-arrow-wrapper:hover {
+    color: mat-color($foreground, text);
+  }
+
+  .ng-select .ng-arrow-wrapper .ng-arrow {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid;
+    height: 7px !important;
+  }
+
+  .ng-select.ng-select-single .ng-select-container .ng-value-container {
+    height: 1em;
+  }
+
+  .ng-select.ng-select-multiple {
+    margin-bottom: -4px;
+
+    .ng-value {
+      // WIP
+      color: mat-color($primary, default-contrast);
+      background: mat-color($primary);
+      padding: 4px 8px;
+      border-radius: 12px;
+      margin: 0 4px 2px 0;
+
+      .ng-value-label {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-input {
+    padding-top: 4px;
+  }
+
+  .ng-dropdown-panel {
+    @include mat-elevation(4);
+    background: mat-color($background, card);
+    color: mat-color($foreground, text) !important;
+
+
+    .mat-option.ng-option-selected:not(.ng-option-marked):not(:hover) {
+      background: mat-color($background, card);
+
+      &:not(.ng-option-disabled) {
+        color: mat-color($foreground, text);
+      }
+    }
+
+    // left: 0;
+    &.ng-select-bottom {
+      top: calc(100% + .5em);
+    }
+
+    &.ng-select-top {
+      bottom: calc(100% + 1.5em);
+    }
+
+    &.multiple {
+      .ng-option {
+        &.selected {
+          background: mat-color($background, card);
+        }
+
+        &.marked {
+          background: mat-color($foreground, text, .04);
+        }
+      }
+    }
+
+    .ng-dropdown-header {
+      border-bottom: 1px solid mat-color($foreground, text, .12);
+      padding: 0 16px;
+      line-height: 3em;
+      min-height: 3em;
+    }
+
+    .ng-dropdown-footer {
+      border-top: 1px solid mat-color($foreground, text, .12);
+      padding: 0 16px;
+      line-height: 3em;
+      min-height: 3em;
+    }
+
+    .ng-dropdown-panel-items {
+      .ng-optgroup {
+        user-select: none;
+        cursor: pointer;
+        line-height: 3em;
+        height: 3em;
+        padding: 0 16px;
+        color: mat-color($foreground, text);
+        font-weight: 500;
+
+        &.ng-option-marked {
+          background: mat-color($foreground, text, .04);
+        }
+
+        &.ng-option-disabled {
+          cursor: default;
+        }
+
+        &.ng-option-selected {
+          background: mat-color($foreground, text, .12);
+          color: $highlight-color;
+        }
+      }
+
+      .ng-option {
+        line-height: 3em;
+        min-height: 3em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 0 16px;
+        text-decoration: none;
+        position: relative;
+        color: mat-color($foreground, text, .87);
+        text-align: left;
+
+        &.ng-option-marked {
+          background: mat-color($foreground, text, .04);
+          color: mat-color($foreground, text, .87);
+        }
+
+        &.ng-option-selected {
+          background: mat-color($foreground, text, .12);
+          color: $highlight-color;
+        }
+
+        &.ng-option-disabled {
+          color: mat-color($foreground, text, 0.38);
+        }
+
+        &.ng-option-child {
+          padding-left: 32px;
+        }
+
+        .ng-tag-label {
+          padding-right: 5px;
+          font-size: 80%;
+          font-weight: 400;
+          color: mat-color($foreground, text, 0.38);
+        }
+      }
+    }
+  }
+}
+
+
+
+
+// ng select
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  white-space:normal !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  //line-height: 1.2em !important;
+  min-height: 2.2em !important;
+  line-height: 2.2em !important;
+  //min-height: 2.5em !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 10px;
+  text-decoration: none;
+  position: relative;
+  color: rgba(0, 0, 0, 0.87);
+  text-align: left;
+}
+
+//select custom
+.ng-select.ng-select-multiple .ng-value .ng-value-label {
+  margin-left: 8px;
+  white-space: normal;
+}
+.ng-select.ng-select-multiple {
+  margin-bottom: -8px !important;
+}
+
+.ng-select.ng-select-multiple .ng-value {
+  color: white;
+  background: #673ab7;
+  padding: 4px 8px;
+  border-radius: 12px;
+  margin: 0 4px 2px 0;
+  margin-bottom: 6px !important;
+}
+
+//----check box style--------
+
+.custom-control {
+  position: relative;
+  display: block;
+  min-height: 1.5rem;
+  padding-left: 1.7rem;
+  //padding-top: 10px !important;
+  //padding-bottom: 10px !important;
+}
+
+.custom-control-inline {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  margin-right: 1rem;
+}
+
+.custom-control-input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: #fff;
+  background-color: #673ab7;
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.custom-control-input:active ~ .custom-control-label::before {
+  color: #ffffff;
+  background-color: #b3d7ff;
+}
+
+.custom-control-input:disabled ~ .custom-control-label {
+  color: #6c757d;
+}
+
+.custom-control-input:disabled ~ .custom-control-label::before {
+  background-color: #e9ecef;
+
+}
+
+.custom-control-label {
+  margin-bottom: 0;
+}
+
+.custom-control-label::before {
+  position: absolute;
+  //top: 0.25rem;
+  top: 0.87rem;
+  left: 0;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  pointer-events: none;
+  content: "";
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  //background-color: #dee2e6;
+  background-color: #fafafa;
+  border: 2px solid #737373;
+}
+
+//icono check
+.custom-control-label::after {
+  position: absolute;
+  //top: 0.25rem;
+  //top: 0.87rem;
+  top: 7px;
+  left: 0;
+  display: block;
+  //width: 1rem;
+  //height: 1rem;
+  width: 1.3rem;
+  height: 1.3rem;
+  content: "";
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+
+}
+
+// cuadrado check
+.custom-checkbox .custom-control-label::before {
+  //border-radius: 0.25rem;
+  top: 7px;
+  border-radius: 0.13rem;
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #673ab7;
+  border: 2px solid#673ab7;
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
+}
+
+.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::before {
+  background-color: #673ab7;
+ // border: 2px solid#7700ff;
+}
+
+.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::after {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3E%3Cpath stroke='%23fff' d='M0 2h4'/%3E%3C/svg%3E");
+}
+
+.custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before {
+  background-color: rgba(0, 123, 255, 0.5);
+}
+
+.custom-checkbox .custom-control-input:disabled:indeterminate ~ .custom-control-label::before {
+  background-color: rgba(0, 123, 255, 0.5);
+}

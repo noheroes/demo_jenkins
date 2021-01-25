@@ -1,0 +1,19 @@
+<div class="loader-error-root">
+  <div>
+    <div class="mat-body loader-error-text-container">
+      <h1 style="color: darkorchid;">:(</h1>
+    </div>
+    <div class="mat-body loader-error-text-container">
+      No ha sido posible iniciar sesión.Por favor, vuelva a intentarlo en unos minutos.<br />
+      Si el problema persiste ponte en contacto con el administrador del sistema
+    </div>
+    <div>
+      <sunedu-base-button
+        icon="account_circle"
+        color="primary"
+        label="Aceptar"
+        (on-click)="handleRetry()"
+      ></sunedu-base-button>
+    </div>
+  </div>
+</div>

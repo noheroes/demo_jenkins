@@ -1,0 +1,22 @@
+<ng-container *ngIf="state$ | async as state">
+  <mat-card class="card-border" [hidden] = "idLocalSelecionado">
+  <div style="display: flex; margin-top: 10px;">
+    <div style="flex: 1"></div>
+    <sunedu-base-button
+      label="Agregar taller"
+      color="accent"
+      icon="add_circle"
+      (on-click)="handleClickNuevoTaller()"
+      
+      [hidden]="readOnly"
+      ></sunedu-base-button>
+  </div>
+ <sunedu-data-grid
+ [loading]="state.bandejaTaller.isLoading"
+ [source]="state.bandejaTaller.source"
+ [definition]="state.bandejaTaller.gridDefinition"
+ (on-load-data)="handleLoadData($event)"
+ (on-click-button)="handleClickButton($event)">
+ </sunedu-data-grid>
+</mat-card>
+</ng-container>

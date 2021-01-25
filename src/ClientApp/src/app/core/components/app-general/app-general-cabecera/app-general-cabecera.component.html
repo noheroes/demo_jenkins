@@ -1,0 +1,50 @@
+<mat-card
+  class="actividad-header-root"
+  [ngClass]="{ 'fix-loader': loading && !source }"
+>
+  <ng-container *ngIf="loading && !source; else headerTemplate">
+      <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Cargando...</span>
+      </div>
+  </ng-container>
+</mat-card>
+
+<ng-template #headerTemplate>
+  <div class="row" *ngIf="source">
+    <div
+      class="col-md-3 col-sm-12"
+      *ngFor="let item of definition.fields; let $i = index"
+    >
+      <ng-container *ngIf="!item.custom; else customTemplate">
+        <div class="field-metadata-container">
+          <dt class="field-metadata-label">{{ item.label }}:</dt>
+          <dd class="field-metadata-desc">
+            <span *ngIf="item.isDatetime; else normalField">
+              {{
+                source[item.field]
+                  | dateFormat
+                    : null
+                    : item['dateTimeFormat'] || datetimeDefaultFormat
+              }}</span
+            >
+            <ng-template #normalField>
+              {{ source[item.field] || '-' }}</ng-template
+            >
+          </dd>
+        </div>
+      </ng-container>
+
+      <ng-template #customTemplate>
+        <ng-container
+          *ngTemplateOutlet="
+            customTemplates[$i];
+            context: {
+              $implicit: item
+            }
+          "
+        >
+        </ng-container>
+      </ng-template>
+    </div>
+  </div>
+</ng-template>

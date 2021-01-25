@@ -1,0 +1,11 @@
+<ng-container *ngIf="session$ | async as state">
+  <sunedu-loader-configuration
+    text="Iniciando sesión... Espere por favor..."
+    *ngIf="state.isLoading"
+  ></sunedu-loader-configuration>
+
+  <app-login-error
+    (on-retry)="handleRetryLogin()"
+    *ngIf="state.loginError"
+  ></app-login-error>
+</ng-container>

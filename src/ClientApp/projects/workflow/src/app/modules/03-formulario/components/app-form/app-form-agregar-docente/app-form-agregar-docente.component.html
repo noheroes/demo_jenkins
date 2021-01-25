@@ -1,0 +1,18 @@
+<ng-container *ngIf="state$ | async as state" (handleItemsGrilla)="onGetPersonas()" >
+
+  <form [formGroup]="form" autocomplete="off" novalidate>
+    <div class="form-row">
+      <div class="col-md-8">
+        <sunedu-form-field variant="select" fullWidth="true" label="Lista de docentes" controlName="idPersona"
+          [formGroupParent]="form" [options]="state.comboLists.personas" [msgValidations]="msgValidations.idPersona"   [disabled]="state.isLoading || readOnly"
+          [hideRequiredIndicator]="true">
+        </sunedu-form-field>
+      </div>
+      <div class="col-md-4 align-self-end">
+        <sunedu-base-button label="Agregar" color="accent" icon="add_circle" (on-click)="handleClickAgregarDocente()"
+          [disabled]="state.isLoading"
+          [hidden]="readOnly"></sunedu-base-button>
+      </div>
+    </div>
+  </form>
+</ng-container>

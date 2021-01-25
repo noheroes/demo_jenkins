@@ -1,0 +1,75 @@
+<ng-container *ngIf="loading||(formularioSource&&!showTareas);else tareasTemplate">
+  <sunedu-page-title [text]="title"></sunedu-page-title>
+
+  <app-actividad-header
+    [definition]="headerDefinition"
+    [source]="headerSource"
+    [templates]="customHeaderTemplates"
+    [loading]="loading"
+  ></app-actividad-header>
+
+  <mat-card
+    class="actividad-container-root"
+    [ngClass]="{'fix-loader': loading&&!formularioSource}"
+  >
+    <ng-container *ngIf="loading&&!formularioSource;else contentTemplate">
+      <sunedu-loader-configuration text="Cargando datos del formulario">
+      </sunedu-loader-configuration>
+    </ng-container>
+
+  </mat-card>
+
+  <app-actividad-footer
+    [loading]="loading"
+    (clickBandeja)="handleIrBandeja($event)"
+    (clickFinalizar)="handleFinalizar($event)"
+    (clickValidar)="handleValidar($event)"
+  ></app-actividad-footer>
+
+</ng-container>
+
+<ng-template #contentTemplate>
+  <ng-container *ngIf="!overrideContentTemplate;else applyOverrideTemplate">
+    <mat-tab-group
+      class="vertical-tabs"
+      animationDuration="0"
+      (selectedTabChange)="handleChangeTab($event)"
+    >
+      <ng-container *ngFor="let tab of contentSource">
+
+        <mat-tab
+          *ngIf="!hideTab(tab.key)"
+          [label]="tab.name"
+        >
+          <div class="tab-container">
+            <ng-container *ngTemplateOutlet="contentTemplates[tab.key]; context: {
+            $implicit: tab,
+            solicitud: formularioSource.solicitud,
+            detalle: formularioSource.detalleBandeja
+          }">
+            </ng-container>
+          </div>
+        </mat-tab>
+      </ng-container>
+
+    </mat-tab-group>
+  </ng-container>
+</ng-template>
+
+<ng-template #applyOverrideTemplate>
+  <ng-container *ngTemplateOutlet="overrideContentTemplate; context: {
+    $implicit: formularioSource
+  }">
+  </ng-container>
+</ng-template>
+
+<ng-template #tareasTemplate>
+  tareas
+</ng-template>
+
+<sunedu-json-viewer
+  [show]="debugMode"
+  [json]="{
+    formularioSource:formularioSource
+  }"
+></sunedu-json-viewer>

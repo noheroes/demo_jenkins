@@ -1,0 +1,40 @@
+<ng-container *ngIf="appSession$ | async as appSession">
+  <ng-container *ngIf="state$ | async as state">
+    <sunedu-data-grid-form-filter
+      (on-submit)="HandleSubmit()"
+      (on-new)="HandleClickNuevo()"
+      (on-reset)="HandleLimpiar()"
+      [formGroup]="form"
+      [hideExport]="true"
+      [hideNew]="true"
+      [disableButtons]="state.isLoading"
+    >
+      <sunedu-form-model-field
+        variant="multiselect"
+        label="Procedimiento"
+        [options]="procedimientos"
+        bindLabel="text"
+        bindValue="value"
+        [disabled]="state.isLoading"
+        (on-change)="handleInputChangeProcedimiento($event)"
+      ></sunedu-form-model-field>
+      <sunedu-form-model-field
+        variant="select"
+        label="Entidad"
+        [options]="entidades"
+        bindLabel="text"
+        [disabled]="state.isLoading"
+        (on-change)="handleInputChangeEntidad($event)"
+      ></sunedu-form-model-field>
+
+      <sunedu-form-field
+        label="N° de solicitud"
+        controlName="numeroSolicitud"
+        [formGroupParent]="form"
+        [disabled]="state.isLoading"
+        [inputProps]="{ maxlength: 15 }"
+        [msgValidations]="msgValidations['numeroSolicitud']"
+      ></sunedu-form-field>
+    </sunedu-data-grid-form-filter>
+  </ng-container>
+</ng-container>

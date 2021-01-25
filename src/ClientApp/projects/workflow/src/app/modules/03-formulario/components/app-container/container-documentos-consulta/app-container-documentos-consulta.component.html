@@ -1,0 +1,190 @@
+<ng-container *ngIf="state$ | async as state">
+  <div class="row">
+    <div class="col-12">
+      <h2>BANDEJA DE DOCUMENTOS</h2>
+    </div>
+  </div>
+  <br>
+  <div class="expandCollapse" style="cursor:pointer" *ngIf="false">
+    <mat-card>
+      <mat-card-content>
+        <legend (click)="toggle()">
+          <mat-icon>{{!hideRuleContent ?'arrow_downward':'arrow_upward'}}</mat-icon>CRITERIOS DE BUSQUEDA
+        </legend>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="expandCollapseContent" *ngIf="false" [hidden]="!hideRuleContent">
+
+    <mat-card>
+      <mat-card-content>
+      
+        <div class="form-row">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-8 text-center">
+            <h2>Fecha de recepción de SUNEDU</h2>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-4">
+            <sunedu-form-field variant="select" label="Bandeja" bindLabel="text" bindValue="value"
+              controlName="descBandeja" [formGroupParent]="form" [options]="tiposBandeja.list">
+            </sunedu-form-field>
+          </div>
+          <div class="col-md-4">
+            <sunedu-form-field variant="datepicker" label="Desde" controlName="fechaRecepcionDesde"
+              [formGroupParent]="form">
+            </sunedu-form-field>
+          </div>
+          <div class="col-md-4">
+            <sunedu-form-field variant="datepicker" label="Hasta" controlName="fechaRecepcionHasta"
+              [formGroupParent]="form">
+            </sunedu-form-field>
+          </div>
+        </div>
+        <br>
+        <div class="form-row">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-8 text-center">
+            <h2>Fecha de recepción de la Universidad</h2>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-4">
+            <sunedu-form-field variant="select" label="Tipo Documento" controlName="subTipoDocumentoDesc"
+              bindLabel="text" [formGroupParent]="form" bindValue="value" [options]="subTiposDocumentos.list">
+            </sunedu-form-field>
+          </div>
+          <div class="col-md-4">
+            <sunedu-form-field variant="datepicker" label="Desde" controlName="fechaNotificacionDesde"
+              [formGroupParent]="form">
+            </sunedu-form-field>
+          </div>
+          <div class="col-md-4">
+            <sunedu-form-field variant="datepicker" label="Hasta" controlName="fechaNotificacionHasta"
+              [formGroupParent]="form">
+            </sunedu-form-field>
+          </div>
+        </div>
+        <br>
+        <div class="form-row">
+          <div class="col-md-6">
+            <sunedu-form-field label="Nombre del Archivo" controlName="archivoNombre" [formGroupParent]="form">
+            </sunedu-form-field>
+          </div>
+          <div class="col-md-6 text-left" style="margin-top:27px">
+            <sunedu-base-button label="Buscar" color="primary" icon="search" (on-click)="onBuscar()">
+            </sunedu-base-button>
+            <sunedu-base-button label="Limpiar" color="secondary" icon="clear_all" (on-click)="onLimpiar()">
+            </sunedu-base-button>
+          </div>
+        </div>
+        
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="row">
+    <div class="col-1">
+      <button 
+        class="gestorButton" 
+        color="primary" 
+        style="border-radius: 3px; float:left"
+        mat-flat-button 
+        [mdePopoverTriggerFor]="appPopover"
+        mdePopoverTriggerOn="click" 
+        placement="right"
+        #popoverTrigger="mdePopoverTrigger"
+        matTooltip="Categorías" 
+        [disabled]="false" 
+        >
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div class="col-4 text-center" style="align-self: center;">
+      <label>{{categoria}}</label>
+    </div>
+    <div class="col-7" style="float: left;">
+      <sunedu-base-button
+      label="Adicionar Documento"
+      color="primary"
+      icon="add_circle_outline"
+      (on-click)="handleAdd()"
+      ></sunedu-base-button>
+    </div>
+  </div>
+  <br>
+  
+  <div class="row">
+    <div class="col-10">
+      <sunedu-form-field label="Busqueda" controlName="busqueda" 
+          [formGroupParent]="form" 
+          [hideRequiredIndicator]="true"
+          [disabled]="state.documentosConsulta.isLoading  || state.documentosConsulta.type == formType.CONSULTAR">
+      </sunedu-form-field>
+    </div>
+    <div class="col-2" style="margin-top: 23px;margin-left: -25px;">
+      <sunedu-base-button
+        label="Buscar"
+        color="primary"
+        icon="search"
+        (on-click)="handleSearch()"
+        ></sunedu-base-button>
+    </div>
+  </div>
+  
+
+  <br>
+  <mat-card>
+    <mat-card-content>
+      <div style="display: flex; margin-top: 10px;">
+        <div style="flex: 1" class="inline-block"></div>
+            <sunedu-base-button label="Actualizar"
+                                color="primary"
+                                icon="refresh"
+                                (on-click)="handleRefresh()">
+            </sunedu-base-button>
+      </div>
+      <sunedu-data-grid [loading]="state.documentosConsutlaBusqueda.isLoading"
+        [source]="state.documentosConsutlaBusqueda.source"
+        [definition]="state.documentosConsutlaBusqueda.gridDefinition" (on-load-data)="handleLoadData($event)"
+        (on-click-button)="handleClickButton($event)">
+      </sunedu-data-grid>
+    </mat-card-content>
+  </mat-card>
+
+</ng-container>
+<br>
+<br>
+
+<mde-popover #appPopover="mdePopover" [mdePopoverCloseOnClick]="false" [mdePopoverOverlapTrigger]="false">
+  <mat-card>
+    <mat-card-content>
+      <h4>CATEGORIAS</h4>
+      <hr>
+      <div class="row">
+        <button type="button" class="button-popover" (click)="handleCategoria('todos'); appPopover._emitCloseEvent()">-- TODOS --</button>
+      </div>
+      <div class="row">
+        <button type="button" class="button-popover" (click)="handleCategoria('borrador'); appPopover._emitCloseEvent()">BORRADOR</button>
+      </div>
+      <div class="row">
+        <button type="button" class="button-popover" (click)="handleCategoria('revision'); appPopover._emitCloseEvent()">REVISION DOCUMENTARIA</button>
+      </div>
+      <div class="row">
+        <button type="button" class="button-popover" (click)="handleCategoria('vista'); appPopover._emitCloseEvent()">VISTA PRESENCIAL</button>
+      </div>
+      <div class="row">
+        <button type="button" class="button-popover" (click)="handleCategoria('dap'); appPopover._emitCloseEvent()">DAP</button>
+      </div>
+      <div class="row">
+        <button type="button" class="button-popover" (click)="handleCategoria('itl'); appPopover._emitCloseEvent()">ITL/PR</button>
+      </div>
+      <div class="row">
+        <button type="button" class="button-popover" (click)="handleCategoria('informacion'); appPopover._emitCloseEvent()">INFORMACION COMPLEMENTARIA</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</mde-popover>

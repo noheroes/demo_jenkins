@@ -1,0 +1,61 @@
+<ng-container *ngIf="state$ | async as state">
+  <sunedu-modal-form-container
+  [title]="state.title"
+  [loading]="state.isLoading"
+  (on-submit)="handleSubmit()"
+  (on-dismiss)="handleClose()"
+  [msgErrors]="state.error"
+  [cancelLabel]="CLOSE_MODAL.LIC_CLOSE_MODAL_LABEL" [cancelIcon]="CLOSE_MODAL.LIC_CLOSE_MODAL_ICON"
+  [formType]="state.type">
+  <mat-card>
+    <mat-card-content> 
+      <div class="form-row">
+        <div class="col-md-6" [hidden] = "codigoHidden">
+          <sunedu-form-model-field
+            label="Código de la Facultad"
+            [formModelField]="form.model['codigo']"
+            [inputProps]="{ maxlength: 50 }"
+            [disabled]="state.isLoading  || state.type == formType.CONSULTAR || esDisabled">
+          </sunedu-form-model-field>
+        </div>
+        <div class="col-md-6">
+          <sunedu-form-model-field
+            label="Nombre de la facultad"
+            [formModelField]="form.model['nombre']"
+            [inputProps]="{ maxlength: 250 }"
+            [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+            [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+        <div class="col-md-6">
+          <sunedu-form-model-field  variant="datepicker" 
+          label="Fecha de creación"
+          [formModelField]="form.model['fechaCreacionFacultad']"
+          [inputProps]="{ maxlength: 15 }" [maxDate]="max_date"
+          [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+          [hideRequiredIndicator]="true">
+        </sunedu-form-model-field>
+        </div>
+        <div class="col-md-6"> 
+          <sunedu-form-model-field
+          label="N° de resolución"
+          [formModelField]="form.model['numeroResolucion']"
+          [inputProps]="{ maxlength: 20 }"
+          [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+          [hideRequiredIndicator]="true">
+        </sunedu-form-model-field>
+        </div>
+        <div class="col-md-6">
+          <sunedu-form-model-field
+          label="Órgano que aprueba la creación"
+          [formModelField]="form.model['organoCreacion']"
+          [inputProps]="{ maxlength: 250 }"
+          [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+          [hideRequiredIndicator]="true">
+            </sunedu-form-model-field>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</sunedu-modal-form-container>
+</ng-container>

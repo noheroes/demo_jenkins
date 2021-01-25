@@ -1,0 +1,123 @@
+@import '~src/assets/scss/variables';
+
+.gestor-archivos-container {
+  display: flex;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.gestor-archivos-file-input-container {
+  flex: 1;
+
+  &>input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    height: 100%;
+    z-index: -999;
+    height: 0px;
+    width: 0px;
+  }
+
+  &.unset-flex {
+    flex: unset;
+  }
+
+}
+
+.gestor-archivos-file-input {
+  width: 100%;
+
+  ::ng-deep .mat-form-field-flex {
+    background-color: #efefef;
+  }
+}
+
+.hint-info-archivo {
+  font-size: 1.05em;
+  color: #353535;
+
+  mat-icon {
+    font-size: 11px;
+    position: relative;
+    top: 2px;
+    margin-right: 5px;
+  }
+}
+
+.blinking {
+  animation: blinkingText 0.2s infinite;
+}
+
+.custom-error {
+  font-size: 87% !important;
+}
+
+.icon-label-container {
+  position: relative;
+  border-radius: 10px;
+
+  .icon-label-clickeable-area {
+    width: 120px;
+    height: 120px;
+    color: $primary-color;
+    cursor: pointer;
+
+    mat-icon.friendly-icon {
+      height: 40px;
+      width: 40px;
+      font-size: 40px;
+      position: relative;
+      top: 15%;
+      left: 40px;
+    }
+  }
+}
+
+.friendly-label-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 12px;
+  min-height: 55%;
+}
+
+.friendly-label {
+  text-align: center;
+  font-size: 11px;
+  display: block;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.friendly-mini-buttons-container {
+  position: absolute;
+  right: -10px;
+  top: -10px;
+}
+
+@keyframes blinkingText {
+  0% {
+    opacity: 1;
+  }
+
+  49% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  99% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+
+}

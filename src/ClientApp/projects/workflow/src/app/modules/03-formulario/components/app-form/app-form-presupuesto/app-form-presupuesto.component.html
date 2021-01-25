@@ -1,0 +1,56 @@
+<ng-container *ngIf="state$ | async as state">
+    <sunedu-modal-form-container [title]="state.title" [loading]="state.isLoading" (on-submit)="handleSubmit()"
+    [cancelLabel]="CLOSE_MODAL.LIC_CLOSE_MODAL_LABEL" [cancelIcon]="CLOSE_MODAL.LIC_CLOSE_MODAL_ICON" (on-dismiss)="handleClose()" [msgErrors]="state.error" [formType]="state.type">
+        <mat-card>
+            <mat-card-content>
+                <div class="form-row">
+                    <div class="col-md-6" [hidden]="codigoHidden">
+                        <sunedu-form-model-field label="Código" [formModelField]="form.model['codigo']" [disabled]="state.isLoading  || state.type == formType.CONSULTAR || esDisabledCodigo"
+                        [hideRequiredIndicator]="true">
+                        </sunedu-form-model-field>
+                    </div>
+                    <div class="col-md-6">
+                        <sunedu-form-model-field label="Concepto" [formModelField]="form.model['concepto']" [disabled]="state.isLoading  || state.type == formType.CONSULTAR || esDisabled"
+                        [inputProps]="{ maxlength: 500 }" [hideRequiredIndicator]="true">
+                        </sunedu-form-model-field>
+                    </div>
+                    <div class="col-md-6">
+                        <sunedu-form-model-field label="Año 1 - Presupuestado" [formModelField]="form.model['anioUnoPresupuesto']" decimals="2" number-only="true" [inputProps]="{ maxlength : 9}" [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                        [hideRequiredIndicator]="true">
+                        </sunedu-form-model-field>
+                    </div>
+                    <div class="col-md-6">
+                        <sunedu-form-model-field label="Año 1 - Ejecutado" [formModelField]="form.model['anioUnoEjecucion']" decimals="2" number-only="true" [inputProps]="{ maxlength : 9}" [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                        [hideRequiredIndicator]="true">
+                        </sunedu-form-model-field>
+                    </div>
+                    <div class="col-md-6">
+                        <sunedu-form-model-field label="Año 2 - Presupuestado" [formModelField]="form.model['anioDosPresupuesto']" decimals="2" number-only="true" [inputProps]="{ maxlength : 9}" [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                        [hideRequiredIndicator]="true">
+                        </sunedu-form-model-field>
+                    </div>
+                    <div class="col-md-6">
+                        <sunedu-form-model-field label="Año 3 - Presupuestado" [formModelField]="form.model['anioTresPresupuesto']" decimals="2" number-only="true" [inputProps]="{ maxlength : 9}" [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                        [hideRequiredIndicator]="true">
+                        </sunedu-form-model-field>
+                    </div>
+                    <div class="col-md-6">
+                        <sunedu-form-model-field label="Año 4 - Presupuestado" [formModelField]="form.model['anioCuatroPresupuesto']" decimals="2" number-only="true" [inputProps]="{ maxlength : 9}" [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                        [hideRequiredIndicator]="true">
+                        </sunedu-form-model-field>
+                    </div>
+                    <div class="col-md-6">
+                        <sunedu-form-model-field label="Año 5 - Presupuestado" [formModelField]="form.model['anioCincoPresupuesto']" decimals="2" number-only="true" [inputProps]="{ maxlength : 9}" [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                        [hideRequiredIndicator]="true">
+                        </sunedu-form-model-field>
+                    </div>
+                    <div class="col-md-6">
+                        <sunedu-form-model-field label="Año 6 - Presupuestado" [formModelField]="form.model['anioSeisPresupuesto']" decimals="2" number-only="true" [inputProps]="{ maxlength : 9}" [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                        [hideRequiredIndicator]="true">
+                        </sunedu-form-model-field>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </sunedu-modal-form-container>
+</ng-container>

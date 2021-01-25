@@ -1,0 +1,58 @@
+<ng-container *ngIf="state$ | async as state">
+    <mat-card>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-12">
+                    <h2>Programa y Mención</h2>
+                </div>
+            </div>
+            <div style="display: flex; margin-top: 10px;">
+              <div style="flex: 1"></div>
+                <sunedu-base-button 
+                label="Agregar programa y mención"
+                color="accent"
+                icon="add_circle"
+                (on-click)="handleClickNuevoProgramaMencion()"
+                [disabled]="state.bandejaMaestroPrograma.isLoading"
+                [hidden]="readOnly"
+                ></sunedu-base-button>
+            </div>
+            <sunedu-data-grid
+            [loading]="state.bandejaMaestroPrograma.isLoading"
+            [source]="state.bandejaMaestroPrograma.source"
+            [definition]="state.bandejaMaestroPrograma.gridDefinition"
+            (on-load-data)="handleLoadDataPrograma($event)"
+            (on-click-button)="handleClickButtonPrograma($event)">
+            </sunedu-data-grid>
+        </mat-card-content>
+    </mat-card>
+    
+    <mat-card>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-12">
+                    <h2>Segunda Especialidad</h2>
+                </div>
+            </div>
+            <div style="display: flex; margin-top: 10px;">
+                <div style="flex: 1"></div>
+                  <sunedu-base-button
+                  label="Agregar segunda especialidad"
+                  color="accent"
+                  icon="add_circle"
+                  (on-click)="handleClickNuevoSegundaSegunda()"
+                  [disabled]="state.bandejaMaestroProgramaSegunda.isLoading"
+                  [hidden]="readOnly"
+                  ></sunedu-base-button>
+              </div>
+             <sunedu-data-grid
+             [loading]="state.bandejaMaestroProgramaSegunda.isLoading" 
+             [source]="state.bandejaMaestroProgramaSegunda.source"
+             [definition]="state.bandejaMaestroProgramaSegunda.gridDefinition"
+             (on-load-data)="handleLoadDataSegunda($event)"
+             (on-click-button)="handleClickButtonSegunda($event)">
+             </sunedu-data-grid>
+        </mat-card-content>
+    </mat-card>
+    
+</ng-container> 

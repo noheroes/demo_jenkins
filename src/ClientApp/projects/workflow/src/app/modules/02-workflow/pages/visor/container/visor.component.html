@@ -1,0 +1,73 @@
+<ng-container *ngIf="state$ | async as state;">
+    <mat-card>
+        <mat-card-content>
+            <label style="font-weight: bold; color: #584892;">Consulta de visor</label>
+        </mat-card-content>
+    </mat-card>
+    <br>
+    <mat-card>
+        <mat-card-content>
+            <label style="font-weight: bold; color: #584892;">VISOR DE ARCHIVO TESTIGO</label>
+            <div class="form-row">
+                <div class="col-2">
+                    <label>Archivo Testigo</label>
+                </div>
+                <div class="col-8">
+                    <sunedu-gestor-archivos
+                    [config]="configFile" [paramsExtra]="getParametros()" (sendInfoSuccess)="getInfoFile($event)" (sendCanClean)="getClean($event)">
+                   </sunedu-gestor-archivos>
+                </div>
+                <div class="col-2">
+    
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <br>
+    <div *ngIf="hasInfo">
+        <mat-card >
+            <mat-card-content>
+                <div *ngFor="let firma of firmas">
+                    <div class="row">
+                        <div class="col-12">
+                            <label style="font-weight: bold; color: #584892;">Firmado digitalmente por: </label> {{firma.sujeto}} 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label style="font-weight: bold; color: #584892;">Emisor del certificado: </label> {{firma.emisor}}
+                        </div>
+                        <div class="col-4">
+                            <label style="font-weight: bold; color: #584892;">Motivo: </label> {{firma.razon}}
+                        </div>
+                        <div class="col-4">
+                            <label style="font-weight: bold; color: #584892;">Oficina: </label> {{firma.ubicacion}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label style="font-weight: bold; color: #584892;">Fecha Firma: </label> {{firma.fechaFirma}}
+                        </div>
+                        <div class="col-6">
+                            <label style="font-weight: bold; color: #584892;">RTD: </label> {{firma.comentario}}
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <br>
+        <mat-card>
+            <mat-card-content>
+                <label style="font-weight: bold; color: #584892;">Contenido del archivo</label>
+                <!-- <pre id="jsonFIle"></pre> -->
+
+                <!-- {{jsonFile| json}} -->
+                <!-- <ngx-json-viewer [json]="jsonFile"></ngx-json-viewer> -->
+                <json-formatter [open]="1" [json]="jsonFile"></json-formatter>
+            </mat-card-content>
+    
+        </mat-card>
+    </div>
+   
+</ng-container>

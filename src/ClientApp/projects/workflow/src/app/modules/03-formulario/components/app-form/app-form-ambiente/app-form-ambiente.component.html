@@ -1,0 +1,155 @@
+<ng-container *ngIf="state$ | async as state">
+  <sunedu-modal-form-container
+    [title]="state.title"
+    [loading]="state.isLoading"
+    (on-submit)="handleSubmit()"
+    (on-dismiss)="handleClose()"
+    [msgErrors]="state.error"
+    [cancelLabel]="CLOSE_MODAL.LIC_CLOSE_MODAL_LABEL" [cancelIcon]="CLOSE_MODAL.LIC_CLOSE_MODAL_ICON"
+    [formType]="state.type">
+    <mat-card  >
+      <h2 >Ambiente de docentes</h2>
+      <mat-card-content>
+        <div class="form-row">
+            <div class="col-md-6">
+              <sunedu-form-model-field
+                variant="select"
+                label="Locales"
+                bindLabel="text"
+                bindValue="value"
+                [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                [formModelField]="form.model['codigoLocalRef']"
+                [options]="state.comboLists.locales"
+                (on-change)="handleInputChange($event)">
+              </sunedu-form-model-field>
+            </div>
+
+            <div class="col-md-6">
+              <sunedu-form-model-field
+              label="N° de ambiente"
+              [formModelField]="form.model['codigo']"
+              [inputProps]="{ maxlength: 15 }"
+              [disabled]="state.isLoading  || state.type == formType.CONSULTAR">
+            </sunedu-form-model-field>
+            </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-6">
+            <sunedu-form-model-field
+            label="Código de ambiente"
+            [formModelField]="form.model['ubicacion']"
+            [disabled]="true">
+          </sunedu-form-model-field>
+          </div>
+          <div class="col-md-6">
+            <sunedu-form-model-field
+            label="Referencia de ubicación del ambiente"
+            [formModelField]="form.model['ubicacion']"
+            [inputProps]="{ maxlength: 15 }"
+            [disabled]="state.isLoading  || state.type == formType.CONSULTAR">
+          </sunedu-form-model-field>
+          </div>
+      </div>
+
+
+      <div class="form-row">
+
+        <div class="col-md-6">
+          <sunedu-form-model-field
+            label="N° total de docentes que hace uso del ambiente"
+            [formModelField]="form.model['cantidadDocente']"
+            [inputProps]="{ maxlength: 15 }"
+            [disabled]="state.isLoading  || state.type == formType.CONSULTAR">
+          </sunedu-form-model-field>
+        </div>
+
+        <div class="col-md-6">
+          <sunedu-form-model-field
+                variant="select"
+                label="Internet"
+                bindLabel="text"
+                bindValue="value"
+                [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+                [formModelField]="form.model['tieneInternet']"
+                [options]="state.comboLists.tieneInternet"
+                (on-change)="handleInputChange($event)">
+          </sunedu-form-model-field>
+        </div>
+
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-6">
+        <sunedu-form-model-field
+        label="N° de sillas"
+        [formModelField]="form.model['cantidadSillas']"
+        [disabled]="state.isLoading  || state.type == formType.CONSULTAR">
+      </sunedu-form-model-field>
+      </div>
+      <div class="col-md-6">
+        <sunedu-form-model-field
+        label="N° de mesas"
+        [formModelField]="form.model['cantidadMesas']"
+        [disabled]="state.isLoading  || state.type == formType.CONSULTAR">
+      </sunedu-form-model-field>
+      </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-md-6">
+      <sunedu-form-model-field
+      variant="select"
+      label="Régimen de dedicación de docentes que alberga"
+      bindLabel="text"
+      bindValue="value"
+      [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+      [formModelField]="form.model['tipoRegimenDedicacionEnum']"
+      [options]="state.comboLists.regimenDedicaciones"
+      (on-change)="handleInputChange($event)">
+     </sunedu-form-model-field>
+    </div>
+
+    <div class="col-md-6">
+      <sunedu-form-model-field
+        label="Otro equipamiento o mobiliario"
+        [formModelField]="form.model['otroEquipamentoMobiliario']"
+        [disabled]="state.isLoading  || state.type == formType.CONSULTAR">
+      </sunedu-form-model-field>
+    </div>
+</div>
+
+<div class="form-row">
+  <div class="col-md-6">
+    <sunedu-form-model-field
+    label="Aforo"
+    [formModelField]="form.model['aforo']"
+    [disabled]="state.isLoading  || state.type == formType.CONSULTAR">
+    </sunedu-form-model-field>
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="col-md-12">
+    <div class="item-container">
+      <sunedu-form-model-field
+        variant="multiline"
+        placeholder="Comentario"
+        size="sm"
+        bindLabel="text"
+        [formModelField]="form.model['comentario']"
+        [showErrorsMargin]="false"
+        label="Comentario"
+        [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+        [inputProps]="{ maxlength : 1000, rows: 5}"
+        [showCharCount]="true">
+      </sunedu-form-model-field>
+    </div>
+  </div>
+</div>
+      </mat-card-content>
+    </mat-card>
+
+
+  </sunedu-modal-form-container>
+</ng-container>

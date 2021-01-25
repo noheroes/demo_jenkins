@@ -1,0 +1,58 @@
+<div
+  class="tag-container"
+  *ngIf="tags||editable"
+>
+  <div class="tag-icon-container">
+    <mat-icon color="accent">local_offer</mat-icon>
+  </div>
+  <div class="tag-input-container">
+    <mat-form-field
+      class="chip-list"
+      floatLabel="never"
+      [ngClass]="{'no-editable': !editable}"
+    >
+      <mat-chip-list
+        #chipList
+        aria-label="Fruit selection"
+        [disabled]="disabled"
+      >
+        <mat-chip
+          *ngFor="let tag of tagsArray; let i = index"
+          [removable]="editable"
+          (removed)="handleRemove(i)"
+          color="accent"
+        >
+          {{tag}}
+          <mat-icon
+            matChipRemove
+            *ngIf="editable"
+          >cancel</mat-icon>
+        </mat-chip>
+        <input
+          [disabled]="!editable"
+          autocomplete="off"
+          [placeholder]="editable?'Nueva etiqueta...':''"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="true"
+          (matChipInputTokenEnd)="handleAdd($event)"
+        >
+      </mat-chip-list>
+    </mat-form-field>
+  </div>
+
+  <div class="button-end-save">
+    <button
+      *ngIf="editable&&existeArchivo"
+      class="btn-save-tags"
+      mat-button
+      color="primary"
+      matTooltip="Guardar tags"
+      (click)="save.emit()"
+      [disabled]="disabled"
+    >
+      <mat-icon>save</mat-icon>
+    </button>
+  </div>
+
+</div>

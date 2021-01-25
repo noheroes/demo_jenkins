@@ -1,0 +1,21 @@
+<ng-container *ngIf="state$ | async as state">
+    <sunedu-modal-form-container
+    [title]="state.title"
+    [loading]="state.isLoading"
+    (on-submit)="handleSubmit()"
+    (on-dismiss)="handleClose()"
+    [cancelLabel]="CLOSE_MODAL.LIC_CLOSE_MODAL_LABEL" [cancelIcon]="CLOSE_MODAL.LIC_CLOSE_MODAL_ICON"
+    [msgErrors]="state.error"
+    [formType]="state.type">
+    <mat-card>
+      <mat-card-content>        
+        <sunedu-data-grid
+        [loading]="state.isLoading"
+        [source]="state.source"
+        [definition]="state.gridDefinition">
+        </sunedu-data-grid>
+      </mat-card-content>
+    </mat-card>
+  </sunedu-modal-form-container>
+  </ng-container>
+  

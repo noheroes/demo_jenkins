@@ -1,0 +1,34 @@
+<ng-container *ngIf="state$ | async as state">
+  <sunedu-modal-form-container [title]="state.title" [loading]="state.isLoading" (on-submit)="handleSubmit()"
+  [cancelLabel]="CLOSE_MODAL.LIC_CLOSE_MODAL_LABEL" [cancelIcon]="CLOSE_MODAL.LIC_CLOSE_MODAL_ICON"
+    (on-dismiss)="handleClose()" [msgErrors]="state.error" [formType]="state.type" [modoConsulta]="true">
+    <div class="row">
+      <div class="col-md-12 pb-3">
+        <h3>{{nombre_curso}}</h3>  
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6">
+        <sunedu-form-model-field variant="select" label="Hora lectiva" bindLabel="text" bindValue="value"
+          [disabled]="state.isLoading  || state.type == formType.CONSULTAR || readOnly"
+          [formModelField]="form.model['tipoHoraLectivaEnum']" [options]="state.comboLists.horaLectivas"
+          (on-change)="handleInputChange($event)" [hideRequiredIndicator]="true">
+        </sunedu-form-model-field>
+      </div>
+      <div class="col-md-3">
+        <sunedu-form-model-field number-only="true" [inputProps]="{ maxlength : 3 }" label="Cantidad" [formModelField]="form.model['cantidad']"
+          [disabled]="state.isLoading  || state.type == formType.CONSULTAR || readOnly" [hideRequiredIndicator]="true">
+        </sunedu-form-model-field>
+      </div>
+      <div class="col-md-3 align-self-end">
+        <sunedu-base-button label="Agregar" color="accent" icon="add_circle" (on-click)="handleSubmit()"
+          [disabled]="state.isLoading  || state.type == formType.CONSULTAR"
+          [hidden]="readOnly">
+        </sunedu-base-button>
+      </div>
+    </div>
+    <sunedu-data-grid [loading]="state.isLoading" [source]="state.source" [definition]="state.gridDefinition"
+      (on-click-button)="handleClickButton($event)">
+    </sunedu-data-grid>
+  </sunedu-modal-form-container>
+</ng-container>

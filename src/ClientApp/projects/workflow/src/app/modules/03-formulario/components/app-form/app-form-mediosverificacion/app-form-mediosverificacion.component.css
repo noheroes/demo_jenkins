@@ -1,0 +1,175 @@
+.drop-inside {
+  border: 1px solid #00f;
+}
+
+.drop-before {
+  border-top: 1px solid #00f;
+}
+
+.drop-after {
+  border-bottom: 1px solid #00f;
+}
+
+.node-title {
+padding:10px;
+margin: 5px;
+background: #f5f5f5;
+border-radius: 3px;
+border: 1px solid #e7eaec;
+cursor:pointer;
+}
+
+.node-children {
+  position: relative;
+  transition: height 0.2s;
+  margin-left: 40px;
+}
+
+.item-notes {
+margin-left:20px;
+color:#aaa;
+cursor:pointer;
+}
+
+span{
+text-align: center;
+/* vertical-align: middle; */
+font-weight: bold;
+min-width: 25px;
+padding-top: 3px;
+}
+
+.node-title:hover{
+background-color: #e1e1e1;
+}
+
+.material-icons {
+font-family: 'Material Icons';
+font-weight: normal;
+font-style: normal;
+font-size: 24px;  /* Preferred icon size */
+display: inline-block;
+line-height: 1;
+text-transform: none;
+letter-spacing: normal;
+word-wrap: normal;
+white-space: nowrap;
+direction: ltr;
+
+/* Support for all WebKit browsers. */
+-webkit-font-smoothing: antialiased;
+/* Support for Safari and Chrome. */
+text-rendering: optimizeLegibility;
+
+/* Support for Firefox. */
+-moz-osx-font-smoothing: grayscale;
+
+/* Support for IE. */
+font-feature-settings: 'liga';
+}
+
+.mv-icon {
+color: #335BFF;
+font-size: large;
+vertical-align: middle;
+margin-top:3px;
+}
+/* Note: If you're using an SVG icon, you should make the class target the `<svg>` element */
+.mv-icon svg {
+fill: white;
+}
+
+.node-head{
+padding-right: 10px;
+padding-top: 10px;
+margin:5px;
+height: 40px;
+}
+
+.badge{
+  background-color: #d1dade;
+  color: #5e5e5e;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  padding-bottom: 4px;
+  padding-left: 6px;
+  padding-right: 6px;
+  text-shadow: none;
+  white-space: nowrap;
+}
+
+.table-responsive{
+  background-color:#f5f5f5 !important;
+}
+.table-responsive:hover{
+  background-color: #e1e1e1 !important;
+}
+
+thead{
+  background-color: #5d4595;
+  color:white;
+  text-align: center;
+}
+thead tr td{
+  padding-right: 10px;
+}
+
+tbody{
+  border: 1px solid #5e5e5e;
+}
+
+tbody tr td{
+  padding-right: 10px;
+  overflow: overlay;
+  white-space: nowrap;
+}
+
+
+.margen-contenido-mv{
+  margin-left: 8px;
+}
+
+tbody tr td::-webkit-scrollbar {
+  height: 10px; /*6*/
+  width: 10px;
+}
+
+tbody tr td::-webkit-scrollbar-track {
+  background-color: #b9b9b9;
+  height: 6px;
+  border-radius: 5px;
+}
+
+tbody tr td::-webkit-scrollbar-thumb {
+  height: 8px !important;
+  border-radius: 5px;
+  background:#1c84c6;
+}
+
+tbody tr:hover{
+  background-color: #FEEED7;
+}
+
+.badgeComentario{
+  font-size: 12px;
+  border-radius: 5px;
+  text-shadow: none;
+  white-space: nowrap;
+  padding-top: 0px;
+}
+
+.message-icon {
+  margin: 0 ;
+  margin-left: 10px ;
+  font-size: 12px;
+  text-align: left;
+  color: red;
+  cursor: pointer;
+}
+
+.pull-left {
+  float: left;
+}
+
+

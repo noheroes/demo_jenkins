@@ -1,0 +1,74 @@
+<ng-container *ngIf="state$ | async as state">
+  <sunedu-modal-form-container
+  [title]="state.title"
+  [loading]="state.isLoading"
+  (on-dismiss)="handleClose()"
+  [msgErrors]="state.error"
+  [cancelLabel]="CLOSE_MODAL.LIC_CLOSE_MODAL_LABEL" [cancelIcon]="CLOSE_MODAL.LIC_CLOSE_MODAL_ICON"
+  [formType]="typeConsultar"
+  >
+  <mat-card>
+    <mat-card-content>
+
+      <sunedu-data-grid-form-filter (on-submit)="handleSubmitFilter()" (on-reset)="handleLimpiar()"
+      [disableButtons]="state.isLoading" [hideExport]="true" [hideNew]="true">
+      <div class="form-row">
+        <div class="col-md-6">
+          <sunedu-form-model-field label="Fecha de actividad de"  variant="datepicker"
+            [formModelField]="formBuscar.model['fechaMinimo']"
+            [inputProps]="{ maxlength: 50 }"
+            [minDate]="fechaInicio_MinDate"
+            [maxDate]="fechaInicio_MaxDate"
+            [disabled]="state.isLoading"
+            [hideRequiredIndicator]="true" (on-change)="handleChangeInput($event)">
+          </sunedu-form-model-field>
+        </div>
+        <div class="col-md-6">
+          <sunedu-form-model-field label="hasta" variant="datepicker"
+            [formModelField]="formBuscar.model['fechaMaximo']"
+            [minDate]="fechaFin_MinDate"
+            [maxDate]="fechaFin_MaxDate"
+            [inputProps]="{ maxlength: 50 }"
+            [disabled]="state.isLoading"
+            [hideRequiredIndicator]="true" (on-change)="handleChangeInput($event)">
+          </sunedu-form-model-field>
+        </div>
+      </div>
+          <sunedu-form-model-field variant="select" label="Actividad" [formModelField]="formBuscar.model['pasoNombre']"
+            [options]="state.comboLists.actividades" (on-change)="handleInputChange($event)" bindLabel="text"
+            bindValue="value" [disabled]="state.isLoading">
+          </sunedu-form-model-field>
+          <sunedu-form-model-field variant="select" label="Responsable"
+            [formModelField]="formBuscar.model['responsable']" [options]="state.comboLists.responsables"
+            (on-change)="handleInputChange($event)" bindLabel="text" bindValue="value" [disabled]="state.isLoading">
+          </sunedu-form-model-field>
+          <sunedu-form-model-field variant="select" label="Estado" [formModelField]="formBuscar.model['estado']"
+            [options]="state.comboLists.estados" (on-change)="handleInputChange($event)" bindLabel="text"
+            bindValue="value" [disabled]="state.isLoading">
+          </sunedu-form-model-field>
+          <sunedu-form-model-field variant="select" label="Rol" [formModelField]="formBuscar.model['rol']"
+            [options]="state.comboLists.roles" (on-change)="handleInputChange($event)" bindLabel="text"
+            bindValue="value" [disabled]="state.isLoading">
+          </sunedu-form-model-field>
+
+        </sunedu-data-grid-form-filter>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-content>
+
+        <div style="display: flex; margin-top: 10px;">
+          <div style="flex: 1"></div>
+
+          <div div class="col-md-3 align-self-end">
+
+          </div>
+        </div>
+        <sunedu-data-grid [loading]="state.isLoading" [source]="state.source" [definition]="state.gridDefinition"
+          (on-load-data)="handleLoadData($event)" (on-click-button)="handleClickButton($event)">
+        </sunedu-data-grid>
+
+      </mat-card-content>
+    </mat-card>
+  </sunedu-modal-form-container>
+</ng-container>

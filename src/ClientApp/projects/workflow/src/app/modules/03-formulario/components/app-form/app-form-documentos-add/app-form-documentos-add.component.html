@@ -1,0 +1,80 @@
+<ng-container *ngIf="state$ | async as state">
+    <sunedu-modal-form-container [title]="state.title" [loading]="state.isLoading" (on-submit)="handleSubmit()"
+        (on-dismiss)="handleClose()" [msgErrors]="state.error" [formType]="state.type"
+        [cancelLabel]="CLOSE_MODAL.LIC_CLOSE_MODAL_LABEL" [cancelIcon]="CLOSE_MODAL.LIC_CLOSE_MODAL_ICON">
+        <mat-card>
+            <mat-card-content>
+                <div class="form-row">
+                    <div class="col-12">
+                        <h2>Información general del documento</h2>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <sunedu-form-field label="Tipo de documento" controlName="tipo" [formGroupParent]="form"
+                            [msgValidations]="validators['tipo']" [hideRequiredIndicator]="true" [disabled]="true">
+                        </sunedu-form-field>
+                    </div>
+                </div>
+                <br>
+                <div class="form-row" *ngIf="registrarInformacion">
+                    <div class="col-md-4">
+                        <sunedu-form-field variant="datepicker" label="Fecha Emisión" controlName="fechaEmision"
+                            [disabled]="!show" [formGroupParent]="form" [msgValidations]="validators['fechaEmision']"
+                            [hideRequiredIndicator]="true" [maxDate]="max_date"
+                            [disabled]="state.isLoading  || state.type == formType.CONSULTAR">
+                        </sunedu-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <sunedu-form-field label="N°" controlName="numero" [disabled]="!show" [formGroupParent]="form"
+                            [msgValidations]="validators['numero']" number-only="true" [inputProps]="{ maxlength : 11}"
+                            [hideRequiredIndicator]="true"
+                            [disabled]="state.isLoading  || state.type == formType.CONSULTAR">
+                        </sunedu-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <sunedu-form-field label="Nombre Oficial" controlName="nombreOficial" [disabled]="!show"
+                            [formGroupParent]="form" [msgValidations]="validators['nombreOficial']"
+                            [hideRequiredIndicator]="true"
+                            [disabled]="state.isLoading  || state.type == formType.CONSULTAR">
+                        </sunedu-form-field>
+                    </div>
+                    <br>
+                </div>
+                <div class="form-row" *ngIf="registrarInformacion">
+                    <div class="col-md-12">
+                        <sunedu-form-field variant="multiline" label="Descripción del archivo" controlName="descripcion" 
+                            [disabled]="!show" [formGroupParent]="form" [inputProps]="{ maxlength : 500}"
+                            [msgValidations]="validators['descripcion']" [hideRequiredIndicator]="true"
+                            [disabled]="state.isLoading  || state.type == formType.CONSULTAR">
+                        </sunedu-form-field>
+                    </div>
+                </div>
+                <br>
+                <div class="form-row" *ngIf="!restringirDescarga">
+                    <div class="col-md-4">
+                        <sunedu-base-button label="Descargar formato" color="primary" icon="cloud_download"
+                            (on-click)="onPlantilla()"></sunedu-base-button>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <br>
+        <mat-card>
+            <mat-card-content>
+                <div class="form-row">
+                    <div class="col-12">
+                        <h2>Archivo</h2>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-12">
+                        <sunedu-gestor-archivos [config]="configFile" (sendCanClean)="setTieneArchivo($event)"
+                            (sendInfoSuccess)="getInfoFile($event)">
+                        </sunedu-gestor-archivos>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </sunedu-modal-form-container>
+</ng-container>

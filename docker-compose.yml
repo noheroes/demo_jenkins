@@ -1,0 +1,24 @@
+version: "3"
+services:
+
+    web:
+        image: "gnosis.web"
+        build: .
+        hostname: "gnosis.web"
+        container_name: "gnosis.web"
+        environment:
+            "ASPNETCORE_ENVIRONMENT": Production 
+            "TZ": "America/Bogota"
+        networks: 
+            - ms 
+        ports: 
+            - "59523:443"
+        volumes: 
+        - /c/app/_certificates/:/https/
+        - /c/app/_log/web:/app/Log
+        - ./env.js:/app/ClientApp/dist/env.js
+        restart: on-failure
+      
+networks:
+    ms:
+      external: true

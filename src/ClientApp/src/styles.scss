@@ -1,0 +1,168 @@
+@import './assets/scss/variables';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import './assets/scss/constants';
+@import './assets/scss/toast-theme';
+@import './assets/scss/helpers';
+@import './assets/scss/_galenus-theme';
+@import './assets/scss/base-custom';
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #efefef;
+  //font-family: "OpenSans-Regular", Helvetica, Arial, sans-serif !important;
+  font-size: 0.875rem;
+  -webkit-text-size-adjust: none;
+  height: 100%;
+}
+
+
+body{
+  position: relative;
+}
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($yup-app-theme);
+
+@include mat-base-typography($custom-typography);
+
+
+.mat-title {
+  font-family: mat-font-family($title-typography, title) !important;
+}
+
+.mat-table .mat-cell {
+  font-size: 0.875rem !important;
+}
+
+.source-container {
+  background: #efefef;
+  margin: 15px 0px;
+  padding: 15px;
+  border: solid 1px #ccc;
+}
+
+.form-buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 0px;
+
+  button {
+    margin: 0px 5px;
+  }
+}
+
+.sunedu-modal {
+  .mat-dialog-container {
+    padding: 0px !important;
+  }
+}
+
+.sunedu-modal.sunedu-modal-sm {
+  .mat-dialog-container {
+    width: 450px;
+  }
+}
+
+.sunedu-modal.sunedu-modal-md {
+  .mat-dialog-container {
+    width: 750px;
+  }
+}
+
+.sunedu-modal.sunedu-modal-lg {
+  .mat-dialog-container {
+    width: 1200px;
+  }
+}
+
+.sunedu-modal.sunedu-modal-xl {
+  max-width: 95vw !important;
+
+  .mat-dialog-container {
+    width: 1750px;
+  }
+}
+
+.page-title{
+  font-weight: bold;
+  font-size: x-large;
+}
+
+@media(max-width:480px) {
+  .sunedu-modal {
+    width: 100%;
+    max-width: 100% !important;
+  }
+}
+
+
+.border-indicator-open {
+  border-left: solid 5px mat-color($yup-app-accent);
+}
+
+.border-indicator-close {
+  border-left: solid 5px gray;
+}
+
+//======================================================================
+
+@media(max-width:480px) {
+  .mat-drawer-content {
+    display: contents !important;
+  }
+}
+
+@media(min-width: 480px) {
+
+  ::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #b9b9b9;
+    height: 6px;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    height: 8px !important;
+    border-radius: 5px;
+    background: mat-color($yup-app-accent);
+  }
+
+}
+
+
+.flexcontainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  /* You can set flex-wrap and
+     flex-direction individually */
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* Or do it all in one line
+    with flex flow */
+  flex-flow: row wrap;
+  /* tweak where items line
+     up on the row
+     valid values are: flex-start,
+     flex-end, space-between,
+     space-around, stretch */
+  align-content: flex-end;
+}
+
+.ng-select-container {
+  // min-height: 39.25px !important;
+}
+
+.ng-select-multiple {
+  .ng-placeholder {
+    top: 8px !important;
+  }
+}

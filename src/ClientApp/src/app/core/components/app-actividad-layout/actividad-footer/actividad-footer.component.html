@@ -1,0 +1,29 @@
+<div class="actividad-footer-root">
+  <div class="row">
+    <div class="col-md-4 footer-button-container">
+      <sunedu-base-button
+        icon="reply"
+        color="primary"
+        label="Ir a bandeja"
+        [disabled]="loading"
+        (on-click)="handleIrBandeja()"
+      ></sunedu-base-button>
+    </div>
+    <div class="col-md-4 footer-button-container">
+      <sunedu-base-button
+        color="accent"
+        label="Validar Solicitud"
+        [disabled]="loading"
+        (on-click)="handleValidar()"
+      ></sunedu-base-button>
+    </div>
+    <div class="col-md-4 footer-button-container">
+      <sunedu-base-button
+        class="button-finalizar"
+        [label]="finalizarText"
+        [disabled]="loading"
+        (on-click)="handleFinalizar()"
+      ></sunedu-base-button>
+    </div>
+  </div>
+</div>

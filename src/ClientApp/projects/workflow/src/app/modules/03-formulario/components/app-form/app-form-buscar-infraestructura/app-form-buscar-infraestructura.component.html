@@ -1,0 +1,19 @@
+<ng-container *ngIf="state$ | async as state">
+    <sunedu-data-grid-form-filter
+    (on-submit)="HandleSubmit()"
+    (on-new)="HandleClickNuevo()"
+    (on-reset)="HandleLimpiar()"
+    [disableButtons]="state.isLoading"
+    >
+    <sunedu-form-model-field
+    variant="select"
+    label="Local"
+    [formModelField]="form.model['codigoSedeFilial']"
+    [options]="state.comboLists.sedeFilial"
+    (on-change)="handleInputChange($event)"
+    bindLabel="text"
+    bindValue="value"
+    [disabled]="state.isLoading"></sunedu-form-model-field>
+  </sunedu-data-grid-form-filter>
+  </ng-container>
+  

@@ -1,0 +1,33 @@
+<ng-container *ngIf="state$ | async as state;">
+    <sunedu-page-title text="Bandeja de actividades"></sunedu-page-title>
+    <!-- Comentado, Se debe habilitar para el Rol de UACTD Evaluador
+      <app-form-busqueda-bandeja (on-click-nuevo)="handleClickNuevo()"></app-form-busqueda-bandeja>
+    -->
+    <div style="display: flex; margin-top: 10px;">
+      <div style="flex: 1" class="inline-block"></div>
+      <sunedu-base-button
+        label="Actualizar"
+        color="primary"
+        icon="refresh"
+        (on-click)="handleRefresh()"
+        ></sunedu-base-button>
+      <!-- <button type="button"  class="btn btn-warning" style="display:inline-flex;padding-top: 10px;align-items: end;color:white; background-color:#5d4595; border-color: white;"(click)="handleRefresh()">
+      <mat-icon>refresh</mat-icon> Actualizar
+      </button> -->
+    </div>
+
+    <sunedu-data-grid
+      [loading]="state.buscadorBandeja.isLoading"
+      [source]="state.buscadorBandeja.gridSource"
+      [definition]="state.buscadorBandeja.gridDefinition"
+      (on-load-data)="handleLoadData($event)"
+      (on-click-button)="handleClickButton($event)"
+      [serverError]="state.buscadorBandeja.error">
+
+      <ng-template
+        suneduTemplate="estado"
+        let-data
+        let-rowIndex="rowIndex">
+      </ng-template>
+    </sunedu-data-grid>
+</ng-container>

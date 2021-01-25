@@ -1,0 +1,51 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "skipLibCheck": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "@lic/workflow/*": [
+        "projects/workflow/src/*"
+      ],
+      "@lic/administracion/*": [
+        "projects/administracion/src/*"
+      ],
+      "@lic/core": [
+        "src/app/core"
+      ]
+    }
+  },
+  "include": [
+    "src/main.ts",
+    "src/polyfills.ts",
+    "src/app/**/*.module.ts",
+    "src/app/**/*.component.ts",
+    "src/app/**/*.service.ts",
+    "src/app/**/*.guard.ts",
+    "projects/**/*.module.ts",
+    "projects/**/*.component.ts",
+    "projects/**/*.interface.ts",
+    "projects/**/*.directive.ts",
+    "projects/**/*.service.ts",
+    "projects/**/*.pipe.ts"
+  ]
+}

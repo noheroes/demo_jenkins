@@ -1,0 +1,8 @@
+<ng-container *ngIf="state$ | async as state">
+  <sunedu-data-grid-form-filter (on-submit)="HandleSubmit()" (on-new)="HandleClickNuevo()" (on-reset)="HandleLimpiar()"
+    [disableButtons]="state.isLoading" [hideExport]="true" [hideNew]="true">   
+    <sunedu-form-model-field variant="select" label="Filtrar por programa" [formModelField]="form.model['codigoPrograma']"
+      [options]="state.comboLists.programas" (on-change)="handleInputChange($event)" bindLabel="text" bindValue="value"
+      [disabled]="state.isLoading"></sunedu-form-model-field>   
+  </sunedu-data-grid-form-filter>
+</ng-container>

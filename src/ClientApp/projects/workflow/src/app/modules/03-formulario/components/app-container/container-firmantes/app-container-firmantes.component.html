@@ -1,0 +1,12 @@
+<ng-container *ngIf="state$ | async as state">
+  <h2>Selección de representantes legales para firma</h2>
+  <sunedu-data-grid [loading]="state.buscadorFirmante.isLoading" [source]="state.buscadorFirmante.source"
+    [definition]="state.buscadorFirmante.gridDefinition" (on-load-data)="handleLoadData($event)"
+    (on-click-button)="handleClickButton($event)">
+    <ng-template suneduTemplate="firmante" let-data>
+      <div style="display: flex;">
+        <mat-checkbox [checked]="data.seleccionado" (change)="handleChangeSeleccion($event, data)" [disabled]="data.esResponsable=='SI'" ></mat-checkbox>
+      </div>
+    </ng-template>
+  </sunedu-data-grid>
+</ng-container>

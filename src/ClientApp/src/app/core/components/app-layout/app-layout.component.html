@@ -1,0 +1,11 @@
+<ng-container *ngIf="state$ | async as state">
+    <sunedu-layout [router]="router" [appTitle]="state.ui.appTitle" [drawerMini]="state.ui.drawerMini"
+    [drawerOpen]="state.ui.isMobile?state.ui.drawerMobileOpen:state.ui.drawerOpen" [appMenu]="state.ui.appMenu"
+    [isMobile]="state.ui.isMobile" [user]="state.session.user" (on-toogle-drawer)="handleToogleDrawer($event)"
+    (on-logout)="handleLogout()" [drawerAttached]="state.ui.drawerAttached"
+    (on-toogle-drawer-attached)="handleToogleAttachDrawer($event)"
+    (on-change-mobile-size)="handleChangeMobileSize($event)" (on-click-logo)="handleClickLogo()"
+    (on-click-change-password)="handleClickChangePassword()">
+    <ng-content></ng-content>
+  </sunedu-layout>
+</ng-container>

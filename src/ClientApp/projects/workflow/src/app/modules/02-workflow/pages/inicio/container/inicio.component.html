@@ -1,0 +1,62 @@
+<div class="flujos-category-list">
+   <div class="flujos-category-list-item">
+      <mat-card class="flujos-category-list-card">
+         <div class="flujos-category-list-card-header">
+            <img src="assets/images/licenciamiento.png">
+         </div>
+         <!-- <img mat-card-image src="https://www.tutorialspoint.com/materialize/src/html5-mini-logo.jpg" alt="Learn HTML5"> -->
+         <mat-card-content>
+           <mat-card-title>
+             <h4>Licenciamientos</h4>
+           </mat-card-title>
+           <p>
+             ¿Desea iniciar un procedimiento de licenciamiento?
+           </p>
+         </mat-card-content>
+         <mat-card-actions align="end">
+           <!-- <button mat-button (click)="openModalIniciarProcedimiento()">INICIAR</button> -->
+           <button mat-button (click)="onIniciarProcedimiento()" [disabled]="disabledLicenciamiento">INICIAR</button>
+         </mat-card-actions>
+       </mat-card>
+   </div>
+   <!-- <img mat-card-image src="https://www.tutorialspoint.com/materialize/src/html5-mini-logo.jpg" alt="Learn HTML5"> -->
+   <!-- <div class="flujos-category-list-item">
+      <mat-card class="flujos-category-list-card">
+         <div class="flujos-category-list-card-header">
+            <img src="assets/images/recepcion.png">
+         </div>
+
+         <mat-card-content>
+           <mat-card-title>
+             <h4>Recepción</h4>
+           </mat-card-title>
+           <p>
+            ¿Deseas incluir un documento físico a un expediente? Ven por aquí.
+           </p>
+         </mat-card-content>
+         <mat-card-actions align="end">
+           <button mat-button>INICIAR</button>
+         </mat-card-actions>
+       </mat-card>
+   </div> -->
+   <!-- <img mat-card-image src="https://www.tutorialspoint.com/materialize/src/html5-mini-logo.jpg" alt="Learn HTML5"> -->
+   <div class="flujos-category-list-item">
+    <mat-card class="flujos-category-list-card">
+       <div class="flujos-category-list-card-header">
+          <img src="assets/images/emision.png">
+       </div>
+
+       <mat-card-content>
+         <mat-card-title>
+           <h4>Emisión</h4>
+         </mat-card-title>
+         <p>
+          ¿Deseas enviar un documento a SUNEDU para tu licenciamiento? Hazlo aquí.
+         </p>
+       </mat-card-content>
+       <mat-card-actions align="end">
+         <button mat-button (click)="openModalIniciarProcedimiento()" [disabled]="disabledEmision">INICIAR</button>
+       </mat-card-actions>
+     </mat-card>
+ </div>
+</div>

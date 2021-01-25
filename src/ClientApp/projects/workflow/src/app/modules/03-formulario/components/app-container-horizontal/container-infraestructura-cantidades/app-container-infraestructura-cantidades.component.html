@@ -1,0 +1,121 @@
+<ng-container *ngIf="state$ | async as state" >
+    <mat-card [hidden]="idLocalSelecionado">
+        <br>
+        <div class="col text-center" style="background-color: #5D4595;">
+            <label style="color: white;">USO EDUCATIVO</label>
+        </div>
+        <br>
+
+        <div class="form-row">
+            <div class="col-2">
+                <label class="total-title">Nº total <br>de aulas</label>
+                <sunedu-form-model-field label="" placeholder="N° total de aulas" [formModelField]="form.model['numeroTotalAulas']" number-only="soloNumeros" [inputProps]="{ maxlength : 2}" [disabled]="state.isLoading  || readOnly" [hideRequiredIndicator]="true"></sunedu-form-model-field>
+            </div>
+            <div class="col-2">
+                <label class="total-title">Nº total <br>de ambientes</label>
+                <sunedu-form-model-field label="" placeholder="N° total de ambientes" [formModelField]="form.model['numeroTotalAmbientes']" number-only="soloNumeros" [inputProps]="{ maxlength : 2}" [disabled]="state.isLoading  || readOnly" [hideRequiredIndicator]="true"></sunedu-form-model-field>
+            </div>
+            <div class="col-2">
+                <label class="total-title">Nº total <br>de bibliotecas</label>
+                <sunedu-form-model-field label="" placeholder="N° total de bibliotecas" [formModelField]="form.model['numeroTotalBibliotecas']" number-only="soloNumeros" [inputProps]="{ maxlength : 2}" [disabled]="state.isLoading  || readOnly" [hideRequiredIndicator]="true"></sunedu-form-model-field>
+            </div>
+        </div>
+        <br>
+        <div class="form-row">
+            <div class="col-2">
+                <label>Nº total <br>de laboratorios</label>
+                <sunedu-form-model-field label="" placeholder="N° total de laboratorios" [formModelField]="form.model['numeroTotalLaboratorios']" number-only="soloNumeros" [inputProps]="{ maxlength : 2}" [disabled]="esBloqueado || readOnly" [hideRequiredIndicator]="true"></sunedu-form-model-field>
+            </div>
+            <div class="col-2">
+                <label>Nº total de laboratorios<br>de enseñanza</label>
+                <sunedu-form-model-field label="" placeholder="N° total de laboratorios de enseñanza" [formModelField]="form.model['numeroLaboratorioEnsenanza']" number-only="soloNumeros" [inputProps]="{ maxlength : 2}" [disabled]="esBloqueado || readOnly" [hideRequiredIndicator]="true"></sunedu-form-model-field>
+            </div>
+            <div class="col-2">
+                <label>Nº total de laboratorios<br>de cómputo</label>
+                <sunedu-form-model-field label="" placeholder="N° total de laboratorios de cómputo" [formModelField]="form.model['numeroLaboratorioComputo']" number-only="soloNumeros" [inputProps]="{ maxlength : 2}" [disabled]="esBloqueado || readOnly" [hideRequiredIndicator]="true"></sunedu-form-model-field>
+            </div>
+            <div class="col-2">
+                <label>Nº total de laboratorios<br>de investigación</label>
+                <sunedu-form-model-field label="" placeholder="N° total de laboratorios de investigación" [formModelField]="form.model['numeroLaboratorioInvestigacion']" number-only="soloNumeros" [inputProps]="{ maxlength : 2}" [disabled]="esBloqueado || readOnly" [hideRequiredIndicator]="true"></sunedu-form-model-field>
+            </div>
+        </div>
+        <br>
+        <div class="form-row">
+            <div class="col-2">
+                <label>Nº total <br>de talleres</label>
+                <sunedu-form-model-field label="" placeholder="N° total de talleres" [formModelField]="form.model['numeroTotalTalleres']" number-only="soloNumeros" [inputProps]="{ maxlength : 2}" [disabled]="esBloqueado || readOnly" [hideRequiredIndicator]="true"></sunedu-form-model-field>
+            </div>
+            <div class="col-2">
+                <label>Nº total de talleres<br>de enseñanza</label>
+                <sunedu-form-model-field label="" placeholder="N° total de talleres de enseñanza" [formModelField]="form.model['numeroTalleresEnsenanza']" number-only="soloNumeros" [inputProps]="{ maxlength : 2}" [disabled]="esBloqueado || readOnly" [hideRequiredIndicator]="true"></sunedu-form-model-field>
+            </div>
+            <div class="col-2">
+                <label>Nº total de talleres<br>de cómputo</label>
+                <sunedu-form-model-field label="" placeholder="N° total de talleres de cómputo" [formModelField]="form.model['numeroTalleresComputo']" number-only="soloNumeros" [inputProps]="{ maxlength : 2}" [disabled]="esBloqueado || readOnly" [hideRequiredIndicator]="true"></sunedu-form-model-field>
+            </div>
+            <div class="col-2">
+                <label>Nº total de talleres<br>de investigación</label>
+                <sunedu-form-model-field label="" placeholder="N° total de talleres de investigación" [formModelField]="form.model['numeroTalleresInvestigacion']" number-only="soloNumeros" [inputProps]="{ maxlength : 2}" [disabled]="esBloqueado || readOnly" [hideRequiredIndicator]="true"></sunedu-form-model-field>
+            </div>
+        </div>
+        <br>
+        <div class="col-12 text-center" style="background-color: #5D4595;">
+            <label style="color: white;">SERVICIOS COMPLEMENTARIOS</label>
+        </div>
+        <br>
+        <legend>Ambientes complementarios</legend>
+        <br>
+        <div class="form-row">
+            <div class="col-2">
+                <label>Nº total <br>de lactarios</label>
+                <sunedu-form-model-field label="" placeholder="N° total de lactarios" [formModelField]="form.model['numeroTotalLactarios']" number-only="soloNumeros" [inputProps]="{ maxlength : 2}" [disabled]="state.isLoading  || readOnly"  [hideRequiredIndicator]="true"></sunedu-form-model-field>
+            </div>
+            <div class="col-2">
+                <label>Nº total <br>de auditorios</label>
+                <sunedu-form-model-field label="" placeholder="N° total de auditorios" [formModelField]="form.model['numeroTotalAuditorios']" number-only="soloNumeros" [inputProps]="{ maxlength : 2}" [disabled]="state.isLoading  || readOnly"  [hideRequiredIndicator]="true"></sunedu-form-model-field>
+            </div>
+        </div>
+        <br>
+        <legend>Ambientes bienestar universitario</legend>
+        <br>
+        <div class="form-row">
+            <div class="col-2">
+                <label>Nº total <br>de <br>tópicos</label>
+                <sunedu-form-model-field label="" placeholder="N° total de tópicos" [formModelField]="form.model['numeroTotalTopicos']" number-only="soloNumeros" [inputProps]="{ maxlength : 2}" [disabled]="state.isLoading  || readOnly"  [hideRequiredIndicator]="true"></sunedu-form-model-field>
+            </div>
+            <div class="col-2">
+                <label>Nº total de <br>ambientes de servicio<br>psicopedagógico</label>
+                <sunedu-form-model-field label="" placeholder="N° total de ambientes de servicio psicopedagógico" [formModelField]="form.model['numeroTotalAmbienteServicioPsicopedagogico']" number-only="soloNumeros" [inputProps]="{ maxlength : 2}" [disabled]="state.isLoading  || readOnly"  [hideRequiredIndicator]="true"></sunedu-form-model-field>
+            </div>
+            <div class="col-2">
+                <label>Nº total <br>de ambientes <br>de servicios deportivos</label>
+                <sunedu-form-model-field label="" placeholder="N° total de ambientes de servicios deportivos" [formModelField]="form.model['numeroTotalAmbienteServicioDeportivos']" number-only="soloNumeros" [inputProps]="{ maxlength : 2}" [disabled]="state.isLoading  || readOnly"  [hideRequiredIndicator]="true"></sunedu-form-model-field>
+            </div>
+            <div class="col-2">
+                <label>Nº total de ambientes <br>de servicios artísticos y culturales</label>
+                <sunedu-form-model-field label="" placeholder="N° total de ambientes de servicios artísticos y culturales" [formModelField]="form.model['numeroTotalAmbienteServicioArtisticoCulturales']" number-only="soloNumeros" [inputProps]="{ maxlength : 2}" [disabled]="state.isLoading  || readOnly"  [hideRequiredIndicator]="true"></sunedu-form-model-field>
+            </div>
+        </div>
+        <br>
+        <div class="form-row">
+            <div class="col-md-12">
+                <sunedu-form-model-field
+                  variant="multiline"
+                  label="Comentarios"
+                  [inputProps]="{ maxlength : 200}"
+                  [formModelField]="form.model['comentario']"
+                  [disabled]="state.isLoading  || readOnly"
+                  [hideRequiredIndicator]="true">
+              </sunedu-form-model-field>
+            </div>
+        </div>
+        <br>
+        <div class="text-center" style="margin-top: 10px;" *ngIf="!readOnly">
+            <div style="flex: 1" class="inline-block"></div>
+            <button type="button"  class="btn btn-warning" style="display:inline-flex;padding-top: 10px;align-items: end;background-color: orange;" icon="save" (click)="handleSubmit()" [hidden]="readOnly">
+            <mat-icon>save</mat-icon> <h5>Guardar</h5>
+            </button>
+          </div>
+    </mat-card>
+
+</ng-container>

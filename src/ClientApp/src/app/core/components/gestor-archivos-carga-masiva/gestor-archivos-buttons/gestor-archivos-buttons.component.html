@@ -1,0 +1,98 @@
+<ng-container *ngIf="!friendlyStyle;else friendlyButtons">
+
+    <div
+      class="gestor-archivo-buttons-container"
+      [ngClass]="{
+      'border-left-radius': buttonsOnly,
+      'friendly-style': friendlyStyle
+    }"
+    >
+      <button
+        class="gestor-button"
+        mat-flat-button
+        color="primary"
+        matTooltip="Seleccionar archivo"
+        (click)="clickAttach.emit()"
+        [disabled]="!enableAttach"
+        *ngIf="visibleAttach"
+      >
+        <mat-icon>attach_file</mat-icon>
+      </button>
+      <button
+        class="gestor-button"
+        color="accent"
+        mat-flat-button
+        matTooltip="Enviar archivo"
+        (click)="clickUpload.emit()"
+        [disabled]="!enableUpload"
+        *ngIf="visibleUpload"
+      >
+        <mat-icon>cloud_upload</mat-icon>
+      </button>
+      <button
+        class="gestor-button"
+        color="primary"
+        mat-flat-button
+        matTooltip="Descargar archivo"
+        (click)="clickDownload.emit()"
+        [disabled]="!enableDownload"
+        *ngIf="visibleDownload"
+      >
+        <mat-icon>cloud_download</mat-icon>
+      </button>
+      <button
+        class="gestor-button"
+        color="accent"
+        mat-flat-button
+        disabled
+        matTooltip="Eliminar archivo"
+        (click)="clickDelete.emit()"
+        [disabled]="!enableDelete"
+        *ngIf="visibleDelete"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+  
+    </div>
+  </ng-container>
+  
+  <ng-template #friendlyButtons>
+    <button
+      *ngIf="visibleDelete"
+      mat-mini-fab
+      class="friendly-mini-button friendly-button-delete"
+      matTooltip="Eliminar archivo"
+      matTooltipPosition="above"
+      (click)="clickDelete.emit()"
+      [disabled]="!enableDelete"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  
+    <button
+      *ngIf="visibleUpload"
+      mat-mini-fab
+      color="accent"
+      class="friendly-mini-button"
+      matTooltip="Subir archivo"
+      matTooltipPosition="above"
+      (click)="clickUpload.emit()"
+      [disabled]="!enableUpload"
+    >
+      <mat-icon>cloud_upload</mat-icon>
+    </button>
+  
+    <button
+      *ngIf="friendlyStyle&&visibleHelp"
+      mat-mini-fab
+      color="primary"
+      class="friendly-mini-button"
+      matTooltip="Ayuda"
+      matTooltipPosition="above"
+      (click)="clickHelp.emit()"
+      [disabled]="!enableHelp"
+    >
+      <mat-icon>help_outline</mat-icon>
+    </button>
+  </ng-template>
+  

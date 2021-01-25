@@ -1,0 +1,85 @@
+<ng-container *ngIf="state$ | async as state">
+  <mat-card>
+    <sunedu-form-model-field variant="select" label="Sede/Filial" [options]="sedes"
+      (on-change)="handleInputChange($event,'sede')" bindLabel="text" bindValue="value" [disabled]="false">
+    </sunedu-form-model-field>
+  </mat-card>
+  <br>
+  <br>
+  <mat-card class="card-border">
+    <sunedu-form-model-field variant="select" label="Local" [options]="locales" [model]="idLocal"
+      (on-change)="handleInputChange($event,'local')" bindLabel="text" bindValue="value" [disabled]="false">
+    </sunedu-form-model-field>
+  </mat-card>
+  <br>
+  <br>
+  <br>
+  <div class="horizontal-tabs">
+    <mat-tab-group class="horizontal-tabs">
+      <mat-tab label="Presupuesto por CBC (Formato 01)">
+        <br> 
+        <h5 class="node-title">Presupuesto de la universidad por condiciones básicas de calidad</h5>
+        <br>    
+        <div class="node-title">
+          <span>{{tipoPresupuestoNombre[0]}}</span>
+        </div>
+        <app-container-presupuesto [idLocal]="idLocal" [idSede]="idSede" [tipoPresupuesto]="tipoPresupuesto[0]"  [readOnly]="readOnly"></app-container-presupuesto>
+        <div class="node-title">
+          <span>{{tipoPresupuestoNombre[1]}}</span>
+        </div>
+        <app-container-presupuesto [idLocal]="idLocal" [idSede]="idSede" [tipoPresupuesto]="tipoPresupuesto[1]"  [readOnly]="readOnly"></app-container-presupuesto>
+        <div class="node-title">
+          <span>{{tipoPresupuestoNombre[2]}}</span>
+        </div>
+        <app-container-presupuesto [idLocal]="idLocal" [idSede]="idSede" [tipoPresupuesto]="tipoPresupuesto[2]"  [readOnly]="readOnly"></app-container-presupuesto>
+        <div class="node-title">
+          <span>{{tipoPresupuestoNombre[3]}}</span>
+        </div>
+        <app-container-presupuesto [idLocal]="idLocal" [idSede]="idSede" [tipoPresupuesto]="tipoPresupuesto[3]"  [readOnly]="readOnly"></app-container-presupuesto>
+        <div class="node-title">
+          <span>{{tipoPresupuestoNombre[4]}}</span>
+        </div>
+        <app-container-presupuesto [idLocal]="idLocal" [idSede]="idSede" [tipoPresupuesto]="tipoPresupuesto[4]"  [readOnly]="readOnly"></app-container-presupuesto>
+        <app-container-presupuesto [idLocal]="idLocal" [idSede]="idSede" [tipoPresupuesto]="tipoPresupuesto[5]"  [readOnly]="readOnly"></app-container-presupuesto>
+        <div class="node-title">
+          <span>{{tipoPresupuestoNombre[5]}}</span>
+        </div>
+        <app-container-presupuesto [idLocal]="idLocal" [idSede]="idSede" [tipoPresupuesto]="tipoPresupuesto[6]"  [readOnly]="readOnly"></app-container-presupuesto>
+      </mat-tab>
+      <mat-tab label="Laboratorios y talleres (Formato 5.1)">
+        <ng-template matTabContent>
+          <app-container-laboratorio [idLocal]="idLocal" [idSede]="idSede" [codigoLocal]="codigoLocal" [readOnly]="readOnly">
+          </app-container-laboratorio>
+          <app-container-taller  [idLocal]="idLocal" [idSede]="idSede" [codigoLocal]="codigoLocal" [readOnly]="readOnly">
+          </app-container-taller>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Infraestructura (Formato 05)">
+        <ng-template matTabContent>
+          <!-- <app-container-infraestructura [idLocal]="idLocal" [idSede]="idSede" [readOnly]="readOnly"></app-container-infraestructura> -->
+          <app-container-infraestructura-cantidades [idLocal]="idLocal" [idSede]="idSede" [readOnly]="readOnly"></app-container-infraestructura-cantidades>
+        </ng-template>
+      </mat-tab>      
+      <mat-tab label="Programas por Sede/Filial (Formato 02)">
+        <ng-template matTabContent>
+          <app-container-programa [idLocal]="idLocal" [idSede]="idSede" [readOnly]="readOnly"></app-container-programa>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Programas de SEG (Formato 2.1)">
+        <ng-template matTabContent>
+          <app-container-programa-se [idLocal]="idLocal" [idSede]="idSede" [readOnly]="readOnly"></app-container-programa-se>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Relación de docentes (Formato 06)">
+        <ng-template matTabContent>
+          <app-container-relaciondocente [idLocal]="idLocal" [idSede]="idSede" [readOnly]="readOnly"></app-container-relaciondocente>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Relación de no docentes (Formato 07)">
+        <ng-template matTabContent>
+          <app-container-relacionnodocente [idLocal]="idLocal" [idSede]="idSede" [readOnly]="readOnly"></app-container-relacionnodocente>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</ng-container>

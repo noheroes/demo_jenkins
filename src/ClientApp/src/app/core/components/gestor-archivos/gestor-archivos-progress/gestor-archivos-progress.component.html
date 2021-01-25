@@ -1,0 +1,18 @@
+<div
+  *ngIf="show"
+  class="progress-container"
+>
+  <span
+    *ngIf="progress>0"
+    class="progress-number"
+    [ngClass]="{'fix-complete': progress==100}"
+  >{{progress}}</span>
+
+  <mat-progress-spinner
+    color="primary"
+    [mode]="progress==0||progress>=100||indeterminate?'indeterminate':'determinate'"
+    diameter="30"
+    [value]="progress"
+  >
+  </mat-progress-spinner>
+</div>

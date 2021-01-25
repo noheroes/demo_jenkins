@@ -1,0 +1,238 @@
+<ng-container *ngIf="state$ | async as state">
+  <mat-card>
+    <mat-card-content>
+      <br>
+      <div class="row">
+        <div class="col-12">
+          <h2>Datos generales</h2>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="col-md-6">
+          <sunedu-form-model-field label="Nombre" placeholder="Ingrese nombres" [formModelField]="form.model['nombre']" 
+          [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+        <div class="col-md-6">
+          <sunedu-form-model-field label="N° de RUC" number-only="true" placeholder="N° de RUC" [inputProps]="{ maxlength : 11}" [formModelField]="form.model['ruc']"
+          [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-12">
+          <sunedu-form-model-field label="Razón social" placeholder="Razón social" [formModelField]="form.model['razonSocial']"
+          [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <sunedu-form-model-field 
+            label="Documento de creación" 
+            placeholder="Documento de creación" 
+            [inputProps]="{ maxlength : 20}"
+            [formModelField]="form.model['numeroDocumentoCreacion']"
+            [hideRequiredIndicator]="true">
+            <!-- <ng-template suneduTemplate="labelAddons">
+              <mat-icon matTooltip="Test Documento Creacion">help_outline</mat-icon>
+            </ng-template> -->
+            
+          </sunedu-form-model-field>
+        </div>
+        <div class="col-md-6">
+          <sunedu-form-model-field variant="datepicker" label="Fecha de creación" placeholder="Fecha de creación" [formModelField]="form.model['fechaDocumentoCreacion']" [maxDate]="max_date"
+          [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <sunedu-form-model-field 
+            variant="select" label="Tipo de Gestión" placeholder="Tipo de Gestión" bindLabel="text" bindValue="value" [formModelField]="form.model['tipoGestionEnum']" (on-change)="handleInputChange($event)" [options]="tipoGestiones"
+            [hideRequiredIndicator]="true">
+            <!-- <ng-template suneduTemplate="labelAddons">
+              <mat-icon matTooltip="{{mensaje_test}}">help_outline</mat-icon>
+            </ng-template> -->
+          </sunedu-form-model-field>
+    
+        </div>
+        <div class="col-md-6" *ngIf="esGestionPrivada">
+          <sunedu-form-model-field variant="select" label="Modalidad de constitución o creación" placeholder="Modalidad de constitución o creación" bindLabel="text" bindValue="value" [formModelField]="form.model['tipoModalidadCreacionEnum']"
+                                   (on-change)="handleInputChange($event)" [options]="tipoModalidadCreaciones"
+                                   [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+      </div> 
+    
+      <!-- DOMICILIO LEGAL -->
+      <br>
+      <div class="row">
+        <div class="col-12">
+          <h2>Domicilio legal</h2>
+        </div>
+      </div>
+      <mat-divider [inset]="true"></mat-divider>
+      <div class="form-row">
+        <div class="col-md-12">
+          <sunedu-form-model-field label="Domicilio" placeholder="Domicilio" [formModelField]="form.model['domicilio']"
+          [inputProps]="{ maxlength : 250}" [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <sunedu-form-model-field variant="select" label="Departamento" placeholder="Departamento" bindLabel="text" bindValue="value" [formModelField]="form.model['nombreDepartamento']" [options]="departamentos" (on-change)="handleInputChange($event)"
+          [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+        <div class="col-md-6">
+          <sunedu-form-model-field  variant="select" label="Provincia" placeholder="Provincia" bindLabel="text" bindValue="value" [formModelField]="form.model['nombreProvincia']" (on-change)="handleInputChange($event)" [options]="provincias"
+          [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <sunedu-form-model-field  variant="select" label="Distrito" placeholder="Distrito" bindLabel="text" bindValue="value" [formModelField]="form.model['nombreDistrito']" (on-change)="handleInputChange($event)" [options]="distritos"
+          [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+        <div class="col-md-6">
+          <sunedu-form-model-field label="Referencia" placeholder="Referencia" [formModelField]="form.model['referencia']"
+          [inputProps]="{ maxlength : 250}" [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <sunedu-form-model-field 
+                variant="mask" 
+                label="Teléfono" 
+                placeholder="Teléfono" 
+                number-only="true" 
+                [inputProps]="{ maxlength : 30}" 
+                [formModelField]="form.model['telefono']" 
+                [mask]="mask_telefono"
+                (on-change)="showTelefono()" 
+                [hideRequiredIndicator]="true"
+                >
+          </sunedu-form-model-field>
+          <mat-icon style="font-size:small;margin-right: -8px; vertical-align: text-top;">info</mat-icon><label>Formato válido (01)2345678 /987654321</label>
+        </div>
+        <div class="col-md-6">
+          <sunedu-form-model-field label="Página web" placeholder="Página web" [formModelField]="form.model['paginaWeb']" 
+          [inputProps]="{ maxlength : 250}" [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+      </div>
+    
+      <!-- PROMOTORA-->
+      <br>
+      <div class="row" *ngIf="esGestionPrivada">
+        <div class="col-12">
+          <h2>Identificación de la promotora</h2>
+        </div>
+      </div>
+      <mat-divider [inset]="true"></mat-divider>
+      <div class="form-row" *ngIf="esGestionPrivada">
+        <div class="col-md-12">
+          <sunedu-form-model-field label="Nombre/denominación" placeholder="Nombre/denominación" [formModelField]="form.model['nombrePromotora']" (on-change)="handleInputChange($event)"
+          [inputProps]="{ maxlength : 250}" [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+      </div>
+    
+      <div class="form-row" *ngIf="esGestionPrivada">
+        <div class="col-md-8">
+          <sunedu-form-model-field label="N° de RUC" placeholder="N° de RUC" number-only="true" [inputProps]="{ maxlength : cantidadMaximaCaracteresDocumentoPromotora}" [formModelField]="form.model['numeroDocumento']" (on-change)="handleInputChange($event)"
+          [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+      </div>
+      <div class="form-row" *ngIf="esGestionPrivada">
+        <div class="col-md-12">
+          <sunedu-form-model-field label="Razón social" placeholder="Razón social" [inputProps]="{ maxlength : 250}" [formModelField]="form.model['razonSocialPromotora']" (on-change)="handleInputChange($event)"
+          [inputProps]="{ maxlength : 250}" [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+    
+      </div>
+      <div class="form-row" *ngIf="esGestionPrivada">
+        <div class="col-md-12">
+          <sunedu-form-model-field label="Oficina registral" placeholder="Oficina registral" [formModelField]="form.model['oficinaRegitral']" (on-change)="handleInputChange($event)"
+          [inputProps]="{ maxlength : 250}" [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+      </div>
+      <div class="form-row" *ngIf="esGestionPrivada">
+        <div class="col-md-6">
+          <sunedu-form-model-field label="N° de partida registral" placeholder="N° de partida registral" [formModelField]="form.model['numeroPartida']" number-only="soloNumeros" [inputProps]="{ maxlength : 11}" (on-change)="handleInputChange($event)"
+          [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+        <div class="col-md-6">
+          <sunedu-form-model-field label="Asiento" placeholder="Asiento" [inputProps]="{ maxlength : 200}" [formModelField]="form.model['asiento']" (on-change)="handleInputChange($event)"
+          [inputProps]="{ maxlength : 250}" [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+      </div>
+      <div class="form-row" *ngIf="esGestionPrivada">
+        <div class="col-md-12">
+          <sunedu-form-model-field label="Domicilio legal" placeholder="Domicilio legal" [formModelField]="form.model['domicilioLegal']" (on-change)="handleInputChange($event)"
+          [inputProps]="{ maxlength : 250}" [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+      </div>
+      <div class="form-row" [hidden]="!esGestionPrivada">
+        <div class="col-md-4">
+          <sunedu-form-model-field variant="select" label="Departamento" placeholder="Departamento Promotora" bindLabel="text" bindValue="value" [formModelField]="form.model['nombreDepartamentoPromotora']" (on-change)="handleInputChange($event)"
+                                   [options]="departamentosPromotora" [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+        <div class="col-md-4">
+          <sunedu-form-model-field variant="select" label="Provincia" placeholder="Provincia Promotora" bindLabel="text" bindValue="value" [formModelField]="form.model['nombreProvinciaPromotora']" (on-change)="handleInputChange($event)" [options]="provinciasPromotora"
+          [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+        <div class="col-md-4">
+          <sunedu-form-model-field variant="select" label="Distrito" placeholder="Distrito Promotora" bindLabel="text" bindValue="value" [formModelField]="form.model['nombreDistritoPromotora']" (on-change)="handleInputChange($event)" [options]="distritosPromotora"
+          [hideRequiredIndicator]="true">
+          </sunedu-form-model-field>
+        </div>
+      </div>
+    
+      <div style="display: flex; margin-top: 10px;">
+        <div style="flex: 1" class="inline-block"></div>
+        <button type="button"  class="btn btn-warning" style="display:inline-flex;padding-top: 10px;align-items: end;background-color: orange;" icon="save" (click)="handleSubmit()" [hidden]="readOnly">
+        <mat-icon>save</mat-icon> <h5>Guardar</h5>
+        </button>
+      </div>
+    
+    </mat-card-content>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-12">
+          <h2>Representante legal</h2>
+        </div>
+      </div>
+      <mat-divider [inset]="true"></mat-divider>
+      <!-- <div style="display: flex; margin-top: 10px;">
+        <div style="flex: 1"></div>
+        <sunedu-base-button label="Agregar representante legal" color="accent" icon="add_circle"
+          (on-click)="handleClickNuevoRepresentanteLegal()"
+          [disabled]="state.buscardorRepresentanteLegal.isLoading"></sunedu-base-button>
+      </div> -->
+      <sunedu-data-grid [loading]="state.buscardorRepresentanteLegal.isLoading" [source]="state.buscardorRepresentanteLegal.source" [definition]="state.buscardorRepresentanteLegal.gridDefinition" (on-load-data)="handleLoadData($event)" (on-click-button)="handleClickButton($event)">
+      </sunedu-data-grid>
+      <!-- <div class="source-container mat-caption">
+        <pre>{{form.value|json}}</pre>
+      </div> -->
+    </mat-card-content>
+  </mat-card>
+  <!-- DATOS GENERALES -->
+  
+
+  
+</ng-container>

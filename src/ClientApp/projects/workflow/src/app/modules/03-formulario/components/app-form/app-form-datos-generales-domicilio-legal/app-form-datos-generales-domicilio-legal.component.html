@@ -1,0 +1,136 @@
+  <div class="row">
+    <div class="col-12">
+      <h2 >Domicilio legal</h2>
+    </div>
+  </div>
+  <mat-divider [inset]="true"></mat-divider>
+  <div class="form-row">
+    <div class="col-md-12">
+      <sunedu-form-field
+        label="Domicilio"
+        controlName="domicilio"
+        [formGroupParent]="formGroup"
+        [msgValidations]="validations.apellidos"
+        (on-change)="handleChangeInput($event)"
+      ></sunedu-form-field>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-6">
+      <!-- <sunedu-form-field
+        label="Departamento"
+        controlName="nombreDepartamento"
+        [formGroupParent]="formGroup"
+        [msgValidations]="validations.apellidos"
+        (on-change)="handleChangeInput($event)"
+      ></sunedu-form-field> -->
+      <sunedu-form-field
+        variant="select"
+        label="Departamento"
+        bindLabel="nombre"
+        bindValue="codigo"
+        controlName="nombreDepartamento"
+        [formGroupParent]="formGroup"
+        [options]="departamentos"
+        (on-change)="handleChangeInput($event)"
+        [msgValidations]="validations.apellidos"
+        >
+      </sunedu-form-field>
+
+      <sunedu-form-model-field
+      variant="select"
+      label="Departamento"
+      bindLabel="nombre"
+      bindValue="codigo"
+      [formGroup]="formGroup"
+      [formControlName]="'nombreDepartamento'"
+      [options]="departamentos"
+      (on-change)="handleChangeInput($event)"
+      validations="validations.apellidos"
+      >
+    </sunedu-form-model-field>
+
+      <!-- <sunedu-form-field
+        variant="select"
+        label="Departamento"
+        bindLabel="text"
+        bindValue="value"
+        controlName="nombreDepartamento"
+        [formGroupParent]="formGroup"
+        [options]="departamentos"
+        [msgValidations]="validations.apellidos"
+        (on-change)="handleInputChangeDepartamento($event)">
+      </sunedu-form-field> -->
+    </div>
+    <div class="col-md-6">
+      <!-- <sunedu-form-field
+        label="Provincia"
+        controlName="nombreProvincia"
+        [formGroupParent]="formGroup"
+        [msgValidations]="validations.apellidos"
+        (on-change)="handleChangeInput($event)"
+      ></sunedu-form-field> -->
+      <sunedu-form-field
+        variant="select"
+        label="Provincia"
+        bindLabel="text"
+        bindValue="value"
+        controlName="nombreProvincia"
+        [formGroupParent]="formGroup"
+        [options]="provincias"
+        [msgValidations]="validations.apellidos">
+      </sunedu-form-field>
+    </div>
+
+  </div>
+  <div class="form-row">
+    <div class="col-md-6">
+      <!-- <sunedu-form-field
+        label="Distrito"
+        controlName="nombreDistrito"
+        [formGroupParent]="formGroup"
+        [msgValidations]="validations.apellidos"
+        (on-change)="handleChangeInput($event)">
+      </sunedu-form-field> -->
+      <sunedu-form-field
+        variant="select"
+        label="Distrito"
+        bindLabel="text"
+        bindValue="value"
+        controlName="nombreDistrito"
+        [formGroupParent]="formGroup"
+        [msgValidations]="validations.apellidos">
+      </sunedu-form-field>
+    </div>
+    <div class="col-md-6">
+      <sunedu-form-field
+      label="Referencia"
+      controlName="referencia"
+      [formGroupParent]="formGroup"
+      [msgValidations]="validations.apellidos"
+      (on-change)="handleChangeInput($event)"
+    ></sunedu-form-field>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-6">
+      <sunedu-form-field
+        label="Telefono"
+        controlName="telefono"
+        [formGroupParent]="formGroup"
+        [msgValidations]="validations.apellidos"
+        (on-change)="handleChangeInput($event)"
+      ></sunedu-form-field>
+    </div>
+    <div class="col-md-6">
+      <sunedu-form-field
+        label="Pagina web"
+        controlName="paginaWeb"
+        [formGroupParent]="formGroup"
+        [msgValidations]="validations.apellidos"
+        (on-change)="handleChangeInput($event)"
+      ></sunedu-form-field>
+    </div>
+  </div>
+
+

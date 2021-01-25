@@ -1,0 +1,48 @@
+<ng-container *ngIf="state$ | async as state" [ngSwitch]="state.formato.currentForm">
+  <ng-container *ngSwitchCase="'mallacurricular'" [ngTemplateOutlet]="mallacurricular"
+    [ngTemplateOutletContext]="{state:(mallaCurricularState$ | async)}"></ng-container>
+  <ng-container *ngSwitchCase="'curso'" [ngTemplateOutlet]="curso"
+    [ngTemplateOutletContext]="{stateCurso:(cursoState$ | async)}"></ng-container>
+</ng-container>
+
+<ng-template #mallacurricular let-state='state'>
+  <app-form-buscar-mallacurricular *ngIf="!readOnly" (on-click-nuevo)="handleClickAgregarMallaCurricular()">
+  </app-form-buscar-mallacurricular>
+  <div style="margin-top: 10px;">
+    <div style="flex: 1"></div>
+    <sunedu-button-nuevo label="Agregar Malla Curricular" [disabled]="state.buscadorMallaCurricular.isLoading"
+      class="example-icon" [hidden]="readOnly" (on-click)="handleClickAgregarMallaCurricular()">
+    </sunedu-button-nuevo>
+  </div>
+  <sunedu-data-grid [loading]="state.buscadorMallaCurricular.isLoading" [source]="state.buscadorMallaCurricular.source"
+    [definition]="state.buscadorMallaCurricular.gridDefinition" (on-load-data)="handleLoadData($event)"
+    (on-click-button)="handleClickButton($event)">
+  </sunedu-data-grid>
+</ng-template>
+
+<ng-template #curso let-stateCurso='stateCurso'>
+  <div class="expandCollapse" style="cursor:pointer">
+    <mat-card>
+      <mat-card-content>
+        <legend (click)="toggle()"><mat-icon style="font-size: 18px;">{{!hideRuleContent ?'arrow_downward':'arrow_upward'}}</mat-icon>Buscador de cursos de: {{stateCurso.buscadorCurso.descripcionPrograma}}</legend>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="expandCollapseContent" [hidden]="!hideRuleContent">
+    <!-- <h2>Buscador de cursos de {{stateCurso.buscadorCurso.descripcionPrograma}}</h2> -->
+    <app-form-buscar-curso *ngIf="!readOnly">
+    </app-form-buscar-curso>
+  </div>
+  <br>
+  <div style="display: flex; margin-top: 10px;">
+    <div style="flex: 1"></div>
+    <sunedu-button-nuevo label="Agregar curso" [disabled]="stateCurso.buscadorCurso.isLoading" [hidden]="readOnly" class="example-icon" (on-click)="handleClickNuevoCurso()">
+    </sunedu-button-nuevo>
+  </div>
+  <sunedu-data-grid [loading]="stateCurso.buscadorCurso.isLoading" [source]="stateCurso.buscadorCurso.source"
+    [definition]="stateCurso.buscadorCurso.gridDefinition" (on-load-data)="handleLoadDataCurso($event)"
+    (on-click-button)="handleClickButtonCurso($event)">
+  </sunedu-data-grid>
+    <sunedu-base-button icon="reply" color="primary" label="Ir a malla curricular"
+      [disabled]="stateCurso.buscadorCurso.isLoading" (on-click)="handleIrAMaestroMallaCurricular()"></sunedu-base-button>
+</ng-template>

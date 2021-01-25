@@ -1,0 +1,13 @@
+<ng-container *ngIf="state$ | async as state">
+  <ng-container *ngIf="state.globalConfig.configuration&&!state.globalConfig.isLoading">
+    <ngx-loading-bar color="#cb4f2b"></ngx-loading-bar>
+    <router-outlet></router-outlet>
+  </ng-container>
+  <sunedu-loader-block-ui [show]="state.ui.blockUi"></sunedu-loader-block-ui>
+  <ng-container *ngIf="state.globalConfig.isLoading">
+    <sunedu-loader-configuration></sunedu-loader-configuration>
+  </ng-container>
+  <ng-container *ngIf="state.globalConfig.error">
+    Ocurrió un error al cargar la configuración
+  </ng-container>
+</ng-container>

@@ -1,0 +1,51 @@
+<ng-container *ngIf="state$ | async as state">
+  <sunedu-modal-form-container
+  [title]="state.title"
+  [loading]="state.isLoading"
+  (on-dismiss)="handleClose()"
+  [msgErrors]="state.error"
+  [cancelLabel]="CLOSE_MODAL.LIC_CLOSE_MODAL_LABEL" [cancelIcon]="CLOSE_MODAL.LIC_CLOSE_MODAL_ICON"
+  [formType]="state.type">
+  <mat-card>
+    <mat-card-content>
+      <h4>{{node.codigos}}</h4>
+    </mat-card-content>
+  </mat-card>
+  <br>
+  <mat-card>
+    <div  class="medio-verificacion">
+      <label>{{node.codigo}} - {{node.hasDescriptionChild}}</label>
+    </div>
+  </mat-card>
+  <br>
+    <mat-card style="background-color:#F2F2F2;">
+          <div *ngFor="let comentario of comentarios" class="comentario-container">
+            <div [ngClass]="{'comentario-left':!comentario.derecha,'comentario-right':comentario.derecha}">
+              <div [ngClass]="{'message-text text-left':!comentario.derecha,'message-text text-right':comentario.derecha}">{{comentario.mensaje}}</div>
+              <span class="message-time pull-right">{{comentario.usuarioAutorDescripcion}}</span>
+              <span *ngIf="comentario.allowDelete" class="message-icon pull-left" (click)="setComentarioDelete(comentario)"><mat-icon>delete</mat-icon></span>
+            </div>
+            <br>
+          </div>
+    </mat-card>
+  <br>
+  <div *ngIf="permitirComentario">
+      <textarea
+      autocomplete="off" 
+      autocorrect="off" 
+      autocapitalize="off"
+      spellcheck="false"
+      rows="5"
+      class="input-comentario"
+      placeholder="Ingrese un comentario"
+      [(ngModel)]="message"
+      ng-model-options="{ updateOn: 'blur' }"
+      maxlength="100"
+      ></textarea>
+       <!-- <span class="message-time pull-right">{{message.length}}/100</span> -->
+  </div>
+  
+
+  <button mat-button *ngIf="permitirComentario" type="button" class="btn btn-outline-primary" (click)="setComentarioAdd();">Enviar <mat-icon>send</mat-icon></button>
+</sunedu-modal-form-container>
+</ng-container>

@@ -1,0 +1,31 @@
+<ng-container *ngIf="state$ | async as state">
+  <mat-card>
+    <mat-card-content>
+      
+  <div style="display: flex; margin-top: 10px;">
+    <div style="flex: 1"></div>
+ 
+        <div div class="col-md-3 align-self-end">
+            <sunedu-base-button
+              label="Agregar facultad"
+              color="accent"
+              icon="add_circle"
+              (on-click)="handleClickAgregarFacultad()"
+              [disabled]="state.isLoading"
+              [hidden]="readOnly"
+              ></sunedu-base-button>
+          </div>
+    </div>
+      <sunedu-data-grid
+        [loading]="state.isLoading"
+        [source]="state.source"
+        [definition]="state.gridDefinition"
+        (on-load-data)="handleLoadData($event)"
+        (on-click-button)="handleClickButton($event)">
+        </sunedu-data-grid>
+  
+      </mat-card-content>
+    </mat-card>
+</ng-container>
+
+  

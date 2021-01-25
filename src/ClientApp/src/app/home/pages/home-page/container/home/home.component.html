@@ -1,0 +1,16 @@
+<ng-container *ngIf="isLoggedIn;else login">
+    <app-layout>
+        <!-- <h1>Hello, world!</h1>
+    <p>Welcome to your new single-page application, built with:</p>
+    <ul>
+      <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for
+        client-side code</li>
+    </ul> -->
+
+        <img src="../../assets/images/licenciamiento.jpg" class="center">
+    </app-layout>
+</ng-container>
+
+<ng-template #login>
+    <app-wellcome (on-click-login)="handleLogin()"></app-wellcome>
+</ng-template>

@@ -1,0 +1,74 @@
+.chip-list {
+  width: 100%;
+
+  &.no-editable {
+    ::ng-deep {
+      .mat-form-field-flex {
+        background: #efefef;
+      }
+    }
+  }
+
+  ::ng-deep {
+    .mat-form-field-infix {
+      padding: 0px;
+
+      .mat-form-field-label {
+        top: unset;
+      }
+    }
+
+    .mat-standard-chip {
+      min-height: 20px;
+      font-size: 11px;
+    }
+  }
+}
+
+input {
+  ::placeholder {
+    color: red;
+  }
+}
+
+::ng-deep {
+  .placeholder {
+    color: green
+  }
+
+}
+
+.placeholder {
+  color: green
+}
+
+.button-end-save {
+  border-radius: 0px 5px 5px 0;
+  overflow: hidden;
+}
+
+.tag-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.tag-input-container {
+  flex: 1;
+}
+
+.btn-save-tags {
+  margin-bottom: 1.25em;
+  padding-left: 0px;
+  padding-right: 0px;
+  min-width: 40px;
+}
+
+.tag-icon-container {
+  margin-top: 6px;
+  margin-bottom: 1.25em;
+
+  mat-icon {
+    font-size: 18px;
+  }
+}

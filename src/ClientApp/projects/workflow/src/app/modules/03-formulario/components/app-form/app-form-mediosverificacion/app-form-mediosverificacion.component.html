@@ -1,0 +1,238 @@
+<ng-container *ngIf="state$ | async as state">
+    <hr>
+    <div class="row">
+        <div class="col-md-2" style="text-align: end;">
+            <h5 style="padding-top:10px;">Sede/Filial:</h5>
+        </div>
+        <div class="col-md-6">
+            <sunedu-form-model-field variant="select" label="" [options]="sedes" (on-change)="handleInputChange($event)" bindLabel="text" bindValue="value" [disabled]="false">
+            </sunedu-form-model-field>
+        </div>
+    </div>
+    <hr>
+    <h5 style="padding-top:10px;">Sede/Filial: {{currentSelect}}</h5>
+    <hr>
+    <br>
+</ng-container>
+
+<div class="row" *ngIf="currentSede">
+    <div class="col-12">
+        <div class="node-head">
+            <div style="float:left;">
+                <button type="button" class="btn btn-primary" style="background: #6c757d;" (click)="onExpand(isAllExpand)">
+          <mat-icon>{{isAllExpand?'arrow_downward':'arrow_upward'}}</mat-icon>
+        </button>
+            </div>
+            <div style="float:right;display: inline-flex;padding-top: 10px;">
+                <mat-icon class="mv-icon" *ngIf="isAllCompleteTask">check_circle</mat-icon>
+                <span class="badge badge-info" style="padding-top: 8px;">{{totalCompleteTask}}</span>
+                <span> de </span>
+                <span class="badge badge-info" style="padding-top: 8px;">{{totalTask}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #tmplNode let-node="node">
+    <div class="node-item" [attr.data-id]="node.id" [attr.id]="'node-'+node.id">
+        <div class="node-title" (click)="node.isExpanded=!node.isExpanded" name="nodeT">
+            <mat-icon *ngIf="node.children.length" class="mv-icon">{{node.isExpanded?'remove':'add'}}</mat-icon>&nbsp;&nbsp;
+            <span class="badge badge-light">{{node.id}}</span>
+            <span style="margin-left: 15px;">{{node.descripcion}}</span>
+
+            <div style="float: right; display: inline-flex;">
+                <mat-icon class="mv-icon" *ngIf="node.totalTask>0 || node.nivel==4" [hidden]="!node.isCompleteTask">check_circle</mat-icon>
+                <div *ngIf="node.totalTask>0">
+                    <span *ngIf="node.nivel!=4" class="badge badge-info">{{node.totalCompleteTask}}</span>
+                    <span *ngIf="node.nivel!=4"> de </span>
+                    <span *ngIf="node.nivel!=4" class="badge badge-info">{{node.totalTask}}</span>
+                </div>
+            </div>
+            <div *ngIf="node.hasDescriptionChild">{{node.hasDescriptionChild}}</div>
+
+        </div>
+        <div *ngIf="node.tipo">
+            <div *ngIf="node.tipo==1">
+                <ng-container *ngTemplateOutlet="tipo1, context:{node:node}"></ng-container>
+            </div>
+            <div *ngIf="node.tipo==2">
+                <ng-container *ngTemplateOutlet="tipo2, context:{node:node}"></ng-container>
+            </div>
+            <div *ngIf="node.tipo==3">
+                <ng-container *ngTemplateOutlet="tipo3A, context:{node:node}"></ng-container>
+                <ng-container *ngTemplateOutlet="tipo3B, context:{node:node}"></ng-container>
+            </div>
+            <div *ngIf="node.tipo==4">
+                <ng-container *ngTemplateOutlet="tipo4, context:{node:node}"></ng-container>
+            </div>
+        </div>
+        <div *ngIf="node.isExpanded && node.children.length" class="node-children" [id]="node.id" name="nodeC">
+            <div *ngFor="let child of node.children">
+                <ng-container *ngTemplateOutlet="tmplNode,context:{node:child}"></ng-container>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #tipo1 let-node="node">
+    <br />
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <sunedu-gestor-archivos [config]="configFile" [paramsExtra]="getParametros(node)" (idArchivoChange)="archivo($event)" (sendInfoSuccess)="getInfoFile($event)">
+            </sunedu-gestor-archivos>
+        </div>
+
+    </div>
+
+
+</ng-template>
+
+<ng-template #tipo2 let-node="node">
+    <br />
+    <div class="row margen-contenido-mv">
+        <div class="col-lg-12">
+            <label class="col-lg-12" [ngClass]="{'text-danger':(urlNode.touched || urlNode.dirty) && !urlNode.valid}">Dominio</label>
+        </div>
+        <div *ngIf="node.canDeleteUrl && !readOnly" class="col-lg-1">
+            <span class="message-icon pull-left" (click)="setDeleteUrl(node)"><mat-icon>delete</mat-icon></span>
+        </div>
+        <div class="col-lg-6" style="margin-left:-10px">
+            <form #formulario></form>
+            <input type="text" placeholder="Ingrese www.dominio.com" [(ngModel)]="node.url" [pattern]="urlRegex" style="padding: 5px 10px;width: 100%;text-transform: uppercase;" #urlNode="ngModel" [disabled]="readOnly" upperCase>
+
+            <!-- <sunedu-form-model-field placeholder="Ingrese www.dominio.com" [(ngModel)]="node.url" [pattern]="urlRegex" style="padding: 5px 10px;width: 100%;text-transform: uppercase;" #urlNode="ngModel" [disabled]="readOnly">
+            </sunedu-form-model-field>  -->
+
+            <span class="text-danger" *ngIf="(urlNode.touched || urlNode.dirty) && urlNode.errors">
+                El campo no tiene el formato correcto.
+              </span>
+        </div>
+        <div class="col-lg-2" style="margin-top:-3px; padding-left: 0px;" *ngIf="!readOnly">
+            <sunedu-base-button label="Guardar" color="primary" icon="save" (on-click)="grabarUrl(node)" [disabled]="!node.url || urlNode.errors?.pattern">
+            </sunedu-base-button>
+        </div>
+
+    </div>
+</ng-template>
+
+<ng-template #tipo3A let-node="node">
+    <br />
+
+    <div class="row margen-contenido-mv">
+
+        <div class="col-md-12" *ngIf="!readOnly">
+            <sunedu-gestor-archivos [config]="configFile" [paramsExtra]="getParametros(node)" (idArchivoChange)="archivo($event)" (sendInfoSuccess)="getInfoFile($event)">
+            </sunedu-gestor-archivos>
+        </div>
+
+    </div>
+
+
+</ng-template>
+
+<ng-template #tipo3B let-node="node">
+    <br />
+    <div *ngIf="node.contenidos!=null && node.contenidos.length>0" class="node-item">
+        <div class="row margen-contenido-mv">
+            <div class="col-md-12">
+                <label style="font-weight: bold;">Listado de Archivos cargados</label><br />
+                <label style="margin-right: 8px;">Filtro:</label>
+                <input type="text" placeholder="nombre archivo" [(ngModel)]="node.filterFile" [attr.id]="'node-filter-'+!node.parent?'padre'+node.id:node.parent+node.id" style="width:260px;"><br />
+                <mat-icon style="font-size:small;margin-right: -8px; vertical-align: text-top;">info</mat-icon><label>Puede filtrar por nombre de archivo</label>
+            </div>
+        </div>
+        <div class="row margen-contenido-mv">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <td>Archivo</td>
+                                <td>Fecha</td>
+                                <!-- <td>Versión de Archivo</td> -->
+                                <td>Estado</td>
+                                <td>Acciones</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let contenido of node.contenidos | mvFilter: {nombreArchivo: node.filterFile};let i=index;">
+
+                                <td style="max-width:320px;"><mat-icon *ngIf="contenido.esFirmado" [matTooltip]="'Archivo Firmado'" style="color: #FFDE03; vertical-align: bottom;">verified</mat-icon>{{contenido.nombreArchivo}}</td>
+                                <!-- <td class="text-center" style="min-width:100px;">{{contenido.fechaArchivo}}</td> -->
+                                <td class="text-center" style="min-width:100px;">{{contenido.fechaArchivo}}</td>
+                                <!-- <td class="text-center" style="width:100px;">{{contenido.versionArchivo}}</td> -->
+                                <td class="text-center" style="width:120px;">
+                                    <mat-icon *ngIf="(contenido.estado|uppercase)=='EN PROCESO'" [matTooltip]="contenido.contenidoArchivoMetadata.mensajeToolTip">settings</mat-icon>
+                                    <mat-icon *ngIf="(contenido.estado|uppercase)=='CARGADO'" style="color:green" [matTooltip]="contenido.contenidoArchivoMetadata.mensajeToolTip">check_circle</mat-icon>
+                                    <mat-icon *ngIf="(contenido.estado|uppercase)=='FALLIDO'" style="color:red" [matTooltip]="contenido.contenidoArchivoMetadata.mensajeToolTip">cancel</mat-icon>
+                                </td>
+                                <td class="text-center" style="width: 65px;">
+                                    <div class="gestorArchivoButtonsContainer">
+
+                                        <button class="gestorButton" color="primary" mat-flat-button (click)="downloadByIdArchivo(contenido)" [disabled]="false" *ngIf="contenido.esIdArchivo">
+                                        <!-- <mat-icon matTooltip="Descargar archivo">cloud_download</mat-icon> -->
+                                        <mat-icon>cloud_download</mat-icon>
+                                        </button>
+
+                                        <button color="accent" mat-flat-button class="uniqueButton" (click)="refreshByTrackingNumber(contenido, node)" [disabled]="false" *ngIf="(contenido.estado|uppercase)=='EN PROCESO' && contenido.intentosRefresh<3">
+                                        <!-- <mat-icon matTooltip="Consultar estado de proceso" >refresh</mat-icon> -->
+                                        <mat-icon >refresh</mat-icon>
+                                        </button>
+
+                                        <button color="accent" mat-flat-button [ngClass]="{'uniqueButton':!contenido.esIdArchivo,'gestorButton':contenido.esIdArchivo}" (click)="eliminarByTrackingNumber(contenido, node)" [disabled]="false" *ngIf="(contenido.estado|uppercase)=='CARGADO' && !readOnly">
+                                        <!-- <mat-icon matTooltip="Eliminar archivo" >delete</mat-icon> -->
+                                        <mat-icon >delete</mat-icon>
+                                        </button>
+
+                                        <button type="button" class="gestorButton" color="primary" mat-flat-button  (click)="messageByIdArchivo(contenido,node, $event)" [disabled]="false" *ngIf="contenido.esIdArchivo">
+                                        <!-- <mat-icon matTooltip="Comentarios">message</mat-icon> -->
+                                        <mat-icon >message</mat-icon>
+                                        <span *ngIf="contenido.comentariosCount>0" class="badgeComentario badge-warning">{{contenido.comentariosCount}}</span>
+                                        </button>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #tipo4 let-node="node">
+    <br />
+    <div class="row">
+        <div class="alert alert-info" role="alert" style="margin: auto;">
+            <mat-icon class="mv-icon">error</mat-icon>
+            Este elemento es referencial. Complete el Formato correspondiente en el sistema
+        </div>
+    </div>
+</ng-template>
+
+
+
+
+
+
+
+
+<div [id]="'main'" *ngIf="currentSelect">
+
+    <div *ngFor="let node of nodes">
+
+        <ng-container *ngTemplateOutlet="tmplNode,context:{node:node}"></ng-container>
+
+    </div>
+</div>
+
+
+<hr />
+<hr />
+<!-- <p><strong>tree data</strong></p>
+<pre>{{nodes|json}}</pre> -->

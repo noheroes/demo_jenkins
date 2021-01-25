@@ -1,0 +1,38 @@
+<ng-container *ngIf="state$ | async as state">
+  <mat-card class="card-border" [hidden] = "idLocalSelecionado">
+  <div class="form-row">
+    <div class="col-md-9">
+      <sunedu-form-model-field
+          variant="select"
+          label="Listado de programas de segunda especialidad"
+          placeholder="--Selecione--"
+          bindLabel="text"
+          bindValue="value"
+          [formModelField]="form.model['id']"
+          [options]="state.comboLists.listadoProgramas"
+          [disabled]="readOnly"
+          (on-change)="handleInputChange($event)"
+          [hideRequiredIndicator]="true">
+        </sunedu-form-model-field>
+     
+    </div>
+        <div div class="col-md-3 align-self-end">
+            <sunedu-base-button
+              label="Vincular"
+              color="accent"
+              icon="add_circle"
+              (on-click)="handleClickAgregar()"
+              [disabled]="state.isLoading"
+              [hidden]="readOnly"
+              ></sunedu-base-button>
+          </div>
+      </div>
+      <sunedu-data-grid
+        [loading]="state.isLoading"
+        [source]="state.source"
+        [definition]="state.gridDefinition"
+        (on-load-data)="handleLoadData($event)"
+        (on-click-button)="handleClickButton($event)">
+        </sunedu-data-grid>  
+  </mat-card>
+</ng-container>

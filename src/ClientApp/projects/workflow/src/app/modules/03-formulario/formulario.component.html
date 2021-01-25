@@ -1,0 +1,154 @@
+<ng-container *ngIf="loading||(modelData&&!showTareas);else tareasTemplate">
+    <sunedu-page-title [text]="title"></sunedu-page-title>
+
+    <app-general-cabecera [definition]="headerDefinition" [source]="headerData" [loading]="loading">
+        <ng-template suneduTemplate="progress-template">
+            <sunedu-progress-bar [progress]="99" [animation]="false" [singleColor]="true"></sunedu-progress-bar>
+        </ng-template>
+
+        <!-- <ng-template suneduTemplate="version-template">
+          <label>Version v1</label>
+        </ng-template> -->
+        <!--<ng-template suneduTemplate="admisibilidad-template" >
+          <div _ngcontent-ng-cli-universal-c9 class="ng-star-inserted" *ngIf="flagPersonalDilic">
+              <div _ngcontent-ng-cli-universal-c9 class="field-metadata-container ng-star-inserted">
+                  <dt _ngcontent-ng-cli-universal-c9 class="field-metadata-label">Fecha de admisibilidad:</dt>
+                  <dd _ngcontent-ng-cli-universal-c9 class="field-metadata-desc">
+                    <p>{{fechaAdmisibilidad}}</p>
+                  </dd>
+              </div>
+          </div>
+      </ng-template>-->
+      
+        <ng-template suneduTemplate="admisibilidad-template">
+          <div _ngcontent-ng-cli-universal-c9 class="ng-star-inserted" *ngIf="flagPersonalDilic">
+              <div _ngcontent-ng-cli-universal-c9 class="field-metadata-container ng-star-inserted">
+                  <dt _ngcontent-ng-cli-universal-c9 class="field-metadata-label">Fecha de admisibilidad:</dt>
+                  <dd _ngcontent-ng-cli-universal-c9 class="field-metadata-desc">
+                    <p>{{ fechaAdmisibilidad | date: 'dd/MM/yyyy hh:mm a' }}</p>
+                  </dd>
+              </div>
+          </div>
+      </ng-template>
+
+        <ng-template suneduTemplate="version-template" >
+            <div _ngcontent-ng-cli-universal-c9 class="ng-star-inserted" *ngIf="flagPersonalDilic">
+                <div _ngcontent-ng-cli-universal-c9 class="field-metadata-container ng-star-inserted">
+                    <dt _ngcontent-ng-cli-universal-c9 class="field-metadata-label">Versión:</dt>
+                    <dd _ngcontent-ng-cli-universal-c9 class="field-metadata-desc">
+                        <sunedu-form-model-field variant="select" [disabled]="false" bindLabel="text" bindValue="value" [formModelField]="form.model['id']" [options]="listadoVersion" (on-change)="handleInputChange($event)">
+                        </sunedu-form-model-field>
+                    </dd>
+                </div>
+            </div>
+        </ng-template>
+
+    </app-general-cabecera>
+    <div class="text-center" *ngIf="loading">
+      <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Cargando...</span>
+      </div>
+    </div>
+    <div *ngIf="fallaCarga" class="alert alert-warning" role="alert">
+        <li *ngFor='let mensaje of mensajesFalla'>
+            {{mensaje}}
+        </li>
+    </div>
+
+    <app-general-contenedor-principal (clickFinalizar)="handleFinalizar($event)" [source]="modelData" [contentSource]="contentSource" [disabledFinalizar]="disabledFinalizar" [esConsultaSolicitud]="esConsultaSolicitud" [loading]="loading" (selectedValueChange)="tab">
+      <!--TAB DE DATOS GENERALES-->
+      <ng-template suneduTemplate="configuracionDatosGenerales" let-data let-modelData="modelData">
+        <app-container-datosgenerales [configTab]="data" [modelData]="modelData"></app-container-datosgenerales>
+      </ng-template>
+
+      <!--TAB DE FORMATOS-->
+      <ng-template suneduTemplate="configuracionFormatos" let-data let-modelData="modelData">
+        <app-container-formato [configTab]="data" [modelData]="modelData"></app-container-formato>
+      </ng-template>
+
+      <!--TAB DE SOLICITUD-->
+      <ng-template suneduTemplate="configuracionSolicitud" let-data let-modelData="modelData">
+        <app-container-solicitud [configTab]="data" [modelData]="modelData"></app-container-solicitud>
+      </ng-template>
+
+      <!--TAB DE MEDIOS-->
+      <ng-template suneduTemplate="configuracionMedioVerificacion" let-data let-modelData="modelData">
+        <app-container-medio [configTab]="data" [modelData]="modelData"></app-container-medio>
+      </ng-template>
+
+      <!--TAB DE FIRMANTES-->
+      <ng-template suneduTemplate="configuracionFirmantes" let-data let-modelData="modelData">
+        <app-container-firmantes (getFirmantes)="onFirmantes($event)" [firmantes]="seleccionFirmantes" [configTab]="data" [modelData]="modelData"></app-container-firmantes>
+      </ng-template>
+
+      <!--TAB DE CARGA MASIVA-->
+      <ng-template suneduTemplate="configuracionCargaMasiva" let-data let-modelData="modelData">
+        <app-container-cargamasiva></app-container-cargamasiva>
+      </ng-template>
+
+      <!--TAB DE FIRMA MV-->
+      <ng-template suneduTemplate="configuracionFirmaMedioVerificacion" let-data let-modelData="modelData">
+        <app-container-firmarmedio [configTab]="data" [modelData]="modelData"></app-container-firmarmedio>
+      </ng-template>
+
+      <!--TAB DE DOCUMENTOS RECIBIDOS-->
+      <!-- <ng-template suneduTemplate="configuracionRecibidos" let-data let-modelData="modelData">
+        <app-container-recibidos [configTab]="data" [modelData]="modelData"></app-container-recibidos>
+      </ng-template> -->
+      <ng-template suneduTemplate="configuracionDocumentosOperacion" let-data let-modelData="modelData">
+        <app-container-documentos-operacion [configTab]="data" [modelData]="modelData"></app-container-documentos-operacion>
+      </ng-template>
+      <!--TAB DE DOCUMENTOS ENVIADOS-->
+      <!-- <ng-template suneduTemplate="configuracionEnviados" let-data let-modelData="modelData">
+        <app-container-enviados [configTab]="data" [modelData]="modelData"></app-container-enviados>
+      </ng-template> -->
+      <ng-template suneduTemplate="configuracionDocumentosBandeja" let-data let-modelData="modelData">
+        <app-container-documentos-consulta [configTab]="data" [modelData]="modelData"></app-container-documentos-consulta>
+      </ng-template>
+
+
+      <!--TAB DE ASIGNACION DE EQUIPO DE TRABAJO-->
+      <ng-template suneduTemplate="configuracionEquipoTrabajo" let-data let-modelData="modelData">
+        <app-container-equipotrabajo [configTab]="data" [modelData]="modelData"></app-container-equipotrabajo>
+      </ng-template>
+
+      <!--TAB DE FIRMA ARCHIVO TESTIGO-->
+      <!--
+  <ng-template suneduTemplate="ConfiguracionFirmaArchivoTestigo" let-data let-modelData="modelData">
+  </ng-template>
+  -->
+      <!--
+
+  <ng-template
+    suneduTemplate="override-content"
+    let-data
+  >
+    sobreescribiendo contenido:<br>
+    source: {{data | json}}
+  </ng-template> -->
+
+    </app-general-contenedor-principal>
+
+    <app-general-footer [source]="modelData" [loading]="loading" [esModoConsulta] ="esModoConsulta" (clickBandeja)="handleIrBandeja($event)" (clickFinalizar)="handleFinalizar($event)" (clickValidar)="handleValidar($event)"></app-general-footer>
+</ng-container>
+<ng-template #tareasTemplate>
+  <div class="text-center">
+    <div>
+      <div class="mat-body loader-error-text-container">
+        <h1 style="color: darkorchid;">:(</h1>
+      </div>
+      <div class="mat-body loader-error-text-container">
+        Algo salió mal <br />
+        Por favor, vuelva a intentarlo en unos minutos.
+      </div>
+      <div>
+        <sunedu-base-button
+          icon="account_circle"
+          color="primary"
+          label="Aceptar"
+          (on-click)="handleRetry()"
+        ></sunedu-base-button>
+      </div>
+    </div>
+  </div>
+</ng-template>

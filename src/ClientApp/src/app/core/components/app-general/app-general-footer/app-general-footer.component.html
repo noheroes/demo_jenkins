@@ -1,0 +1,37 @@
+<div class="actividad-footer-root">
+    <!-- <ng-container *ngIf="loading&&!source;else contentTemplate">
+        <sunedu-loader-configuration text="Cargando">
+        </sunedu-loader-configuration>
+    </ng-container>
+
+    <ng-template #contentTemplate>
+        <div class="row" *ngIf="!source.formulario.conDecisionAutomatica && source.formulario.decision.conDecision">
+            <div class="col-md-5"></div>
+            <div class="col-md-5"></div>
+            <div class="col-md-2">
+                <sunedu-form-model-field variant="select" bindLabel="label" bindValue="value" [label]="source.formulario.decision.pregunta" [formModelField]="form.model['seleccion']" [options]="{list:source.formulario.decision.opciones,loading:false}" (on-change)="handleInputChange($event)">
+                </sunedu-form-model-field>
+            </div>
+        </div>
+    </ng-template> -->
+
+    <br>
+    <div class="row">
+        <div class="col-md-4 footer-button-container"  *ngIf="!esModoConsulta">
+            <sunedu-base-button  icon="reply" color="primary" label="Ir a bandeja" [disabled]="loading" (on-click)="handleIrBandeja()"></sunedu-base-button>
+        </div>
+        <!-- <div class="col-md-4 footer-button-container">
+            <sunedu-base-button color="accent" label="Validar Solicitud" [disabled]="loading" (on-click)="handleValidar()">
+            </sunedu-base-button> 
+        </div> -->
+        <div class="col-md-4 footer-button-container" *ngIf="esModoConsulta">
+            <!-- <sunedu-base-button class="button-finalizar" [label]="finalizarText" [disabled]="loading" (on-click)="handleFinalizar()"></sunedu-base-button> -->
+            <sunedu-base-button color="accent" icon="reply" label="Regresar" [disabled]="loading" (on-click)="handleRegresar()"></sunedu-base-button>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <h6 class="text-left col-md-6">Todos los Derechos Reservados</h6>
+        <h6 class="text-right col-md-6">SUNEDU | LicIns</h6>
+    </div>
+</div>

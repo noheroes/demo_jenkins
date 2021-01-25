@@ -1,0 +1,25 @@
+<ng-container>
+    <mat-card>
+        <h5>{{title}}</h5>
+    </mat-card>
+
+    <app-general-contenedor-principal [source]="modelData" [contentSource]="contentSource" [loading]="loading">
+
+        <!--TAB DE UNIVERSIDADES-->
+        <ng-template suneduTemplate="configuracionEntidades" let-data let-modelData="modelData">
+            <app-container-entidades [configTab]="data" [modelData]="modelData"></app-container-entidades>
+        </ng-template>
+
+        <!--TAB DE RL-->
+        <ng-template suneduTemplate="configuracionRepresentanteLegal" let-data let-modelData="modelData">
+            <app-container-representante-legal [configTab]="data" [modelData]="modelData"></app-container-representante-legal>
+        </ng-template>
+    </app-general-contenedor-principal>
+
+    <div class="footer">
+        <div class="row">
+            <h6 class="text-left col-md-6">Todos los Derechos Reservados</h6>
+            <h6 class="text-right col-md-6">SUNEDU | LicIns</h6>
+        </div>
+    </div>
+</ng-container>
