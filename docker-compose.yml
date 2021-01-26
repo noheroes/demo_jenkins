@@ -16,7 +16,7 @@ services:
         volumes: 
         - /c/app/_certificates/:/https/
         - /c/app/_log/web:/app/Log
-        - /src/env.js:/app/ClientApp/dist/env.js
+        - /src:/app/ClientApp/dist
         restart: on-failure
       
 networks:
