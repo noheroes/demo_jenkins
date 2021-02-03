@@ -6,6 +6,14 @@ pipeline {
   }
   agent any
   stages {
+    stage('Network create') {
+      steps{
+        scripts {
+          sh "docker network create ms"
+        }
+      }
+    }
+
     stage('Building image') {
       steps{
         script {
