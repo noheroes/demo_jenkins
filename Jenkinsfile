@@ -23,7 +23,7 @@ pipeline {
       }
     }
 
-    stage('Building image') {
+    stage('Docker Image') {
       steps{
         script {
           dockerImage = registry.sunedu.gob.pe/pruebas_jenkins/gnosis.web
