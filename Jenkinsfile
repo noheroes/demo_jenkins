@@ -1,10 +1,49 @@
-node {
-  stage 'Checkout'
-  git url: 'https://github.com/noheroes/demo_jenkins.git'
+pipeline {
+  environment {
+    registry = "registry.sunedu.gob.pe/pruebas_jenkins"
+    registryCredential = 'IDHarbor'
+    dockerImage = ''
+  }
+  agent any
+  stages {
+    stage('Building image') {
+      steps{
+        script {
+          sh "docker-compose build"
+          sh "docker-compose up -d"
+        }
+      }
+    }
+    
+    stage('Tag') {
+      steps{
+          script {
+              sh "docker tag gnosis.web registry.sunedu.gob.pe/pruebas_jenkins/gnosis.web"
+          }
+      }
+    }
 
-  stage 'build'
-  docker.build('gnosis.web')
-
-  stage 'deploy'
-  sh './deploy.sh'
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = registry.sunedu.gob.pe/pruebas_jenkins/gnosis.web
+        }
+      }
+    }
+    
+    stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( 'https://registry.sunedu.gob.pe', registryCredential ) {
+             dockerImage.push()
+          }
+        }
+      }
+    }
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
+      }
+    }
+  }
 }
