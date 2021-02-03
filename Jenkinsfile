@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Network create') {
       steps{
-        scripts {
+        script {
           sh "docker network create ms"
         }
       }
